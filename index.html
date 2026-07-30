@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Central de Acesso</title>
+<title>Portal do Cliente</title>
 
 <style>
 *{
@@ -21,7 +21,7 @@ body{
     overflow:hidden;
 }
 
-/* Vídeo de Fundo */
+/* Vídeo de fundo */
 #bg-video{
     position:fixed;
     top:0;
@@ -32,69 +32,55 @@ body{
     z-index:-2;
 }
 
-/* Escurece o vídeo */
+/* Camada escura */
 .overlay{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,.35);
+    background:rgba(0,0,0,.45);
     z-index:-1;
 }
 
-/* Caixa */
+/* Conteúdo */
 .container{
-    width:420px;
-    max-width:90%;
-    background:rgba(255,255,255,.95);
-    backdrop-filter:blur(10px);
-    border-radius:20px;
-    padding:40px;
+    width:100%;
+    max-width:420px;
+    padding:30px;
     text-align:center;
-    box-shadow:0 15px 35px rgba(0,0,0,.35);
 }
 
+/* Título */
 h1{
-    color:#222;
-    font-size:34px;
-    margin-bottom:10px;
+    color:#fff;
+    font-size:42px;
+    font-weight:700;
+    margin-bottom:45px;
+    text-shadow:0 4px 15px rgba(0,0,0,.6);
 }
 
-p{
-    color:#666;
-    margin-bottom:30px;
-}
-
-/* Botões */
+/* Botão */
 .btn{
     display:block;
+    width:100%;
     text-decoration:none;
-    background:linear-gradient(90deg,#ff8c00,#ff5500);
     color:#fff;
-    padding:17px;
-    margin:15px 0;
-    border-radius:12px;
-    font-size:19px;
+    background:rgba(220,20,60,.90);
+    padding:18px;
+    font-size:22px;
     font-weight:bold;
+    border-radius:18px;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.25);
+    box-shadow:0 10px 35px rgba(0,0,0,.45);
     transition:.3s;
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 .btn:hover{
+    background:rgba(255,0,0,.95);
     transform:scale(1.03);
-}
-
-/* Mercado Pago */
-.mp{
-    background:#fff;
-    color:#009EE3;
-    border:2px solid #009EE3;
-}
-
-.mp:hover{
-    background:#009EE3;
-    color:#fff;
 }
 </style>
 
@@ -109,21 +95,11 @@ p{
 
 <div class="container">
 
-<h1>Central de Acesso</h1>
+    <h1>Portal do Cliente</h1>
 
-<p>Escolha uma das opções abaixo.</p>
-
-<a class="btn" href="https://clientefinal.com/" target="_blank">
-🔐 Painel Cliente
-</a>
-
-<a class="btn" href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a" target="_blank">
-▶️ Página de Teste
-</a>
-
-<a class="btn mp" href="https://mpago.li/1C83VEU" target="_blank">
-💳 Pague com Mercado Pago
-</a>
+    <a class="btn" href="https://clientefinal.com/" target="_blank">
+        🔐 Painel Cliente
+    </a>
 
 </div>
 
