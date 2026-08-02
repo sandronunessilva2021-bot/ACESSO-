@@ -1,107 +1,333 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal do Cliente</title>
+
+<title>🍕 Pizza Play</title>
+
+<meta name="theme-color" content="#111111">
+
+<link rel="manifest" href="manifest.json">
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    overflow:hidden;
+background:#000;
+color:#fff;
+overflow-x:hidden;
 }
 
-/* Vídeo de fundo */
 #bg-video{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-2;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
 }
 
-/* Camada escura */
 .overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.45);
-    z-index:-1;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.60);
+z-index:-1;
 }
 
-/* Conteúdo */
 .container{
-    width:100%;
-    max-width:420px;
-    padding:30px;
-    text-align:center;
+max-width:420px;
+margin:auto;
+padding:25px;
+text-align:center;
 }
 
-/* Título */
+.logo{
+
+width:170px;
+height:170px;
+border-radius:35px;
+margin-top:20px;
+box-shadow:0 0 25px #ff6a00;
+
+}
+
 h1{
-    color:#fff;
-    font-size:42px;
-    font-weight:700;
-    margin-bottom:45px;
-    text-shadow:0 4px 15px rgba(0,0,0,.6);
+
+font-size:40px;
+
+margin-top:15px;
+
+color:#ff8a00;
+
 }
 
-/* Botão */
+.sub{
+
+margin-top:8px;
+
+font-size:18px;
+
+color:#ddd;
+
+}
+
 .btn{
-    display:block;
-    width:100%;
-    text-decoration:none;
-    color:#fff;
-    background:rgba(220,20,60,.90);
-    padding:18px;
-    font-size:22px;
-    font-weight:bold;
-    border-radius:18px;
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.25);
-    box-shadow:0 10px 35px rgba(0,0,0,.45);
-    transition:.3s;
+
+display:block;
+
+text-decoration:none;
+
+padding:18px;
+
+border-radius:18px;
+
+margin-top:20px;
+
+font-size:22px;
+
+font-weight:bold;
+
+transition:.3s;
+
+box-shadow:0 0 20px rgba(0,0,0,.4);
+
 }
 
 .btn:hover{
-    background:rgba(255,0,0,.95);
-    transform:scale(1.03);
+
+transform:scale(1.03);
+
 }
+
+.teste{
+
+background:linear-gradient(45deg,#ff7a00,#ff2d00);
+
+color:#fff;
+
+}
+
+.painel{
+
+background:#1565c0;
+
+color:#fff;
+
+}
+
+.btn small{
+
+display:block;
+
+margin-top:8px;
+
+font-size:15px;
+
+font-weight:normal;
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+margin-top:35px;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.08);
+
+padding:18px;
+
+border-radius:18px;
+
+backdrop-filter:blur(8px);
+
+}
+
+.card span{
+
+font-size:40px;
+
+display:block;
+
+margin-bottom:8px;
+
+}
+
+footer{
+
+margin-top:40px;
+
+font-size:14px;
+
+color:#ccc;
+
+padding-bottom:30px;
+
+}
+
+@media(max-width:600px){
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
 </style>
 
 </head>
+
 <body>
 
 <video autoplay muted loop playsinline id="bg-video">
-    <source src="6e0435cdf73692771097c0abcf882e37.mp4" type="video/mp4">
+
+<source src="6e0435cdf73692771097c0abcf882e37.mp4" type="video/mp4">
+
 </video>
 
 <div class="overlay"></div>
 
 <div class="container">
 
-    <h1>Portal do Cliente</h1>
+<img src="logo.png" class="logo">
 
-    <a class="btn" href="https://clientefinal.com/" target="_blank">
-        🔐 Painel Cliente
-    </a>
+<h1>🍕 Pizza Play</h1>
 
+<p class="sub">
+
+Filmes • Séries • Ao Vivo
+
+</p>
+<a class="btn teste"
+href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+target="_blank">
+
+🎁 CRIE SEU LOGIN E SENHA AQUI
+
+<small>
+Aproveite 4 horas grátis
+</small>
+
+</a>
+
+<a class="btn painel"
+href="https://clientefinal.com/"
+target="_blank">
+
+🔐 PAINEL DO CLIENTE
+
+<small>
+Entrar com seu login e senha
+</small>
+
+</a>
+
+<div class="cards">
+
+<div class="card">
+
+<span>🎬</span>
+
+<h3>Filmes</h3>
+
+<p>
+Os melhores lançamentos para você assistir.
+</p>
+
+</div>
+
+<div class="card">
+
+<span>📺</span>
+
+<h3>Séries</h3>
+
+<p>
+Séries de sucesso para maratonar.
+</p>
+
+</div>
+
+<div class="card">
+
+<span>📡</span>
+
+<h3>Ao Vivo</h3>
+
+<p>
+Canais ao vivo com excelente qualidade.
+</p>
+
+</div>
+
+</div>
+
+<footer>
+
+🍕 Pizza Play © 2026
+
+</footer>
+<script>
+
+// Registra o Service Worker para transformar o site em PWA
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("service-worker.js")
+            .then(() => {
+                console.log("Service Worker registrado com sucesso.");
+            })
+            .catch((erro) => {
+                console.log("Erro ao registrar Service Worker:", erro);
+            });
+    });
+}
+
+// Efeito simples ao clicar nos botões
+document.querySelectorAll(".btn").forEach((botao) => {
+    botao.addEventListener("click", function () {
+        this.style.transform = "scale(0.97)";
+
+        setTimeout(() => {
+            this.style.transform = "scale(1)";
+        }, 150);
+    });
+});
+
+// Animação de entrada dos cards
+window.addEventListener("load", () => {
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card, i) => {
+
+        card
 </div>
 
 </body>
 </html>
+
