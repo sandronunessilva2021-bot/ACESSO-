@@ -1,335 +1,494 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🍕 Pizza Play</title>
+
+    <meta name="theme-color" content="#111111">
+    <meta name="description" content="Pizza Play - Filmes, Séries e Ao Vivo">
+
+    <link rel="manifest" href="manifest.json">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           VÍDEO DE FUNDO
+        ========================= */
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        /* Escurece o vídeo para facilitar a leitura */
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.62);
+            z-index: -1;
+        }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 40px 12px 30px;
+            text-align: center;
+        }
+
+        /* =========================
+           TÍTULO
+        ========================= */
+
+        h1 {
+            font-size: 40px;
+            font-weight: 800;
+            margin-top: 10px;
+            color: #fff;
+            text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+        }
+
+        .sub {
+            margin-top: 8px;
+            font-size: 18px;
+            color: #ddd;
+        }
+
+        /* =========================
+           BOTÕES
+        ========================= */
+
+        .btn {
+            display: block;
+            width: 100%;
+            text-decoration: none;
+
+            padding: 19px 12px;
+            margin-top: 20px;
+
+            border-radius: 18px;
+
+            font-size: 20px;
+            font-weight: bold;
 
-<meta charset="UTF-8">
+            color: #fff;
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+            /* Branco transparente */
+            background: rgba(255, 255, 255, 0.15);
 
-<title>🍕 Pizza Play</title>
+            /* Borda branca */
+            border: 1px solid rgba(255, 255, 255, 0.65);
 
-<meta name="theme-color" content="#111111">
+            /* Efeito vidro */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
 
-<link rel="manifest" href="manifest.json">
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.45);
 
-<style>
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
+        .btn:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.23);
+            border-color: #fff;
+        }
 
-body{
-background:#000;
-color:#fff;
-overflow-x:hidden;
-}
+        .btn:active {
+            transform: scale(0.97);
+        }
 
-#bg-video{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-}
+        .btn small {
+            display: block;
+            margin-top: 7px;
 
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.60);
-z-index:-1;
-}
+            font-size: 14px;
+            font-weight: normal;
 
-.container{
-max-width:420px;
-margin:auto;
-padding:25px;
-text-align:center;
-}
+            color: #eee;
+        }
 
-.logo{
-    width:170px;
-    height:170px;
-    object-fit:contain;
-    display:block;
-    margin:20px auto;
-    border-radius:35px;
-    box-shadow:0 0 25px #ff6a00;
-}
+        /* =========================
+           CARDS
+        ========================= */
 
-}
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
 
-h1{
+            gap: 12px;
+            margin-top: 35px;
+        }
 
-font-size:40px;
+        .card {
+            background: rgba(255, 255, 255, 0.08);
 
-margin-top:15px;
+            padding: 18px 12px;
 
-color:#ff8a00;
+            border-radius: 18px;
 
-}
+            border: 1px solid rgba(255, 255, 255, 0.12);
 
-.sub{
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
 
-margin-top:8px;
+            opacity: 0;
+            transform: translateY(20px);
 
-font-size:18px;
+            transition:
+                opacity 0.5s ease,
+                transform 0.5s ease;
+        }
 
-color:#ddd;
+        .card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-}
+        .card span {
+            display: block;
 
-.btn{
+            font-size: 38px;
 
-display:block;
+            margin-bottom: 8px;
+        }
 
-text-decoration:none;
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
 
-padding:18px;
+        .card p {
+            font-size: 13px;
+            line-height: 1.4;
+            color: #ddd;
+        }
 
-border-radius:18px;
+        /* =========================
+           RODAPÉ
+        ========================= */
 
-margin-top:20px;
+        footer {
+            margin-top: 40px;
 
-font-size:22px;
+            font-size: 14px;
 
-font-weight:bold;
+            color: #ccc;
 
-transition:.3s;
+            padding-bottom: 20px;
+        }
 
-box-shadow:0 0 20px rgba(0,0,0,.4);
+        /* =========================
+           CELULAR
+        ========================= */
 
-}
+        @media (max-width: 600px) {
 
-.btn:hover{
+            .container {
+                max-width: 100%;
+                padding: 30px 12px 25px;
+            }
 
-transform:scale(1.03);
+            h1 {
+                font-size: 34px;
+            }
 
-}
+            .sub {
+                font-size: 16px;
+            }
 
-.teste{
+            .btn {
+                font-size: 19px;
+                padding: 18px 10px;
+                border-radius: 17px;
+            }
 
-background:linear-gradient(45deg,#ff7a00,#ff2d00);
+            .btn small {
+                font-size: 14px;
+            }
 
-color:#fff;
+            .cards {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
 
-}
+            .card {
+                padding: 18px;
+            }
 
-.painel{
+            .card span {
+                font-size: 36px;
+            }
 
-background:#1565c0;
+            .card p {
+                font-size: 14px;
+            }
+        }
 
-color:#fff;
-
-}
-
-.btn small{
-
-display:block;
-
-margin-top:8px;
-
-font-size:15px;
-
-font-weight:normal;
-
-}
-
-.cards{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:12px;
-
-margin-top:35px;
-
-}
-
-.card{
-
-background:rgba(255,255,255,.08);
-
-padding:18px;
-
-border-radius:18px;
-
-backdrop-filter:blur(8px);
-
-}
-
-.card span{
-
-font-size:40px;
-
-display:block;
-
-margin-bottom:8px;
-
-}
-
-footer{
-
-margin-top:40px;
-
-font-size:14px;
-
-color:#ccc;
-
-padding-bottom:30px;
-
-}
-
-@media(max-width:600px){
-
-.cards{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-</style>
+    </style>
 
 </head>
 
 <body>
 
-<video autoplay muted loop playsinline id="bg-video">
+    <!-- =========================
+         VÍDEO DE FUNDO
+    ========================= -->
 
-<source src="6e0435cdf73692771097c0abcf882e37.mp4" type="video/mp4">
+    <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        id="bg-video">
 
-</video>
+        <source
+            src="6e0435cdf73692771097c0abcf882e37.mp4"
+            type="video/mp4">
 
-<div class="overlay"></div>
+        Seu navegador não suporta vídeo.
+    </video>
 
-<div class="container">
 
-<img src="logo.png" class="logo" alt="Pizza Play">
+    <!-- ESCURECIMENTO DO VÍDEO -->
 
-<h1>🍕 Pizza Play</h1>
+    <div class="overlay"></div>
 
-<p class="sub">
 
-Filmes • Séries • Ao Vivo
+    <!-- =========================
+         CONTEÚDO
+    ========================= -->
 
-</p>
-<a class="btn teste"
-href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
-target="_blank">
+    <main class="container">
 
-🎁 CRIE SEU LOGIN E SENHA AQUI
+        <h1>🍕 Pizza Play</h1>
 
-<small>
-Aproveite 4 horas grátis
-</small>
+        <p class="sub">
+            Filmes • Séries • Ao Vivo
+        </p>
 
-</a>
 
-<a class="btn painel"
-href="https://clientefinal.com/"
-target="_blank">
+        <!-- =========================
+             BOTÃO 1
+        ========================= -->
 
-🔐 PAINEL DO CLIENTE
+        <a
+            class="btn"
+            href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+            target="_blank"
+            rel="noopener noreferrer">
 
-<small>
-Entrar com seu login e senha
-</small>
+            🎁 CRIE SEU LOGIN E SENHA AQUI
 
-</a>
+            <small>
+                Aproveite 4 horas grátis
+            </small>
 
-<div class="cards">
+        </a>
 
-<div class="card">
 
-<span>🎬</span>
+        <!-- =========================
+             BOTÃO 2
+        ========================= -->
 
-<h3>Filmes</h3>
+        <a
+            class="btn"
+            href="https://clientefinal.com/"
+            target="_blank"
+            rel="noopener noreferrer">
 
-<p>
-Os melhores lançamentos para você assistir.
-</p>
+            🔐 PAINEL DO CLIENTE
 
-</div>
+            <small>
+                Entrar com seu login e senha
+            </small>
 
-<div class="card">
+        </a>
 
-<span>📺</span>
 
-<h3>Séries</h3>
+        <!-- =========================
+             CARDS
+        ========================= -->
 
-<p>
-Séries de sucesso para maratonar.
-</p>
+        <section class="cards">
 
-</div>
+            <div class="card">
 
-<div class="card">
+                <span>🎬</span>
 
-<span>📡</span>
+                <h3>Filmes</h3>
 
-<h3>Ao Vivo</h3>
+                <p>
+                    Os melhores lançamentos
+                    para você assistir.
+                </p>
 
-<p>
-Canais ao vivo com excelente qualidade.
-</p>
+            </div>
 
-</div>
 
-</div>
+            <div class="card">
 
-<footer>
+                <span>📺</span>
 
-🍕 Pizza Play © 2026
+                <h3>Séries</h3>
 
-</footer>
-<script>
+                <p>
+                    Séries de sucesso
+                    para maratonar.
+                </p>
 
-// Registra o Service Worker para transformar o site em PWA
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker
-            .register("service-worker.js")
-            .then(() => {
-                console.log("Service Worker registrado com sucesso.");
-            })
-            .catch((erro) => {
-                console.log("Erro ao registrar Service Worker:", erro);
+            </div>
+
+
+            <div class="card">
+
+                <span>📡</span>
+
+                <h3>Ao Vivo</h3>
+
+                <p>
+                    Canais ao vivo com
+                    excelente qualidade.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             RODAPÉ
+        ========================= -->
+
+        <footer>
+            🍕 Pizza Play © 2026
+        </footer>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           SERVICE WORKER / PWA
+        ========================= */
+
+        if ("serviceWorker" in navigator) {
+
+            window.addEventListener("load", function () {
+
+                navigator.serviceWorker
+                    .register("service-worker.js")
+                    .then(function () {
+
+                        console.log(
+                            "Service Worker registrado com sucesso."
+                        );
+
+                    })
+                    .catch(function (erro) {
+
+                        console.log(
+                            "Erro ao registrar Service Worker:",
+                            erro
+                        );
+
+                    });
+
             });
-    });
-}
 
-// Efeito simples ao clicar nos botões
-document.querySelectorAll(".btn").forEach((botao) => {
-    botao.addEventListener("click", function () {
-        this.style.transform = "scale(0.97)";
+        }
 
-        setTimeout(() => {
-            this.style.transform = "scale(1)";
-        }, 150);
-    });
-});
 
-// Animação de entrada dos cards
-window.addEventListener("load", () => {
+        /* =========================
+           EFEITO DOS BOTÕES
+        ========================= */
 
-    const cards = document.querySelectorAll(".card");
+        document
+            .querySelectorAll(".btn")
+            .forEach(function (botao) {
 
-    cards.forEach((card, i) => {
+                botao.addEventListener("click", function () {
 
-        card
-</div>
+                    this.style.transform = "scale(0.97)";
+
+                    setTimeout(function () {
+
+                        botao.style.transform = "";
+
+                    }, 150);
+
+                });
+
+            });
+
+
+        /* =========================
+           ANIMAÇÃO DOS CARDS
+        ========================= */
+
+        window.addEventListener("load", function () {
+
+            const cards =
+                document.querySelectorAll(".card");
+
+            cards.forEach(function (card, index) {
+
+                setTimeout(function () {
+
+                    card.classList.add("show");
+
+                }, index * 150);
+
+            });
+
+        });
+
+    </script>
 
 </body>
+
 </html>
+```
+
 
