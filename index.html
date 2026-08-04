@@ -1,812 +1,134 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Guia de Conteúdo - Filmes</title>
-  <meta name="description" content="Encontre seus filmes favoritos em um só lugar.">
+  <title>Guia de Filmes</title>
+  <meta name="description" content="Catálogo de filmes">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #080808;
-      --bg-card: #121212;
-      --bg-header: #101010;
-      --red: #e50914;
-      --red-dark: #b20710;
-      --text: #ffffff;
-      --muted: #999999;
-      --border: #252525;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* HEADER */
-    header {
-      background: var(--bg-header);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .header-container {
-      max-width: 1200px;
-      margin: auto;
-      min-height: 72px;
-      padding: 12px 20px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .logo span {
-      color: var(--red);
-    }
-
-    .search {
-      flex: 1;
-      max-width: 480px;
-      position: relative;
-    }
-
-    .search input {
-      width: 100%;
-      background: #1b1b1b;
-      border: 1px solid #303030;
-      border-radius: 8px;
-      color: white;
-      padding: 13px 16px;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .search input:focus {
-      border-color: var(--red);
-    }
-
-    /* BOTÕES */
-    .buttons-area {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 22px 20px 5px;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .main-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-
-      min-height: 58px;
-      padding: 14px 20px;
-
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 800;
-
-      transition: 0.2s ease;
-    }
-
-    .client-button {
-      background: var(--red);
-    }
-
-    .client-button:hover {
-      background: var(--red-dark);
-      transform: translateY(-2px);
-    }
-
-    .test-button {
-      background: #202020;
-      border: 1px solid #444;
-    }
-
-    .test-button:hover {
-      background: #2c2c2c;
-      transform: translateY(-2px);
-    }
-
-    /* CONTEÚDO */
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    .page-title {
-      margin: 20px 0;
-    }
-
-    .page-title h1 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    .page-title p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* CATEGORIAS */
-    .categories {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 12px;
-      scrollbar-width: thin;
-    }
-
-    .categories button {
-      border: 1px solid #303030;
-      background: #151515;
-      color: #ddd;
-      padding: 9px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: 0.2s;
-    }
-
-    .categories button:hover,
-    .categories button.active {
-      background: var(--red);
-      border-color: var(--red);
-      color: white;
-    }
-
-    /* SEÇÃO */
-    .section-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 28px 0 16px;
-    }
-
-    .section-title h2 {
-      font-size: 20px;
-    }
-
-    .section-title span {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* GRID */
-    .movies-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 15px;
-    }
-
-    /* CARD */
-    .movie-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-      position: relative;
-    }
-
-    .movie-card:hover {
-      transform: translateY(-5px);
-      border-color: #444;
-    }
-
-    .poster {
-      width: 100%;
-      aspect-ratio: 2 / 3;
-      background: #1b1b1b;
-      overflow: hidden;
-    }
-
-    .poster img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .movie-info {
-      padding: 10px;
-    }
-
-    .movie-title {
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 8px;
-    }
-
-    .movie-meta {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      background: var(--red);
-      color: white;
-      font-size: 10px;
-      font-weight: bold;
-      padding: 4px 6px;
-      border-radius: 3px;
-    }
-
-    .category {
-      color: #999;
-      font-size: 10px;
-    }
-
-    .new-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: #00a86b;
-      color: white;
-      font-size: 10px;
-      font-weight: bold;
-      padding: 5px 7px;
-      border-radius: 4px;
-      z-index: 2;
-    }
-
-    /* PAGINAÇÃO */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin: 35px 0 20px;
-    }
-
-    .pagination button {
-      width: 38px;
-      height: 38px;
-      border: 1px solid #333;
-      background: #151515;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .pagination button.active,
-    .pagination button:hover {
-      background: var(--red);
-      border-color: var(--red);
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-      padding: 30px 20px;
-      text-align: center;
-      color: #777;
-      font-size: 12px;
-    }
-
-    /* RESPONSIVO TABLET */
-    @media (max-width: 1000px) {
-      .movies-grid {
-        grid-template-columns: repeat(5, 1fr);
-      }
-    }
-
-    @media (max-width: 800px) {
-      .header-container {
-        flex-wrap: wrap;
-      }
-
-      .logo {
-        width: 100%;
-        text-align: center;
-      }
-
-      .search {
-        max-width: none;
-        width: 100%;
-      }
-
-      .movies-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    /* RESPONSIVO CELULAR */
-    @media (max-width: 600px) {
-      .header-container {
-        padding: 14px;
-      }
-
-      .buttons-area {
-        grid-template-columns: 1fr;
-        padding: 15px 14px 0;
-      }
-
-      .main-button {
-        min-height: 55px;
-        font-size: 14px;
-      }
-
-      main {
-        padding: 14px;
-      }
-
-      .page-title h1 {
-        font-size: 22px;
-      }
-
-      .page-title p {
-        font-size: 13px;
-      }
-
-      .movies-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-
-      .movie-title {
-        font-size: 13px;
-      }
-
-      .section-title h2 {
-        font-size: 18px;
-      }
-    }
-
-    @media (max-width: 360px) {
-      .movies-grid {
-        gap: 8px;
-      }
-
-      .movie-info {
-        padding: 8px;
-      }
-
-      .movie-title {
-        font-size: 12px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- CABEÇALHO -->
-  <header>
-    <div class="header-container">
+<header class="header">
+  <div class="header-content">
 
-      <div class="logo">
-        GUIA<span>DECONTEÚDO</span>
-      </div>
+    <a href="index.html" class="logo">
+      GUIA<span>FILMES</span>
+    </a>
 
-      <div class="search">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="🔎 Pesquisar filme..."
-          onkeyup="searchMovies()"
-        >
-      </div>
-
+    <div class="search-box">
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="🔎 Pesquisar filme..."
+        autocomplete="off"
+      >
     </div>
-  </header>
+
+  </div>
+</header>
 
 
-  <!-- BOTÕES PRINCIPAIS -->
-  <div class="buttons-area">
+<!-- BOTÕES -->
+<section class="top-buttons">
 
-    <a
-      class="main-button client-button"
-      href="https://clientefinal.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      🔐 ACESSAR ÁREA DO CLIENTE
-    </a>
+  <a
+    href="https://clientefinal.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn-client"
+  >
+    🔐 ACESSAR ÁREA DO CLIENTE
+  </a>
 
-    <a
-      class="main-button test-button"
-      href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014ade"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      🎁 CRIE SEU TESTE GRÁTIS POR 4 HORAS
-    </a>
+  <a
+    href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014ade"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn-test"
+  >
+    🎁 CRIE SEU TESTE GRÁTIS POR 4 HORAS
+  </a>
 
+</section>
+
+
+<main class="container">
+
+  <section class="intro">
+    <h1>Filmes</h1>
+    <p>Encontre seus filmes favoritos.</p>
+  </section>
+
+
+  <!-- CATEGORIAS -->
+  <nav class="categories" id="categories">
+
+    <button class="category active" data-category="Todos">
+      Todos
+    </button>
+
+    <button class="category" data-category="Ação">
+      Ação
+    </button>
+
+    <button class="category" data-category="Comédia">
+      Comédia
+    </button>
+
+    <button class="category" data-category="Drama">
+      Drama
+    </button>
+
+    <button class="category" data-category="Terror">
+      Terror
+    </button>
+
+    <button class="category" data-category="Ficção">
+      Ficção
+    </button>
+
+    <button class="category" data-category="Animação">
+      Animação
+    </button>
+
+  </nav>
+
+
+  <div class="section-header">
+    <h2>Filmes recentes</h2>
+    <span id="resultCount"></span>
   </div>
 
 
-  <main>
+  <!-- FILMES -->
+  <section id="moviesGrid" class="movies-grid"></section>
 
-    <!-- TÍTULO -->
-    <div class="page-title">
-      <h1>Filmes</h1>
-      <p>Encontre seus filmes favoritos em um só lugar.</p>
-    </div>
 
+  <!-- SEM RESULTADO -->
+  <div id="noResults" class="no-results">
+    Nenhum filme encontrado.
+  </div>
 
-    <!-- CATEGORIAS -->
-    <div class="categories">
 
-      <button class="active" onclick="filterCategory('Todos', this)">
-        Todos
-      </button>
+  <!-- PAGINAÇÃO -->
+  <div class="pagination" id="pagination"></div>
 
-      <button onclick="filterCategory('Ação', this)">
-        Ação
-      </button>
 
-      <button onclick="filterCategory('Comédia', this)">
-        Comédia
-      </button>
+</main>
 
-      <button onclick="filterCategory('Drama', this)">
-        Drama
-      </button>
 
-      <button onclick="filterCategory('Terror', this)">
-        Terror
-      </button>
+<footer>
+  <p>© 2026 Guia Filmes</p>
+</footer>
 
-      <button onclick="filterCategory('Ficção', this)">
-        Ficção
-      </button>
 
-      <button onclick="filterCategory('Animação', this)">
-        Animação
-      </button>
-
-    </div>
-
-
-    <!-- FILMES -->
-    <div class="section-title">
-      <h2>Filmes recentes</h2>
-      <span>Atualizados recentemente</span>
-    </div>
-
-
-    <div class="movies-grid" id="moviesGrid">
-
-
-      <!-- FILME 1 -->
-      <div class="movie-card" data-category="Ação" data-title="O Último Desafio">
-
-        <div class="new-badge">NOVO</div>
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"
-            alt="O Último Desafio"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">O Último Desafio</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Ação</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- FILME 2 -->
-      <div class="movie-card" data-category="Comédia" data-title="Uma Noite Divertida">
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg"
-            alt="Uma Noite Divertida"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">Uma Noite Divertida</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Comédia</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- FILME 3 -->
-      <div class="movie-card" data-category="Drama" data-title="A Grande História">
-
-        <div class="new-badge">NOVO</div>
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/6agKYU5IQFpuDyUYPu39w7U1iTh.jpg"
-            alt="A Grande História"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">A Grande História</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Drama</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- FILME 4 -->
-      <div class="movie-card" data-category="Terror" data-title="A Noite Sombria">
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/2vFuG6bWGyQUzYS9d69E5l9JjR4.jpg"
-            alt="A Noite Sombria"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">A Noite Sombria</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Terror</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- FILME 5 -->
-      <div class="movie-card" data-category="Ficção" data-title="Além do Universo">
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg"
-            alt="Além do Universo"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">Além do Universo</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Ficção</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- FILME 6 -->
-      <div class="movie-card" data-category="Animação" data-title="O Mundo Encantado">
-
-        <div class="new-badge">NOVO</div>
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
-            alt="O Mundo Encantado"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">O Mundo Encantado</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Animação</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- FILME 7 -->
-      <div class="movie-card" data-category="Ação" data-title="Operação Final">
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg"
-            alt="Operação Final"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">Operação Final</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Ação</span>
-          </div>
-        </div>
-
-      </div>
-
-
-      <!-- FILME 8 -->
-      <div class="movie-card" data-category="Drama" data-title="O Caminho">
-
-        <div class="poster">
-          <img
-            src="https://image.tmdb.org/t/p/w500/6Kj1Y0uH1Vq8cH8v6bL6e9V5b.jpg"
-            alt="O Caminho"
-            loading="lazy"
-          >
-        </div>
-
-        <div class="movie-info">
-          <div class="movie-title">O Caminho</div>
-
-          <div class="movie-meta">
-            <span class="badge">FHD</span>
-            <span class="category">Drama</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- PAGINAÇÃO -->
-    <div class="pagination">
-
-      <button class="active">1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>4</button>
-      <button>→</button>
-
-    </div>
-
-
-    <!-- DESTAQUE -->
-    <div class="section-title">
-      <h2>Especialmente para Você!</h2>
-    </div>
-
-    <div class="buttons-area" style="padding:0; max-width:none;">
-
-      <a
-        class="main-button client-button"
-        href="https://clientefinal.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        🔐 ACESSAR ÁREA DO CLIENTE
-      </a>
-
-      <a
-        class="main-button test-button"
-        href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014ade"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        🎁 TESTE GRÁTIS POR 4 HORAS
-      </a>
-
-    </div>
-
-  </main>
-
-
-  <!-- RODAPÉ -->
-  <footer>
-    © 2026 Guia de Conteúdo — Todos os direitos reservados.
-  </footer>
-
-
-  <script>
-
-    let currentCategory = "Todos";
-
-
-    // PESQUISA
-    function searchMovies() {
-
-      const search =
-        document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-      const movies =
-        document.querySelectorAll(".movie-card");
-
-      movies.forEach(movie => {
-
-        const title =
-          movie
-          .getAttribute("data-title")
-          .toLowerCase();
-
-        const category =
-          movie
-          .getAttribute("data-category");
-
-        const matchesSearch =
-          title.includes(search);
-
-        const matchesCategory =
-          currentCategory === "Todos" ||
-          category === currentCategory;
-
-        movie.style.display =
-          matchesSearch && matchesCategory
-          ? ""
-          : "none";
-
-      });
-
-    }
-
-
-    // FILTRO DE CATEGORIA
-    function filterCategory(category, button) {
-
-      currentCategory = category;
-
-      document
-        .querySelectorAll(".categories button")
-        .forEach(btn => {
-          btn.classList.remove("active");
-        });
-
-      button.classList.add("active");
-
-      searchMovies();
-
-    }
-
-  </script>
+<script src="script.js"></script>
 
 </body>
 </html>
+```
