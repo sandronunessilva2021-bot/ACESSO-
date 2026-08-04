@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -39,23 +40,34 @@
 
         #bg-video {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            top: 50%;
+            left: 50%;
+
+            width: 100vw;
+            height: 100vh;
+
+            transform: translate(-50%, -50%);
+
+            object-fit: contain;
+            object-position: center center;
+
+            background: #000;
+
             z-index: -2;
         }
 
-        /* Escurece o vídeo para facilitar a leitura */
+        /* ESCURECIMENTO DO VÍDEO */
 
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
+
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.62);
+
+            background: rgba(0, 0, 0, 0.58);
+
             z-index: -1;
         }
 
@@ -108,13 +120,10 @@
 
             color: #fff;
 
-            /* Branco transparente */
             background: rgba(255, 255, 255, 0.15);
 
-            /* Borda branca */
             border: 1px solid rgba(255, 255, 255, 0.65);
 
-            /* Efeito vidro */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
 
@@ -185,9 +194,7 @@
 
         .card span {
             display: block;
-
             font-size: 38px;
-
             margin-bottom: 8px;
         }
 
@@ -208,11 +215,8 @@
 
         footer {
             margin-top: 40px;
-
             font-size: 14px;
-
             color: #ccc;
-
             padding-bottom: 20px;
         }
 
@@ -221,6 +225,14 @@
         ========================= */
 
         @media (max-width: 600px) {
+
+            #bg-video {
+                width: 100vw;
+                height: 100vh;
+
+                object-fit: cover;
+                object-position: center center;
+            }
 
             .container {
                 max-width: 100%;
@@ -286,10 +298,11 @@
             type="video/mp4">
 
         Seu navegador não suporta vídeo.
+
     </video>
 
 
-    <!-- ESCURECIMENTO DO VÍDEO -->
+    <!-- ESCURECIMENTO -->
 
     <div class="overlay"></div>
 
@@ -307,9 +320,7 @@
         </p>
 
 
-        <!-- =========================
-             BOTÃO 1
-        ========================= -->
+        <!-- BOTÃO 1 -->
 
         <a
             class="btn"
@@ -326,9 +337,7 @@
         </a>
 
 
-        <!-- =========================
-             BOTÃO 2
-        ========================= -->
+        <!-- BOTÃO 2 -->
 
         <a
             class="btn"
@@ -345,9 +354,7 @@
         </a>
 
 
-        <!-- =========================
-             CARDS
-        ========================= -->
+        <!-- CARDS -->
 
         <section class="cards">
 
@@ -395,9 +402,7 @@
         </section>
 
 
-        <!-- =========================
-             RODAPÉ
-        ========================= -->
+        <!-- RODAPÉ -->
 
         <footer>
             🍕 Pizza Play © 2026
@@ -488,5 +493,4 @@
 </body>
 
 </html>
-
-
+```
