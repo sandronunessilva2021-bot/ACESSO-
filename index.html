@@ -5,16 +5,30 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>🍕 Pizza Play</title>
 
-    <meta name="theme-color" content="#111111">
+    <meta name="theme-color" content="#000000">
 
     <meta name="description"
           content="Pizza Play - Filmes, Séries e Ao Vivo">
 
+    <!-- PWA -->
     <link rel="manifest" href="manifest.json">
+
+    <!-- Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- iPhone/iPad -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+
+    <meta name="apple-mobile-web-app-title"
+          content="Pizza Play">
 
 
     <style>
@@ -41,7 +55,7 @@
         }
 
 
-        /* =================================
+        /* ================================
            VÍDEO DE FUNDO
         ================================= */
 
@@ -55,7 +69,8 @@
             width: 100vw;
             height: 100vh;
 
-            transform: translate(-50%, -50%);
+            transform:
+                translate(-50%, -50%);
 
             object-fit: contain;
 
@@ -67,7 +82,7 @@
         }
 
 
-        /* =================================
+        /* ================================
            CAMADA ESCURA
         ================================= */
 
@@ -81,36 +96,33 @@
             width: 100%;
             height: 100%;
 
-            background: rgba(0, 0, 0, 0.58);
+            background:
+                rgba(0, 0, 0, 0.58);
 
             z-index: -1;
         }
 
 
-        /* =================================
-           ÁREA PRINCIPAL
+        /* ================================
+           CONTAINER
         ================================= */
 
         .container {
 
             width: 100%;
 
-            /*
-            O vídeo original é 720x1280.
-            Mantemos a área proporcional.
-            */
-
             max-width: 720px;
 
             margin: 0 auto;
 
-            padding: 40px 12px 30px;
+            padding:
+                40px 12px 30px;
 
             text-align: center;
         }
 
 
-        /* =================================
+        /* ================================
            TÍTULO
         ================================= */
 
@@ -125,7 +137,8 @@
             color: #fff;
 
             text-shadow:
-                0 0 18px rgba(255,255,255,.35);
+                0 0 18px
+                rgba(255,255,255,.35);
         }
 
 
@@ -139,7 +152,7 @@
         }
 
 
-        /* =================================
+        /* ================================
            BOTÕES
         ================================= */
 
@@ -156,7 +169,8 @@
 
             text-decoration: none;
 
-            padding: 19px 12px;
+            padding:
+                19px 12px;
 
             margin-top: 20px;
 
@@ -168,17 +182,12 @@
 
             color: #fff;
 
-            /* Branco transparente */
-
             background:
                 rgba(255,255,255,.15);
 
-            /* Borda branca */
-
             border:
-                1px solid rgba(255,255,255,.65);
-
-            /* Efeito vidro */
+                1px solid
+                rgba(255,255,255,.65);
 
             backdrop-filter:
                 blur(10px);
@@ -187,7 +196,8 @@
                 blur(10px);
 
             box-shadow:
-                0 0 20px rgba(0,0,0,.45);
+                0 0 20px
+                rgba(0,0,0,.45);
 
             transition:
                 transform .2s ease,
@@ -227,7 +237,7 @@
         }
 
 
-        /* =================================
+        /* ================================
            CARDS
         ================================= */
 
@@ -249,12 +259,14 @@
             background:
                 rgba(255,255,255,.08);
 
-            padding: 18px 12px;
+            padding:
+                18px 12px;
 
             border-radius: 18px;
 
             border:
-                1px solid rgba(255,255,255,.12);
+                1px solid
+                rgba(255,255,255,.12);
 
             backdrop-filter:
                 blur(8px);
@@ -310,7 +322,7 @@
         }
 
 
-        /* =================================
+        /* ================================
            RODAPÉ
         ================================= */
 
@@ -326,7 +338,7 @@
         }
 
 
-        /* =================================
+        /* ================================
            CELULAR
         ================================= */
 
@@ -422,7 +434,7 @@
 <body>
 
 
-    <!-- =================================
+    <!-- ================================
          VÍDEO
     ================================= -->
 
@@ -448,14 +460,12 @@
     <div class="overlay"></div>
 
 
-    <!-- =================================
+    <!-- ================================
          CONTEÚDO
     ================================= -->
 
     <main class="container">
 
-
-        <!-- TÍTULO -->
 
         <h1>
             🍕 Pizza Play
@@ -469,9 +479,7 @@
         </p>
 
 
-        <!-- =================================
-             BOTÃO DE TESTE
-        ================================= -->
+        <!-- BOTÃO TESTE -->
 
         <a
             class="btn"
@@ -490,9 +498,7 @@
         </a>
 
 
-        <!-- =================================
-             BOTÃO DO PAINEL
-        ================================= -->
+        <!-- BOTÃO PAINEL -->
 
         <a
             class="btn"
@@ -511,9 +517,7 @@
         </a>
 
 
-        <!-- =================================
-             CARDS
-        ================================= -->
+        <!-- CARDS -->
 
         <section class="cards">
 
@@ -581,9 +585,7 @@
         </section>
 
 
-        <!-- =================================
-             RODAPÉ
-        ================================= -->
+        <!-- RODAPÉ -->
 
         <footer>
 
@@ -595,14 +597,10 @@
     </main>
 
 
-    <!-- =================================
-         JAVASCRIPT
-    ================================= -->
-
     <script>
 
 
-        /* =================================
+        /* ================================
            SERVICE WORKER
         ================================= */
 
@@ -620,7 +618,7 @@
                         .then(function () {
 
                             console.log(
-                                "Service Worker registrado com sucesso."
+                                "Service Worker registrado."
                             );
 
                         })
@@ -628,7 +626,7 @@
                         .catch(function (erro) {
 
                             console.log(
-                                "Erro ao registrar Service Worker:",
+                                "Erro no Service Worker:",
                                 erro
                             );
 
@@ -640,8 +638,8 @@
         }
 
 
-        /* =================================
-           ANIMAÇÃO DOS BOTÕES
+        /* ================================
+           EFEITO DOS BOTÕES
         ================================= */
 
         document
@@ -672,7 +670,7 @@
             });
 
 
-        /* =================================
+        /* ================================
            ANIMAÇÃO DOS CARDS
         ================================= */
 
@@ -705,6 +703,7 @@
 
             }
         );
+
 
     </script>
 
