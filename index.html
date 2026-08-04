@@ -1,16 +1,22 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>🍕 Pizza Play</title>
 
     <meta name="theme-color" content="#111111">
-    <meta name="description" content="Pizza Play - Filmes, Séries e Ao Vivo">
+
+    <meta name="description"
+          content="Pizza Play - Filmes, Séries e Ao Vivo">
 
     <link rel="manifest" href="manifest.json">
+
 
     <style>
 
@@ -21,11 +27,13 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+
         html,
         body {
             width: 100%;
             min-height: 100%;
         }
+
 
         body {
             background: #000;
@@ -33,12 +41,15 @@
             overflow-x: hidden;
         }
 
-        /* =========================
+
+        /* =================================
            VÍDEO DE FUNDO
-        ========================= */
+        ================================= */
 
         #bg-video {
+
             position: fixed;
+
             top: 50%;
             left: 50%;
 
@@ -48,6 +59,7 @@
             transform: translate(-50%, -50%);
 
             object-fit: contain;
+
             object-position: center center;
 
             background: #000;
@@ -55,10 +67,15 @@
             z-index: -2;
         }
 
-        /* ESCURECIMENTO DO VÍDEO */
+
+        /* =================================
+           CAMADA ESCURA
+        ================================= */
 
         .overlay {
+
             position: fixed;
+
             top: 0;
             left: 0;
 
@@ -70,219 +87,345 @@
             z-index: -1;
         }
 
-        /* =========================
-           CONTAINER
-        ========================= */
+
+        /* =================================
+           ÁREA PRINCIPAL
+        ================================= */
 
         .container {
+
             width: 100%;
-            max-width: 520px;
+
+            /*
+            O vídeo original é 720x1280.
+            Mantemos a área proporcional.
+            */
+
+            max-width: 720px;
+
             margin: 0 auto;
+
             padding: 40px 12px 30px;
+
             text-align: center;
         }
 
-        /* =========================
+
+        /* =================================
            TÍTULO
-        ========================= */
+        ================================= */
 
         h1 {
+
             font-size: 40px;
+
             font-weight: 800;
+
             margin-top: 10px;
+
             color: #fff;
-            text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+
+            text-shadow:
+                0 0 18px rgba(255,255,255,.35);
         }
 
+
         .sub {
+
             margin-top: 8px;
+
             font-size: 18px;
+
             color: #ddd;
         }
 
-        /* =========================
+
+        /* =================================
            BOTÕES
-        ========================= */
+        ================================= */
 
         .btn {
+
             display: block;
+
             width: 100%;
+
+            max-width: 100%;
+
+            margin-left: auto;
+            margin-right: auto;
+
             text-decoration: none;
 
             padding: 19px 12px;
+
             margin-top: 20px;
 
             border-radius: 18px;
 
             font-size: 20px;
+
             font-weight: bold;
 
             color: #fff;
 
-            background: rgba(255, 255, 255, 0.15);
+            /* Branco transparente */
 
-            border: 1px solid rgba(255, 255, 255, 0.65);
+            background:
+                rgba(255,255,255,.15);
 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            /* Borda branca */
 
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.45);
+            border:
+                1px solid rgba(255,255,255,.65);
+
+            /* Efeito vidro */
+
+            backdrop-filter:
+                blur(10px);
+
+            -webkit-backdrop-filter:
+                blur(10px);
+
+            box-shadow:
+                0 0 20px rgba(0,0,0,.45);
 
             transition:
-                transform 0.2s ease,
-                background 0.2s ease,
-                border-color 0.2s ease;
+                transform .2s ease,
+                background .2s ease,
+                border-color .2s ease;
         }
 
+
         .btn:hover {
+
             transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.23);
+
+            background:
+                rgba(255,255,255,.23);
+
             border-color: #fff;
         }
 
+
         .btn:active {
-            transform: scale(0.97);
+
+            transform: scale(.97);
         }
 
+
         .btn small {
+
             display: block;
+
             margin-top: 7px;
 
             font-size: 14px;
+
             font-weight: normal;
 
             color: #eee;
         }
 
-        /* =========================
+
+        /* =================================
            CARDS
-        ========================= */
+        ================================= */
 
         .cards {
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                repeat(3, 1fr);
 
             gap: 12px;
+
             margin-top: 35px;
         }
 
+
         .card {
-            background: rgba(255, 255, 255, 0.08);
+
+            background:
+                rgba(255,255,255,.08);
 
             padding: 18px 12px;
 
             border-radius: 18px;
 
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border:
+                1px solid rgba(255,255,255,.12);
 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter:
+                blur(8px);
+
+            -webkit-backdrop-filter:
+                blur(8px);
 
             opacity: 0;
-            transform: translateY(20px);
+
+            transform:
+                translateY(20px);
 
             transition:
-                opacity 0.5s ease,
-                transform 0.5s ease;
+                opacity .5s ease,
+                transform .5s ease;
         }
+
 
         .card.show {
+
             opacity: 1;
-            transform: translateY(0);
+
+            transform:
+                translateY(0);
         }
+
 
         .card span {
+
             display: block;
+
             font-size: 38px;
+
             margin-bottom: 8px;
         }
+
 
         .card h3 {
+
             font-size: 17px;
+
             margin-bottom: 8px;
         }
 
+
         .card p {
+
             font-size: 13px;
+
             line-height: 1.4;
+
             color: #ddd;
         }
 
-        /* =========================
+
+        /* =================================
            RODAPÉ
-        ========================= */
+        ================================= */
 
         footer {
+
             margin-top: 40px;
+
             font-size: 14px;
+
             color: #ccc;
+
             padding-bottom: 20px;
         }
 
-        /* =========================
+
+        /* =================================
            CELULAR
-        ========================= */
+        ================================= */
 
         @media (max-width: 600px) {
 
             #bg-video {
+
                 width: 100vw;
+
                 height: 100vh;
 
                 object-fit: cover;
-                object-position: center center;
+
+                object-position:
+                    center center;
             }
+
 
             .container {
+
+                width: 100%;
+
                 max-width: 100%;
-                padding: 30px 12px 25px;
+
+                padding:
+                    30px 12px 25px;
             }
 
+
             h1 {
+
                 font-size: 34px;
             }
 
+
             .sub {
+
                 font-size: 16px;
             }
 
+
             .btn {
+
+                width: 100%;
+
                 font-size: 19px;
-                padding: 18px 10px;
+
+                padding:
+                    18px 10px;
+
                 border-radius: 17px;
             }
 
+
             .btn small {
+
                 font-size: 14px;
             }
 
+
             .cards {
+
                 grid-template-columns: 1fr;
+
                 gap: 12px;
             }
 
+
             .card {
+
                 padding: 18px;
             }
 
+
             .card span {
+
                 font-size: 36px;
             }
 
+
             .card p {
+
                 font-size: 14px;
             }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
-    <!-- =========================
-         VÍDEO DE FUNDO
-    ========================= -->
+
+    <!-- =================================
+         VÍDEO
+    ================================= -->
 
     <video
         autoplay
@@ -301,25 +444,35 @@
     </video>
 
 
-    <!-- ESCURECIMENTO -->
+    <!-- CAMADA ESCURA -->
 
     <div class="overlay"></div>
 
 
-    <!-- =========================
+    <!-- =================================
          CONTEÚDO
-    ========================= -->
+    ================================= -->
 
     <main class="container">
 
-        <h1>🍕 Pizza Play</h1>
+
+        <!-- TÍTULO -->
+
+        <h1>
+            🍕 Pizza Play
+        </h1>
+
 
         <p class="sub">
+
             Filmes • Séries • Ao Vivo
+
         </p>
 
 
-        <!-- BOTÃO 1 -->
+        <!-- =================================
+             BOTÃO DE TESTE
+        ================================= -->
 
         <a
             class="btn"
@@ -330,13 +483,17 @@
             🎁 CRIE SEU LOGIN E SENHA AQUI
 
             <small>
+
                 Aproveite 4 horas grátis
+
             </small>
 
         </a>
 
 
-        <!-- BOTÃO 2 -->
+        <!-- =================================
+             BOTÃO DO PAINEL
+        ================================= -->
 
         <a
             class="btn"
@@ -347,25 +504,36 @@
             🔐 PAINEL DO CLIENTE
 
             <small>
+
                 Entrar com seu login e senha
+
             </small>
 
         </a>
 
 
-        <!-- CARDS -->
+        <!-- =================================
+             CARDS
+        ================================= -->
 
         <section class="cards">
 
+
             <div class="card">
 
-                <span>🎬</span>
+                <span>
+                    🎬
+                </span>
 
-                <h3>Filmes</h3>
+                <h3>
+                    Filmes
+                </h3>
 
                 <p>
+
                     Os melhores lançamentos
                     para você assistir.
+
                 </p>
 
             </div>
@@ -373,13 +541,19 @@
 
             <div class="card">
 
-                <span>📺</span>
+                <span>
+                    📺
+                </span>
 
-                <h3>Séries</h3>
+                <h3>
+                    Séries
+                </h3>
 
                 <p>
+
                     Séries de sucesso
                     para maratonar.
+
                 </p>
 
             </div>
@@ -387,109 +561,156 @@
 
             <div class="card">
 
-                <span>📡</span>
+                <span>
+                    📡
+                </span>
 
-                <h3>Ao Vivo</h3>
+                <h3>
+                    Ao Vivo
+                </h3>
 
                 <p>
+
                     Canais ao vivo com
                     excelente qualidade.
+
                 </p>
 
             </div>
+
 
         </section>
 
 
-        <!-- RODAPÉ -->
+        <!-- =================================
+             RODAPÉ
+        ================================= -->
 
         <footer>
+
             🍕 Pizza Play © 2026
+
         </footer>
+
 
     </main>
 
 
+    <!-- =================================
+         JAVASCRIPT
+    ================================= -->
+
     <script>
 
-        /* =========================
-           SERVICE WORKER / PWA
-        ========================= */
+
+        /* =================================
+           SERVICE WORKER
+        ================================= */
 
         if ("serviceWorker" in navigator) {
 
-            window.addEventListener("load", function () {
+            window.addEventListener(
+                "load",
+                function () {
 
-                navigator.serviceWorker
-                    .register("service-worker.js")
-                    .then(function () {
+                    navigator.serviceWorker
+                        .register(
+                            "service-worker.js"
+                        )
 
-                        console.log(
-                            "Service Worker registrado com sucesso."
-                        );
+                        .then(function () {
 
-                    })
-                    .catch(function (erro) {
+                            console.log(
+                                "Service Worker registrado com sucesso."
+                            );
 
-                        console.log(
-                            "Erro ao registrar Service Worker:",
-                            erro
-                        );
+                        })
 
-                    });
+                        .catch(function (erro) {
 
-            });
+                            console.log(
+                                "Erro ao registrar Service Worker:",
+                                erro
+                            );
+
+                        });
+
+                }
+            );
 
         }
 
 
-        /* =========================
-           EFEITO DOS BOTÕES
-        ========================= */
+        /* =================================
+           ANIMAÇÃO DOS BOTÕES
+        ================================= */
 
         document
             .querySelectorAll(".btn")
             .forEach(function (botao) {
 
-                botao.addEventListener("click", function () {
+                botao.addEventListener(
+                    "click",
+                    function () {
 
-                    this.style.transform = "scale(0.97)";
+                        this.style.transform =
+                            "scale(0.97)";
 
-                    setTimeout(function () {
 
-                        botao.style.transform = "";
+                        setTimeout(
+                            function () {
 
-                    }, 150);
+                                botao.style.transform =
+                                    "";
 
-                });
+                            },
+                            150
+                        );
+
+                    }
+                );
 
             });
 
 
-        /* =========================
+        /* =================================
            ANIMAÇÃO DOS CARDS
-        ========================= */
+        ================================= */
 
-        window.addEventListener("load", function () {
+        window.addEventListener(
+            "load",
+            function () {
 
-            const cards =
-                document.querySelectorAll(".card");
+                const cards =
+                    document.querySelectorAll(
+                        ".card"
+                    );
 
-            cards.forEach(function (card, index) {
 
-                setTimeout(function () {
+                cards.forEach(
+                    function (card, index) {
 
-                    card.classList.add("show");
+                        setTimeout(
+                            function () {
 
-                }, index * 150);
+                                card.classList.add(
+                                    "show"
+                                );
 
-            });
+                            },
+                            index * 150
+                        );
 
-        });
+                    }
+                );
+
+            }
+        );
 
     </script>
+
 
 </body>
 
 </html>
-
+```
