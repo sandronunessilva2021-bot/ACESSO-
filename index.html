@@ -1,133 +1,1024 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Guia de Filmes</title>
-  <meta name="description" content="Catálogo de filmes">
+<title>GUIA FILMES</title>
 
-  <link rel="stylesheet" href="style.css">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#080808;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* HEADER */
+header{
+    background:#101010;
+    border-bottom:1px solid #292929;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.header{
+    max-width:1200px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#e50914;
+}
+
+.search{
+    width:100%;
+    max-width:500px;
+}
+
+.search input{
+    width:100%;
+    padding:13px 15px;
+    background:#1c1c1c;
+    border:1px solid #333;
+    border-radius:8px;
+    color:#fff;
+    outline:none;
+    font-size:14px;
+}
+
+.search input:focus{
+    border-color:#e50914;
+}
+
+/* BOTÕES */
+.top-buttons{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.top-button{
+    min-height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-radius:7px;
+    font-size:14px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.client{
+    background:#e50914;
+}
+
+.client:hover{
+    background:#b20710;
+    transform:translateY(-2px);
+}
+
+.test{
+    background:#202020;
+    border:1px solid #444;
+}
+
+.test:hover{
+    background:#303030;
+    transform:translateY(-2px);
+}
+
+/* CONTEÚDO */
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px 50px;
+}
+
+.intro{
+    padding:20px 0;
+}
+
+.intro h1{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.intro p{
+    color:#999;
+    font-size:14px;
+}
+
+/* CATEGORIAS */
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:12px;
+}
+
+.category{
+    background:#151515;
+    border:1px solid #333;
+    color:#ddd;
+    padding:9px 16px;
+    border-radius:20px;
+    white-space:nowrap;
+    cursor:pointer;
+}
+
+.category:hover,
+.category.active{
+    background:#e50914;
+    border-color:#e50914;
+    color:#fff;
+}
+
+/* TÍTULO */
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:25px 0 15px;
+}
+
+.section-title h2{
+    font-size:20px;
+}
+
+.section-title span{
+    color:#888;
+    font-size:12px;
+}
+
+/* GRID */
+.movies{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:15px;
+}
+
+/* CARD */
+.movie{
+    background:#131313;
+    border:1px solid #292929;
+    border-radius:7px;
+    overflow:hidden;
+    position:relative;
+    transition:.2s;
+}
+
+.movie:hover{
+    transform:translateY(-4px);
+    border-color:#555;
+}
+
+.poster{
+    width:100%;
+    aspect-ratio:2/3;
+    background:#222;
+    overflow:hidden;
+}
+
+.poster img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.new{
+    position:absolute;
+    top:7px;
+    left:7px;
+    background:#00a86b;
+    padding:5px 7px;
+    border-radius:4px;
+    font-size:9px;
+    font-weight:bold;
+    z-index:2;
+}
+
+.info{
+    padding:10px;
+}
+
+.title{
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-bottom:8px;
+}
+
+.meta{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:10px;
+}
+
+.quality{
+    background:#e50914;
+    padding:4px 6px;
+    border-radius:3px;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.genre{
+    color:#999;
+    font-size:10px;
+}
+
+.watch{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#e50914;
+    color:white;
+    padding:9px;
+    border-radius:5px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.watch:hover{
+    background:#b20710;
+}
+
+/* PAGINAÇÃO */
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.page{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:5px;
+    background:#151515;
+    border:1px solid #333;
+    color:#fff;
+    cursor:pointer;
+}
+
+.page:hover,
+.page.active{
+    background:#e50914;
+    border-color:#e50914;
+}
+
+.no-results{
+    display:none;
+    text-align:center;
+    color:#999;
+    padding:60px 20px;
+}
+
+/* FOOTER */
+footer{
+    border-top:1px solid #292929;
+    text-align:center;
+    color:#666;
+    padding:30px 20px;
+    font-size:12px;
+}
+
+/* TABLET */
+@media(max-width:1000px){
+
+    .movies{
+        grid-template-columns:repeat(5,1fr);
+    }
+
+}
+
+/* TABLET */
+@media(max-width:800px){
+
+    .header{
+        flex-wrap:wrap;
+    }
+
+    .logo{
+        width:100%;
+        text-align:center;
+    }
+
+    .search{
+        max-width:none;
+    }
+
+    .movies{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+}
+
+/* CELULAR */
+@media(max-width:600px){
+
+    .top-buttons{
+        grid-template-columns:1fr;
+        padding:14px;
+    }
+
+    .container{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .intro h1{
+        font-size:23px;
+    }
+
+    .movies{
+        grid-template-columns:repeat(2,1fr);
+        gap:11px;
+    }
+
+    .info{
+        padding:8px;
+    }
+
+    .title{
+        font-size:12px;
+    }
+
+    .watch{
+        font-size:11px;
+    }
+
+}
+</style>
 </head>
 
 <body>
 
-<header class="header">
-  <div class="header-content">
+<header>
 
-    <a href="index.html" class="logo">
-      GUIA<span>FILMES</span>
-    </a>
+<div class="header">
 
-    <div class="search-box">
-      <input
-        type="search"
-        id="searchInput"
-        placeholder="🔎 Pesquisar filme..."
-        autocomplete="off"
-      >
-    </div>
+<a href="index.html" class="logo">
+GUIA<span>FILMES</span>
+</a>
 
-  </div>
+<div class="search">
+<input
+type="search"
+id="search"
+placeholder="🔎 Pesquisar filme..."
+>
+</div>
+
+</div>
+
 </header>
 
 
 <!-- BOTÕES -->
+
 <section class="top-buttons">
 
-  <a
-    href="https://clientefinal.com/"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="btn-client"
-  >
-    🔐 ACESSAR ÁREA DO CLIENTE
-  </a>
+<a
+href="https://clientefinal.com/"
+target="_blank"
+rel="noopener noreferrer"
+class="top-button client"
+>
+🔐 ACESSAR ÁREA DO CLIENTE
+</a>
 
-  <a
-    href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014ade"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="btn-test"
-  >
-    🎁 CRIE SEU TESTE GRÁTIS POR 4 HORAS
-  </a>
+<a
+href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014ade"
+target="_blank"
+rel="noopener noreferrer"
+class="top-button test"
+>
+🎁 CRIE SEU TESTE GRÁTIS POR 4 HORAS
+</a>
 
 </section>
 
 
 <main class="container">
 
-  <section class="intro">
-    <h1>Filmes</h1>
-    <p>Encontre seus filmes favoritos.</p>
-  </section>
+<div class="intro">
+
+<h1>Filmes</h1>
+
+<p>
+Encontre seus filmes favoritos.
+</p>
+
+</div>
 
 
-  <!-- CATEGORIAS -->
-  <nav class="categories" id="categories">
+<!-- CATEGORIAS -->
 
-    <button class="category active" data-category="Todos">
-      Todos
-    </button>
+<div class="categories">
 
-    <button class="category" data-category="Ação">
-      Ação
-    </button>
+<button class="category active" data-category="Todos">
+Todos
+</button>
 
-    <button class="category" data-category="Comédia">
-      Comédia
-    </button>
+<button class="category" data-category="Ação">
+Ação
+</button>
 
-    <button class="category" data-category="Drama">
-      Drama
-    </button>
+<button class="category" data-category="Comédia">
+Comédia
+</button>
 
-    <button class="category" data-category="Terror">
-      Terror
-    </button>
+<button class="category" data-category="Drama">
+Drama
+</button>
 
-    <button class="category" data-category="Ficção">
-      Ficção
-    </button>
+<button class="category" data-category="Terror">
+Terror
+</button>
 
-    <button class="category" data-category="Animação">
-      Animação
-    </button>
+<button class="category" data-category="Ficção">
+Ficção
+</button>
 
-  </nav>
+<button class="category" data-category="Animação">
+Animação
+</button>
 
-
-  <div class="section-header">
-    <h2>Filmes recentes</h2>
-    <span id="resultCount"></span>
-  </div>
+</div>
 
 
-  <!-- FILMES -->
-  <section id="moviesGrid" class="movies-grid"></section>
+<div class="section-title">
+
+<h2>Filmes recentes</h2>
+
+<span id="count"></span>
+
+</div>
 
 
-  <!-- SEM RESULTADO -->
-  <div id="noResults" class="no-results">
-    Nenhum filme encontrado.
-  </div>
+<!-- FILMES -->
+
+<div
+id="movies"
+class="movies"
+></div>
 
 
-  <!-- PAGINAÇÃO -->
-  <div class="pagination" id="pagination"></div>
+<div
+id="noResults"
+class="no-results"
+>
+Nenhum filme encontrado.
+</div>
+
+
+<!-- PAGINAÇÃO -->
+
+<div
+id="pagination"
+class="pagination"
+></div>
 
 
 </main>
 
 
 <footer>
-  <p>© 2026 Guia Filmes</p>
+
+© 2026 Guia Filmes
+
 </footer>
 
 
-<script src="script.js"></script>
+<script>
+
+/* =====================================================
+   FILMES
+===================================================== */
+
+const filmes = [
+
+{
+id:1,
+titulo:"Aventura de Ação",
+categoria:"Ação",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:2,
+titulo:"A Grande Comédia",
+categoria:"Comédia",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:3,
+titulo:"Uma História de Drama",
+categoria:"Drama",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:4,
+titulo:"A Noite Sombria",
+categoria:"Terror",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1505635552518-3448ff116af3?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:5,
+titulo:"Além do Universo",
+categoria:"Ficção",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:6,
+titulo:"Mundo Encantado",
+categoria:"Animação",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:7,
+titulo:"Operação Especial",
+categoria:"Ação",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:8,
+titulo:"O Último Caminho",
+categoria:"Drama",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:9,
+titulo:"Risadas da Cidade",
+categoria:"Comédia",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:10,
+titulo:"A Casa Sombria",
+categoria:"Terror",
+ano:"2024",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1505635552518-3448ff116af3?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:11,
+titulo:"Galáxia Perdida",
+categoria:"Ficção",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:12,
+titulo:"Aventura Animada",
+categoria:"Animação",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:13,
+titulo:"Missão Impossível",
+categoria:"Ação",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:14,
+titulo:"O Dia Mais Divertido",
+categoria:"Comédia",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:15,
+titulo:"Depois da Tempestade",
+categoria:"Drama",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:16,
+titulo:"O Segredo da Casa",
+categoria:"Terror",
+ano:"2025",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1505635552518-3448ff116af3?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:17,
+titulo:"Viagem Espacial",
+categoria:"Ficção",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:18,
+titulo:"O Reino Mágico",
+categoria:"Animação",
+ano:"2026",
+qualidade:"FHD",
+imagem:"https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80"
+}
+
+];
+
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+const porPagina = 12;
+
+let paginaAtual = 1;
+
+let categoriaAtual = "Todos";
+
+let pesquisaAtual = "";
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const areaFilmes =
+document.getElementById("movies");
+
+const paginacao =
+document.getElementById("pagination");
+
+const campoPesquisa =
+document.getElementById("search");
+
+const contador =
+document.getElementById("count");
+
+const semResultado =
+document.getElementById("noResults");
+
+
+/* =====================================================
+   FILTRAR
+===================================================== */
+
+function filtrar(){
+
+return filmes.filter(filme=>{
+
+const categoriaOK =
+categoriaAtual==="Todos" ||
+filme.categoria===categoriaAtual;
+
+const pesquisaOK =
+filme.titulo
+.toLowerCase()
+.includes(pesquisaAtual.toLowerCase());
+
+return categoriaOK && pesquisaOK;
+
+});
+
+}
+
+
+/* =====================================================
+   MOSTRAR FILMES
+===================================================== */
+
+function mostrarFilmes(){
+
+const lista = filtrar();
+
+const totalPaginas =
+Math.ceil(lista.length / porPagina);
+
+if(paginaAtual > totalPaginas){
+paginaAtual=1;
+}
+
+const inicio =
+(paginaAtual-1)*porPagina;
+
+const fim =
+inicio+porPagina;
+
+const filmesPagina =
+lista.slice(inicio,fim);
+
+
+areaFilmes.innerHTML="";
+
+
+contador.textContent =
+lista.length+" filmes";
+
+
+if(filmesPagina.length===0){
+
+semResultado.style.display="block";
+
+paginacao.innerHTML="";
+
+return;
+
+}
+
+semResultado.style.display="none";
+
+
+filmesPagina.forEach((filme,index)=>{
+
+const card =
+document.createElement("article");
+
+card.className="movie";
+
+
+card.innerHTML=`
+
+<div class="poster">
+
+${index<4 ? `<div class="new">NOVO</div>`:""}
+
+<img
+src="${filme.imagem}"
+alt="${filme.titulo}"
+loading="lazy"
+>
+
+</div>
+
+<div class="info">
+
+<div class="title">
+${filme.titulo}
+</div>
+
+<div class="meta">
+
+<span class="quality">
+${filme.qualidade}
+</span>
+
+<span class="genre">
+${filme.categoria}
+</span>
+
+</div>
+
+<a
+class="watch"
+href="filme.html?id=${filme.id}"
+>
+▶ ASSISTIR
+</a>
+
+</div>
+
+`;
+
+
+areaFilmes.appendChild(card);
+
+});
+
+
+criarPaginacao(totalPaginas);
+
+}
+
+
+/* =====================================================
+   PAGINAÇÃO
+===================================================== */
+
+function criarPaginacao(total){
+
+paginacao.innerHTML="";
+
+if(total<=1)return;
+
+
+if(paginaAtual>1){
+
+const anterior =
+document.createElement("button");
+
+anterior.className="page";
+
+anterior.textContent="‹";
+
+anterior.onclick=()=>{
+
+paginaAtual--;
+
+mostrarFilmes();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+paginacao.appendChild(anterior);
+
+}
+
+
+for(let i=1;i<=total;i++){
+
+const botao =
+document.createElement("button");
+
+botao.className="page";
+
+if(i===paginaAtual){
+botao.classList.add("active");
+}
+
+botao.textContent=i;
+
+botao.onclick=()=>{
+
+paginaAtual=i;
+
+mostrarFilmes();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+paginacao.appendChild(botao);
+
+}
+
+
+if(paginaAtual<total){
+
+const proximo =
+document.createElement("button");
+
+proximo.className="page";
+
+proximo.textContent="›";
+
+proximo.onclick=()=>{
+
+paginaAtual++;
+
+mostrarFilmes();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+};
+
+paginacao.appendChild(proximo);
+
+}
+
+}
+
+
+/* =====================================================
+   CATEGORIAS
+===================================================== */
+
+document
+.querySelectorAll(".category")
+.forEach(botao=>{
+
+botao.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".category")
+.forEach(b=>{
+b.classList.remove("active");
+});
+
+botao.classList.add("active");
+
+categoriaAtual =
+botao.dataset.category;
+
+paginaAtual=1;
+
+mostrarFilmes();
+
+});
+
+});
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+campoPesquisa.addEventListener(
+"input",
+()=>{
+
+pesquisaAtual =
+campoPesquisa.value.trim();
+
+paginaAtual=1;
+
+mostrarFilmes();
+
+}
+);
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+mostrarFilmes();
+
+</script>
 
 </body>
 </html>
-
