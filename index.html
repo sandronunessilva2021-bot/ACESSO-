@@ -1,716 +1,812 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <h1>
-    
-</h1>
-
-    <meta name="theme-color" content="#000000">
-
-    <meta name="description"
-          content="Pizza Play - Filmes, Séries e Ao Vivo">
-
-    <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- iPhone/iPad -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <meta name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent">
-
-    <meta name="apple-mobile-web-app-title"
-          content="Pizza Play">
-
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-        }
-
-
-        body {
-            background: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-
-        /* ================================
-           VÍDEO DE FUNDO
-        ================================= */
-
-        #bg-video {
-
-            position: fixed;
-
-            top: 50%;
-            left: 50%;
-
-            width: 100vw;
-            height: 100vh;
-
-            transform:
-                translate(-50%, -50%);
-
-            object-fit: contain;
-
-            object-position: center center;
-
-            background: #000;
-
-            z-index: -2;
-        }
-
-
-        /* ================================
-           CAMADA ESCURA
-        ================================= */
-
-        .overlay {
-
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            background:
-                rgba(0, 0, 0, 0.58);
-
-            z-index: -1;
-        }
-
-
-        /* ================================
-           CONTAINER
-        ================================= */
-
-        .container {
-
-            width: 100%;
-
-            max-width: 720px;
-
-            margin: 0 auto;
-
-            padding:
-                40px 12px 30px;
-
-            text-align: center;
-        }
-
-
-        /* ================================
-           TÍTULO
-        ================================= */
-
-        h1 {
-
-            font-size: 40px;
-
-            font-weight: 800;
-
-            margin-top: 10px;
-
-            color: #fff;
-
-            text-shadow:
-                0 0 18px
-                rgba(255,255,255,.35);
-        }
-
-
-        .sub {
-
-            margin-top: 8px;
-
-            font-size: 18px;
-
-            color: #ddd;
-        }
-
-
-        /* ================================
-           BOTÕES
-        ================================= */
-
-        .btn {
-
-            display: block;
-
-            width: 100%;
-
-            max-width: 100%;
-
-            margin-left: auto;
-            margin-right: auto;
-
-            text-decoration: none;
-
-            padding:
-                19px 12px;
-
-            margin-top: 20px;
-
-            border-radius: 18px;
-
-            font-size: 20px;
-
-            font-weight: bold;
-
-            color: #fff;
-
-            background:
-                rgba(255,255,255,.15);
-
-            border:
-                1px solid
-                rgba(255,255,255,.65);
-
-            backdrop-filter:
-                blur(10px);
-
-            -webkit-backdrop-filter:
-                blur(10px);
-
-            box-shadow:
-                0 0 20px
-                rgba(0,0,0,.45);
-
-            transition:
-                transform .2s ease,
-                background .2s ease,
-                border-color .2s ease;
-        }
-
-
-        .btn:hover {
-
-            transform: scale(1.02);
-
-            background:
-                rgba(255,255,255,.23);
-
-            border-color: #fff;
-        }
-
-
-        .btn:active {
-
-            transform: scale(.97);
-        }
-
-
-        .btn small {
-
-            display: block;
-
-            margin-top: 7px;
-
-            font-size: 14px;
-
-            font-weight: normal;
-
-            color: #eee;
-        }
-
-
-        /* ================================
-           CARDS
-        ================================= */
-
-        .cards {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 12px;
-
-            margin-top: 35px;
-        }
-
-
-        .card {
-
-            background:
-                rgba(255,255,255,.08);
-
-            padding:
-                18px 12px;
-
-            border-radius: 18px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.12);
-
-            backdrop-filter:
-                blur(8px);
-
-            -webkit-backdrop-filter:
-                blur(8px);
-
-            opacity: 0;
-
-            transform:
-                translateY(20px);
-
-            transition:
-                opacity .5s ease,
-                transform .5s ease;
-        }
-
-
-        .card.show {
-
-            opacity: 1;
-
-            transform:
-                translateY(0);
-        }
-
-
-        .card span {
-
-            display: block;
-
-            font-size: 38px;
-
-            margin-bottom: 8px;
-        }
-
-
-        .card h3 {
-
-            font-size: 17px;
-
-            margin-bottom: 8px;
-        }
-
-
-        .card p {
-
-            font-size: 13px;
-
-            line-height: 1.4;
-
-            color: #ddd;
-        }
-
-
-        /* ================================
-           RODAPÉ
-        ================================= */
-
-        footer {
-
-            margin-top: 40px;
-
-            font-size: 14px;
-
-            color: #ccc;
-
-            padding-bottom: 20px;
-        }
-
-
-        /* ================================
-           CELULAR
-        ================================= */
-
-        @media (max-width: 600px) {
-
-            #bg-video {
-
-                width: 100vw;
-
-                height: 100vh;
-
-                object-fit: cover;
-
-                object-position:
-                    center center;
-            }
-
-
-            .container {
-
-                width: 100%;
-
-                max-width: 100%;
-
-                padding:
-                    30px 12px 25px;
-            }
-
-
-            h1 {
-
-                font-size: 34px;
-            }
-
-
-            .sub {
-
-                font-size: 16px;
-            }
-
-
-            .btn {
-
-                width: 100%;
-
-                font-size: 19px;
-
-                padding:
-                    18px 10px;
-
-                border-radius: 17px;
-            }
-
-
-            .btn small {
-
-                font-size: 14px;
-            }
-
-
-            .cards {
-
-                grid-template-columns: 1fr;
-
-                gap: 12px;
-            }
-
-
-            .card {
-
-                padding: 18px;
-            }
-
-
-            .card span {
-
-                font-size: 36px;
-            }
-
-
-            .card p {
-
-                font-size: 14px;
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Guia de Conteúdo - Filmes</title>
+  <meta name="description" content="Encontre seus filmes favoritos em um só lugar.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #080808;
+      --bg-card: #121212;
+      --bg-header: #101010;
+      --red: #e50914;
+      --red-dark: #b20710;
+      --text: #ffffff;
+      --muted: #999999;
+      --border: #252525;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bg-header);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: auto;
+      min-height: 72px;
+      padding: 12px 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--red);
+    }
+
+    .search {
+      flex: 1;
+      max-width: 480px;
+      position: relative;
+    }
+
+    .search input {
+      width: 100%;
+      background: #1b1b1b;
+      border: 1px solid #303030;
+      border-radius: 8px;
+      color: white;
+      padding: 13px 16px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search input:focus {
+      border-color: var(--red);
+    }
+
+    /* BOTÕES */
+    .buttons-area {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 22px 20px 5px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .main-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      min-height: 58px;
+      padding: 14px 20px;
+
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 800;
+
+      transition: 0.2s ease;
+    }
+
+    .client-button {
+      background: var(--red);
+    }
+
+    .client-button:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+    }
+
+    .test-button {
+      background: #202020;
+      border: 1px solid #444;
+    }
+
+    .test-button:hover {
+      background: #2c2c2c;
+      transform: translateY(-2px);
+    }
+
+    /* CONTEÚDO */
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .page-title {
+      margin: 20px 0;
+    }
+
+    .page-title h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .page-title p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* CATEGORIAS */
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scrollbar-width: thin;
+    }
+
+    .categories button {
+      border: 1px solid #303030;
+      background: #151515;
+      color: #ddd;
+      padding: 9px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.2s;
+    }
+
+    .categories button:hover,
+    .categories button.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* SEÇÃO */
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 28px 0 16px;
+    }
+
+    .section-title h2 {
+      font-size: 20px;
+    }
+
+    .section-title span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* GRID */
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 15px;
+    }
+
+    /* CARD */
+    .movie-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-5px);
+      border-color: #444;
+    }
+
+    .poster {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      background: #1b1b1b;
+      overflow: hidden;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .movie-info {
+      padding: 10px;
+    }
+
+    .movie-title {
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 8px;
+    }
+
+    .movie-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 4px 6px;
+      border-radius: 3px;
+    }
+
+    .category {
+      color: #999;
+      font-size: 10px;
+    }
+
+    .new-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #00a86b;
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 5px 7px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    /* PAGINAÇÃO */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 35px 0 20px;
+    }
+
+    .pagination button {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #333;
+      background: #151515;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .pagination button.active,
+    .pagination button:hover {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+      padding: 30px 20px;
+      text-align: center;
+      color: #777;
+      font-size: 12px;
+    }
+
+    /* RESPONSIVO TABLET */
+    @media (max-width: 1000px) {
+      .movies-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .header-container {
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        width: 100%;
+        text-align: center;
+      }
+
+      .search {
+        max-width: none;
+        width: 100%;
+      }
+
+      .movies-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* RESPONSIVO CELULAR */
+    @media (max-width: 600px) {
+      .header-container {
+        padding: 14px;
+      }
+
+      .buttons-area {
+        grid-template-columns: 1fr;
+        padding: 15px 14px 0;
+      }
+
+      .main-button {
+        min-height: 55px;
+        font-size: 14px;
+      }
+
+      main {
+        padding: 14px;
+      }
+
+      .page-title h1 {
+        font-size: 22px;
+      }
+
+      .page-title p {
+        font-size: 13px;
+      }
+
+      .movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .movie-title {
+        font-size: 13px;
+      }
+
+      .section-title h2 {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .movies-grid {
+        gap: 8px;
+      }
+
+      .movie-info {
+        padding: 8px;
+      }
+
+      .movie-title {
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <!-- CABEÇALHO -->
+  <header>
+    <div class="header-container">
 
-    <!-- ================================
-         VÍDEO
-    ================================= -->
+      <div class="logo">
+        GUIA<span>DECONTEÚDO</span>
+      </div>
 
-    <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        id="bg-video">
+      <div class="search">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="🔎 Pesquisar filme..."
+          onkeyup="searchMovies()"
+        >
+      </div>
 
-        <source
-            src="6e0435cdf73692771097c0abcf882e37.mp4"
-            type="video/mp4">
+    </div>
+  </header>
 
-        Seu navegador não suporta vídeo.
 
-    </video>
+  <!-- BOTÕES PRINCIPAIS -->
+  <div class="buttons-area">
 
+    <a
+      class="main-button client-button"
+      href="https://clientefinal.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      🔐 ACESSAR ÁREA DO CLIENTE
+    </a>
 
-    <!-- CAMADA ESCURA -->
+    <a
+      class="main-button test-button"
+      href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014ade"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      🎁 CRIE SEU TESTE GRÁTIS POR 4 HORAS
+    </a>
 
-    <div class="overlay"></div>
+  </div>
 
 
-    <!-- ================================
-         CONTEÚDO
-    ================================= -->
+  <main>
 
-    <main class="container">
+    <!-- TÍTULO -->
+    <div class="page-title">
+      <h1>Filmes</h1>
+      <p>Encontre seus filmes favoritos em um só lugar.</p>
+    </div>
 
 
-        <h1>
-            🍕 Pizza Play
-        </h1>
+    <!-- CATEGORIAS -->
+    <div class="categories">
 
+      <button class="active" onclick="filterCategory('Todos', this)">
+        Todos
+      </button>
 
-        <p class="sub">
+      <button onclick="filterCategory('Ação', this)">
+        Ação
+      </button>
 
-            Filmes • Séries • Ao Vivo
+      <button onclick="filterCategory('Comédia', this)">
+        Comédia
+      </button>
 
-        </p>
+      <button onclick="filterCategory('Drama', this)">
+        Drama
+      </button>
 
+      <button onclick="filterCategory('Terror', this)">
+        Terror
+      </button>
 
-        <!-- BOTÃO TESTE -->
+      <button onclick="filterCategory('Ficção', this)">
+        Ficção
+      </button>
 
-        <a
-            class="btn"
-            href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
-            target="_blank"
-            rel="noopener noreferrer">
+      <button onclick="filterCategory('Animação', this)">
+        Animação
+      </button>
 
-            🎁 CRIE SEU LOGIN E SENHA AQUI
+    </div>
 
-            <small>
 
-                Aproveite 4 horas grátis
+    <!-- FILMES -->
+    <div class="section-title">
+      <h2>Filmes recentes</h2>
+      <span>Atualizados recentemente</span>
+    </div>
 
-            </small>
 
-        </a>
+    <div class="movies-grid" id="moviesGrid">
 
 
-        <!-- BOTÃO PAINEL -->
+      <!-- FILME 1 -->
+      <div class="movie-card" data-category="Ação" data-title="O Último Desafio">
 
-        <a
-            class="btn"
-            href="https://clientefinal.com/"
-            target="_blank"
-            rel="noopener noreferrer">
+        <div class="new-badge">NOVO</div>
 
-            🔐 PAINEL DO CLIENTE
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg"
+            alt="O Último Desafio"
+            loading="lazy"
+          >
+        </div>
 
-            <small>
+        <div class="movie-info">
+          <div class="movie-title">O Último Desafio</div>
 
-                Entrar com seu login e senha
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Ação</span>
+          </div>
+        </div>
 
-            </small>
+      </div>
 
-        </a>
 
+      <!-- FILME 2 -->
+      <div class="movie-card" data-category="Comédia" data-title="Uma Noite Divertida">
 
-        <!-- CARDS -->
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/q719jXXEzOoYaps6babgKnONONX.jpg"
+            alt="Uma Noite Divertida"
+            loading="lazy"
+          >
+        </div>
 
-        <section class="cards">
+        <div class="movie-info">
+          <div class="movie-title">Uma Noite Divertida</div>
 
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Comédia</span>
+          </div>
+        </div>
 
-            <div class="card">
+      </div>
 
-                <span>
-                    🎬
-                </span>
 
-                <h3>
-                    Filmes
-                </h3>
+      <!-- FILME 3 -->
+      <div class="movie-card" data-category="Drama" data-title="A Grande História">
 
-                <p>
+        <div class="new-badge">NOVO</div>
 
-                    Os melhores lançamentos
-                    para você assistir.
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/6agKYU5IQFpuDyUYPu39w7U1iTh.jpg"
+            alt="A Grande História"
+            loading="lazy"
+          >
+        </div>
 
-                </p>
+        <div class="movie-info">
+          <div class="movie-title">A Grande História</div>
 
-            </div>
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Drama</span>
+          </div>
+        </div>
 
+      </div>
 
-            <div class="card">
 
-                <span>
-                    📺
-                </span>
+      <!-- FILME 4 -->
+      <div class="movie-card" data-category="Terror" data-title="A Noite Sombria">
 
-                <h3>
-                    Séries
-                </h3>
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/2vFuG6bWGyQUzYS9d69E5l9JjR4.jpg"
+            alt="A Noite Sombria"
+            loading="lazy"
+          >
+        </div>
 
-                <p>
+        <div class="movie-info">
+          <div class="movie-title">A Noite Sombria</div>
 
-                    Séries de sucesso
-                    para maratonar.
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Terror</span>
+          </div>
+        </div>
 
-                </p>
+      </div>
 
-            </div>
 
+      <!-- FILME 5 -->
+      <div class="movie-card" data-category="Ficção" data-title="Além do Universo">
 
-            <div class="card">
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/8Y43POKjjKDGI9MH89NW0NAzzp8.jpg"
+            alt="Além do Universo"
+            loading="lazy"
+          >
+        </div>
 
-                <span>
-                    📡
-                </span>
+        <div class="movie-info">
+          <div class="movie-title">Além do Universo</div>
 
-                <h3>
-                    Ao Vivo
-                </h3>
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Ficção</span>
+          </div>
+        </div>
 
-                <p>
+      </div>
 
-                    Canais ao vivo com
-                    excelente qualidade.
 
-                </p>
+      <!-- FILME 6 -->
+      <div class="movie-card" data-category="Animação" data-title="O Mundo Encantado">
 
-            </div>
+        <div class="new-badge">NOVO</div>
 
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg"
+            alt="O Mundo Encantado"
+            loading="lazy"
+          >
+        </div>
 
-        </section>
+        <div class="movie-info">
+          <div class="movie-title">O Mundo Encantado</div>
 
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Animação</span>
+          </div>
+        </div>
 
-        <!-- RODAPÉ -->
+      </div>
 
-        <footer>
 
-            🍕 Pizza Play © 2026
+      <!-- FILME 7 -->
+      <div class="movie-card" data-category="Ação" data-title="Operação Final">
 
-        </footer>
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg"
+            alt="Operação Final"
+            loading="lazy"
+          >
+        </div>
 
+        <div class="movie-info">
+          <div class="movie-title">Operação Final</div>
 
-    </main>
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Ação</span>
+          </div>
+        </div>
 
+      </div>
 
-    <script>
 
+      <!-- FILME 8 -->
+      <div class="movie-card" data-category="Drama" data-title="O Caminho">
 
-        /* ================================
-           SERVICE WORKER
-        ================================= */
+        <div class="poster">
+          <img
+            src="https://image.tmdb.org/t/p/w500/6Kj1Y0uH1Vq8cH8v6bL6e9V5b.jpg"
+            alt="O Caminho"
+            loading="lazy"
+          >
+        </div>
 
-        if ("serviceWorker" in navigator) {
+        <div class="movie-info">
+          <div class="movie-title">O Caminho</div>
 
-            window.addEventListener(
-                "load",
-                function () {
+          <div class="movie-meta">
+            <span class="badge">FHD</span>
+            <span class="category">Drama</span>
+          </div>
+        </div>
 
-                    navigator.serviceWorker
-                        .register(
-                            "service-worker.js"
-                        )
+      </div>
 
-                        .then(function () {
+    </div>
 
-                            console.log(
-                                "Service Worker registrado."
-                            );
 
-                        })
+    <!-- PAGINAÇÃO -->
+    <div class="pagination">
 
-                        .catch(function (erro) {
+      <button class="active">1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>4</button>
+      <button>→</button>
 
-                            console.log(
-                                "Erro no Service Worker:",
-                                erro
-                            );
+    </div>
 
-                        });
 
-                }
-            );
+    <!-- DESTAQUE -->
+    <div class="section-title">
+      <h2>Especialmente para Você!</h2>
+    </div>
 
-        }
+    <div class="buttons-area" style="padding:0; max-width:none;">
 
+      <a
+        class="main-button client-button"
+        href="https://clientefinal.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🔐 ACESSAR ÁREA DO CLIENTE
+      </a>
 
-        /* ================================
-           EFEITO DOS BOTÕES
-        ================================= */
+      <a
+        class="main-button test-button"
+        href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014ade"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        🎁 TESTE GRÁTIS POR 4 HORAS
+      </a>
 
+    </div>
+
+  </main>
+
+
+  <!-- RODAPÉ -->
+  <footer>
+    © 2026 Guia de Conteúdo — Todos os direitos reservados.
+  </footer>
+
+
+  <script>
+
+    let currentCategory = "Todos";
+
+
+    // PESQUISA
+    function searchMovies() {
+
+      const search =
         document
-            .querySelectorAll(".btn")
-            .forEach(function (botao) {
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
 
-                botao.addEventListener(
-                    "click",
-                    function () {
+      const movies =
+        document.querySelectorAll(".movie-card");
 
-                        this.style.transform =
-                            "scale(0.97)";
+      movies.forEach(movie => {
 
+        const title =
+          movie
+          .getAttribute("data-title")
+          .toLowerCase();
 
-                        setTimeout(
-                            function () {
+        const category =
+          movie
+          .getAttribute("data-category");
 
-                                botao.style.transform =
-                                    "";
+        const matchesSearch =
+          title.includes(search);
 
-                            },
-                            150
-                        );
+        const matchesCategory =
+          currentCategory === "Todos" ||
+          category === currentCategory;
 
-                    }
-                );
+        movie.style.display =
+          matchesSearch && matchesCategory
+          ? ""
+          : "none";
 
-            });
+      });
 
-
-        /* ================================
-           ANIMAÇÃO DOS CARDS
-        ================================= */
-
-        window.addEventListener(
-            "load",
-            function () {
-
-                const cards =
-                    document.querySelectorAll(
-                        ".card"
-                    );
+    }
 
 
-                cards.forEach(
-                    function (card, index) {
+    // FILTRO DE CATEGORIA
+    function filterCategory(category, button) {
 
-                        setTimeout(
-                            function () {
+      currentCategory = category;
 
-                                card.classList.add(
-                                    "show"
-                                );
+      document
+        .querySelectorAll(".categories button")
+        .forEach(btn => {
+          btn.classList.remove("active");
+        });
 
-                            },
-                            index * 150
-                        );
+      button.classList.add("active");
 
-                    }
-                );
+      searchMovies();
 
-            }
-        );
+    }
 
-
-    </script>
-
+  </script>
 
 </body>
-
 </html>
-
