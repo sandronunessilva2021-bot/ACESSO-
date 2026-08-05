@@ -60,22 +60,33 @@ text-shadow:0 4px 15px rgba(0,0,0,.6);
 }
 
 /* Botões */
+/* Botões */
 .btn{
 display:block;
 width:100%;
 text-decoration:none;
 color:#fff;
-background:rgba(255,140,0,0.45); /* Laranja transparente */
+background:rgba(255,255,255,0.10); /* Branco bem transparente */
 padding:18px;
 font-size:22px;
 font-weight:bold;
 border-radius:18px;
-border:none;
-backdrop-filter:blur(12px);
--webkit-backdrop-filter:blur(12px);
-box-shadow:0 8px 25px rgba(0,0,0,.35);
+border:1px solid rgba(255,255,255,0.25);
+backdrop-filter:blur(15px);
+-webkit-backdrop-filter:blur(15px);
+box-shadow:0 8px 25px rgba(0,0,0,.25);
 transition:.3s;
 margin-top:18px;
+}
+
+.btn:hover{
+background:rgba(255,255,255,0.18);
+border:1px solid rgba(255,255,255,0.35);
+transform:scale(1.03);
+}
+
+.btn:active{
+transform:scale(.98);
 }
 
 .btn:hover{
