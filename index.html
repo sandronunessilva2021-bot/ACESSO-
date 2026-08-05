@@ -65,18 +65,26 @@ display:block;
 width:100%;
 text-decoration:none;
 color:#fff;
-background:rgba(220,20,60,.90);
+background:rgba(255,140,0,0.45); /* Laranja transparente */
 padding:18px;
 font-size:22px;
 font-weight:bold;
 border-radius:18px;
-box-shadow:0 10px 35px rgba(0,0,0,.45);
+border:none;
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+box-shadow:0 8px 25px rgba(0,0,0,.35);
 transition:.3s;
 margin-top:18px;
 }
 
 .btn:hover{
+background:rgba(255,140,0,0.65);
 transform:scale(1.03);
+}
+
+.btn:active{
+transform:scale(.98);
 }
 </style>
 
