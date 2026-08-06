@@ -1,131 +1,212 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+
+<!doctype html>
+<html lang="pt-br" >
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal do Cliente</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    overflow:hidden;
-}
-
-/* Vídeo de fundo */
-#bg-video{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-2;
-}
-
-/* Camada escura */
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.45);
-    z-index:-1;
-}
-
-/* Conteúdo */
-.container{
-    width:100%;
-    max-width:420px;
-    padding:30px;
-    text-align:center;
-}
-
-/* Título */
-h1{
-    color:#fff;
-    font-size:42px;
-    margin-bottom:45px;
-    text-shadow:0 4px 15px rgba(0,0,0,.6);
-}
-
-/* Botões */
-.btn{
-    display:block;
-    width:100%;
-    text-decoration:none;
-    color:#fff;
-    background:rgba(255,255,255,0.10);
-    padding:18px;
-    font-size:22px;
-    font-weight:bold;
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,0.25);
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-    box-shadow:0 8px 25px rgba(0,0,0,.25);
-    transition:.3s;
-    margin-top:18px;
-}
-
-.btn:hover{
-    background:rgba(255,140,0,.65);
-    border:1px solid rgba(255,255,255,.35);
-    transform:scale(1.03);
-}
-
-.btn:active{
-    transform:scale(.98);
-}
-
-/* Botão do teste grátis */
-.btn-teste{
-    background:linear-gradient(45deg,#00b84f,#00e676);
-    border:none;
-}
-
-.btn-teste:hover{
-    background:linear-gradient(45deg,#00a844,#00d85f);
-}
-</style>
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-status-bar" content="#f7f7ff" />
+	<meta name="theme-color" content="#f7f7ff" />	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>Painel Cliente - Gerenciador de Pagamento</title>
+	<link rel="icon" href="/res/images/panel.png" type="image/png" />
+	<link href="/res/css/pace.min.css" rel="stylesheet" />
+	<link href="/res/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/res/css/app.css" rel="stylesheet">
+	<link href="/res/css/icons.css" rel="stylesheet">
+	<link href="/res/plugins/notifications/css/lobibox.min.css" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/res/css/dark-theme.css" />
+	<link rel="stylesheet" href="/res/api/sweetalert2/dark.css">
+	<script src="/res/js/jquery.min.js"></script>
+	<script src="/res/js/pace.min.js"></script>
+	<script src="/res/api/sweetalert2/sweetalert2.min.js"></script>
+	
+	<link rel="manifest" href="manifest.json" />
+	<link rel="apple-touch-icon" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="57x57" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="76x76" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="120x120" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="144x144" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="152x152" href="/res/images/panel.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/res/images/panel.png" />
+	<style>
+	body {
+			background: linear-gradient(135deg, #ff8a00, rgb(247, 0, 33));
+			min-height: 100vh;
+		}
+		.card {
+			backdrop-filter: blur(10px);
+			background-color: rgba(255, 255, 255, 0.9);
+			border: none;
+			border-radius: 15px;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+		}
+		.btn-warning {
+			background: linear-gradient(45deg, #ff8a00,rgb(255, 115, 0));
+			border: none;
+			transition: all 0.3s ease;
+		}
+		.btn-warning:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(229, 46, 113, 0.4);
+		}
+		.form-control {
+			border-radius: 10px;
+			/* padding: 12px; */
+		}
+		.logo {
+			width: 120px;
+			margin-bottom: 20px;
+		}
+	</style>
 </head>
-
 <body>
-
-<video autoplay muted loop playsinline id="bg-video">
-    <source src="6e0435cdf73692771097c0abcf882e37.mp4" type="video/mp4">
-</video>
-
-<div class="overlay"></div>
-
-<div class="container">
-
-<h1>Portal do Cliente</h1>
-
-<a class="btn"
-   href="https://clientefinal.com/"
-   target="_blank">
-🔐 Painel do Cliente
-</a>
-
-<a class="btn btn-teste"
-   href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
-   target="_blank">
-🎁 CRIE SEU LOGIN AQUI E GANHE 4 HORAS GRÁTIS
-</a>
-
+	<div class="wrapper">
+		<div class="container">
+			<div class="row min-vh-100 align-items-center justify-content-center">
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="card p-4">
+						<div class="card-body">
+							<div class="text-center mb-4">
+							<img src="/res/images/logo.png" alt="Logo" class="logo">
+							<h3>Bem-vindo(a)</h3>
+							<p class="text-muted">Faça login para continuar</p>
+							</div>
+														
+							<div class="form-body">
+								<form class="row g-3 needs-validation" action="/" method="post" novalidate>
+									<div class="col-12">
+										<div class="input-group" id="show_hide_password">
+											<span class="input-group-text bg-transparent border-end-0"><i class='bx bx-user'></i></span>
+											<input type="text" name="username" class="form-control border-end-0" id="username" placeholder="Digite seu Login" value="" required>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="input-group" id="show_hide_password">
+											<span class="input-group-text bg-transparent border-end-0"><i class='bx bx-lock-alt'></i></span>
+											<input type="password" name="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Digite sua Senha" value="" required autocapitalize="no"> <a href="javascript:;" class="input-group-text bg-transparent text-warning"><i class='bx bx-hide'></i></a>
+										</div>
+									</div>
+									<input type="hidden" name="token" value="ff84391907a2d24890c17bd7159576b84c98078667ce84027e50dd3adb0aaedf" >
+									<div class="col-12 text-center">
+																				<div class="cf-turnstile" data-sitekey="0x4AAAAAAB0s_2QgkH7eit-i" data-size="flexible" data-callback="onTurnstileSuccess" data-error-callback="onTurnstileError"></div>
+										<div class="d-grid">
+    <button type="submit" class="btn btn-warning disabled" id="submitBtn" disabled>
+        <i class="bx bxs-lock-open"></i>...
+    </button>
 </div>
 
+<div class="d-grid mt-3">
+    <a href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+       class="btn btn-warning">
+        <i class="bx bx-user-plus"></i>
+        NÃO TEM LOGIN? CRIE AQUI E GANHE 4 HORAS DE TESTE GRÁTIS
+    </a>
+</div>
+																			</div>
+								</form>
+							</div>
+													</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/res/js/bootstrap.bundle.min.js"></script>
+	<script src="/res/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="/res/plugins/notifications/js/lobibox.min.js"></script>
+	<script>
+		function  notificationJSBox(title, text, icon){
+			Swal.fire({
+				title: title,
+				text: text,
+				icon: icon,
+				confirmButtonColor: '#cc8800',
+			});
+
+			let search = window.location.search.split('result=');
+			history.pushState({}, null, window.location.pathname + search[0]);
+		}
+
+		$(document).ready(function () {
+			const isIos = () => {
+			const userAgent = window.navigator.userAgent.toLowerCase();
+			return /iphone|ipad|ipod/.test( userAgent );
+			}
+			const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+			if (isIos() && !isInStandaloneMode()) {
+				this.setState({ showInstallMessage: true });
+			}
+			
+			navigator.serviceWorker.register("service-worker.js")
+			.then(registration => {
+				enableButton.parentNode.remove();
+			})
+			.catch(err => {});
+
+			$("#show_hide_password a").on('click', function (event) {
+				event.preventDefault();
+				if ($('#show_hide_password input').attr("type") == "text") {
+					$('#show_hide_password input').attr('type', 'password');
+					$('#show_hide_password i').addClass("bx-hide");
+					$('#show_hide_password i').removeClass("bx-show");
+				} else if ($('#show_hide_password input').attr("type") == "password") {
+					$('#show_hide_password input').attr('type', 'text');
+					$('#show_hide_password i').removeClass("bx-hide");
+					$('#show_hide_password i').addClass("bx-show");
+				}
+			});
+
+			var forms = document.querySelectorAll('.needs-validation')
+			Array.prototype.slice.call(forms).forEach(function (form) {
+				form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+						event.preventDefault()
+						event.stopPropagation()
+					} else {
+						let btn = form.querySelector('[type="submit"]');
+						btn.disabled = true;
+						btn.innerText = "CARREGANDO ...";
+					}
+					form.classList.add('was-validated')
+				}, false)
+			});
+		});
+	</script>
+
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	<script>
+		function onTurnstileSuccess(token) {
+			var botao = document.getElementById('submitBtn');
+			botao.innerHTML = '<i class="bx bx-lock-open pb-1"></i> ENTRAR';
+			botao.disabled = false;
+			botao.classList.remove('disabled');
+		}
+
+		function onTurnstileError() {
+			var botao = document.getElementById('submitBtn');
+			botao.innerHTML = '<i class="bx bx-loader bx-spin pb-1"></i> ATUALIZE A PAGINA';
+			botao.disabled = TRUE;	
+			botao.classList.add('disabled');
+		}
+
+		var forms = document.querySelectorAll('.needs-validation')
+			Array.prototype.slice.call(forms).forEach(function (form) {
+				form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+						event.preventDefault()
+						event.stopPropagation()
+					} else {
+						let btn = form.querySelector('[type="submit"]');
+						btn.disabled = true;
+						btn.innerText = "CARREGANDO ...";
+					}
+					form.classList.add('was-validated')
+				}, false)
+			});
+	</script>
+	<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"8b092cabf71041d9a4303f5a4764ca7c","r":1}' crossorigin="anonymous"></script>
 </body>
 </html>
