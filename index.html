@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Painel do Cliente</title>
+<title>Painel Cliente</title>
 
 <style>
 *{
@@ -15,7 +14,7 @@
 }
 
 body{
-    background:linear-gradient(135deg,#ff8800,#ff1a1a);
+    background:linear-gradient(135deg,#ff8800,#ff0000);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -25,69 +24,69 @@ body{
 .card{
     width:380px;
     background:#fff;
-    border-radius:20px;
+    border-radius:25px;
     padding:35px;
     box-shadow:0 15px 40px rgba(0,0,0,.25);
+    text-align:center;
 }
 
 .logo{
-    width:120px;
-    display:block;
-    margin:0 auto 20px;
-}
-
-h2{
-    text-align:center;
-    margin-bottom:8px;
-}
-
-p{
-    text-align:center;
-    color:#666;
+    width:280px;
     margin-bottom:25px;
 }
 
-input{
-    width:100%;
-    padding:14px;
-    margin-bottom:15px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    font-size:16px;
+h2{
+    color:#222;
+    margin-bottom:10px;
+    font-size:38px;
 }
 
-button,
-a.botao{
-    width:100%;
+p{
+    color:#666;
+    margin-bottom:35px;
+    font-size:18px;
+}
+
+.botao{
     display:block;
-    text-align:center;
-    padding:14px;
-    border-radius:10px;
+    width:100%;
+    background:linear-gradient(45deg,#ff9500,#ff5a00);
+    color:#fff;
     text-decoration:none;
-    font-size:16px;
+    padding:18px;
+    border-radius:12px;
+    font-size:22px;
     font-weight:bold;
-    border:none;
-    cursor:pointer;
     transition:.3s;
 }
 
-button{
-    background:#ff8800;
-    color:white;
+.botao:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
 }
 
-button:hover{
+.divisor{
+    margin:30px 0;
+    color:#888;
+    font-size:18px;
+}
+
+.botao2{
+    display:block;
+    width:100%;
+    border:2px solid #ff6a00;
+    color:#ff6a00;
+    text-decoration:none;
+    padding:18px;
+    border-radius:12px;
+    font-size:20px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.botao2:hover{
     background:#ff6a00;
-}
-
-a.botao{
-    margin-top:12px;
-    background:#ff8800;
     color:#fff;
-}
-
-a.botao:hover{
-    background:#ff6a00;
 }
 </style>
 
@@ -96,29 +95,25 @@ a.botao:hover{
 
 <div class="card">
 
-<img src="logo.png" class="logo" alt="Logo">
+<img src="logo.png" class="logo" alt="Painel Cliente">
 
 <h2>Bem-vindo(a)</h2>
 
 <p>Faça login para continuar</p>
 
-<form>
-
-<input type="text" placeholder="Digite seu Login">
-
-<input type="password" placeholder="Digite sua Senha">
-
-<button type="submit">
-ENTRAR
-</button>
-
-<a class="botao"
-href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a">
-NÃO TEM LOGIN?<br>
-CRIE AQUI E GANHE 4 HORAS DE TESTE GRÁTIS
+<a class="botao" href="https://clientefinal.com/">
+🔒 LOGIN E PASSWORD
 </a>
 
-</form>
+<div class="divisor">
+OU
+</div>
+
+<a class="botao2" href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a">
+👤 NÃO TEM LOGIN?<br>
+CRIE AQUI E GANHE<br>
+4 HORAS DE TESTE GRÁTIS
+</a>
 
 </div>
 
