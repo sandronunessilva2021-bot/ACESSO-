@@ -18,7 +18,7 @@
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Android/PWA -->
+    <!-- Android -->
     <meta name="mobile-web-app-capable" content="yes">
 
     <!-- iPhone/iPad -->
@@ -30,7 +30,12 @@
     <meta name="apple-mobile-web-app-title"
           content="Pizza Play">
 
+
     <style>
+
+        /* ================================
+           RESET
+        ================================= */
 
         * {
             margin: 0;
@@ -39,17 +44,26 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+
         html,
         body {
+
             width: 100%;
             min-height: 100%;
+
         }
 
+
         body {
+
             background: #000;
+
             color: #fff;
+
             overflow-x: hidden;
+
         }
+
 
         /* ================================
            VÍDEO DE FUNDO
@@ -70,12 +84,15 @@
 
             object-fit: cover;
 
-            object-position: center center;
+            object-position:
+                center center;
 
             background: #000;
 
             z-index: -2;
+
         }
+
 
         /* ================================
            CAMADA ESCURA
@@ -95,7 +112,9 @@
                 rgba(0, 0, 0, 0.58);
 
             z-index: -1;
+
         }
+
 
         /* ================================
            CONTAINER
@@ -113,7 +132,9 @@
                 40px 12px 30px;
 
             text-align: center;
+
         }
+
 
         /* ================================
            TÍTULO
@@ -130,9 +151,12 @@
             color: #fff;
 
             text-shadow:
+
                 0 0 18px
                 rgba(255,255,255,.35);
+
         }
+
 
         .sub {
 
@@ -141,10 +165,13 @@
             font-size: 18px;
 
             color: #ddd;
+
         }
+
 
         /* ================================
            BOTÕES
+           TRANSPARENTES + BORDA LARANJA
         ================================= */
 
         .btn {
@@ -154,6 +181,7 @@
             width: 100%;
 
             margin-left: auto;
+
             margin-right: auto;
 
             text-decoration: none;
@@ -171,43 +199,76 @@
 
             color: #fff;
 
-            background:
-                rgba(255,255,255,.15);
+            /* FUNDO TRANSPARENTE */
+
+            background: transparent;
+
+            /* BORDA LARANJA */
 
             border:
-                1px solid
-                rgba(255,255,255,.65);
+                1px solid #ff6a00;
+
+            /* VIDRO LEVE */
 
             backdrop-filter:
-                blur(10px);
+                blur(5px);
 
             -webkit-backdrop-filter:
-                blur(10px);
+                blur(5px);
+
+            /* BRILHO LARANJA */
 
             box-shadow:
-                0 0 20px
-                rgba(0,0,0,.45);
+
+                0 0 10px
+                rgba(255,106,0,.25);
 
             transition:
+
                 transform .2s ease,
+
                 background .2s ease,
-                border-color .2s ease;
+
+                border-color .2s ease,
+
+                box-shadow .2s ease;
+
         }
+
+
+        /* ================================
+           EFEITO BOTÃO
+        ================================= */
 
         .btn:hover {
 
-            transform: scale(1.02);
+            transform:
+                scale(1.02);
 
             background:
-                rgba(255,255,255,.23);
+                rgba(255,106,0,.08);
 
-            border-color: #fff;
+            border-color:
+                #ff6a00;
+
+            box-shadow:
+
+                0 0 18px
+                rgba(255,106,0,.45);
+
         }
+
 
         .btn:active {
 
-            transform: scale(.97);
+            transform:
+                scale(.97);
+
+            background:
+                rgba(255,106,0,.12);
+
         }
+
 
         .btn small {
 
@@ -220,10 +281,13 @@
             font-weight: normal;
 
             color: #eee;
+
         }
+
 
         /* ================================
            CARDS
+           TRANSPARENTES + BORDA LARANJA
         ================================= */
 
         .cards {
@@ -236,27 +300,38 @@
             gap: 12px;
 
             margin-top: 35px;
+
         }
+
 
         .card {
 
-            background:
-                rgba(255,255,255,.08);
+            background: transparent;
 
             padding:
                 18px 12px;
 
             border-radius: 18px;
 
+            /* BORDA LARANJA */
+
             border:
-                1px solid
-                rgba(255,255,255,.12);
+                1px solid #ff6a00;
+
+            /* VIDRO LEVE */
 
             backdrop-filter:
-                blur(8px);
+                blur(5px);
 
             -webkit-backdrop-filter:
-                blur(8px);
+                blur(5px);
+
+            /* BRILHO */
+
+            box-shadow:
+
+                0 0 10px
+                rgba(255,106,0,.20);
 
             opacity: 0;
 
@@ -264,9 +339,21 @@
                 translateY(20px);
 
             transition:
+
                 opacity .5s ease,
-                transform .5s ease;
+
+                transform .5s ease,
+
+                background .2s ease,
+
+                box-shadow .2s ease;
+
         }
+
+
+        /* ================================
+           CARDS VISÍVEIS
+        ================================= */
 
         .card.show {
 
@@ -274,7 +361,26 @@
 
             transform:
                 translateY(0);
+
         }
+
+
+        /* ================================
+           EFEITO DOS CARDS
+        ================================= */
+
+        .card:hover {
+
+            background:
+                rgba(255,106,0,.06);
+
+            box-shadow:
+
+                0 0 16px
+                rgba(255,106,0,.35);
+
+        }
+
 
         .card span {
 
@@ -283,14 +389,18 @@
             font-size: 38px;
 
             margin-bottom: 8px;
+
         }
+
 
         .card h3 {
 
             font-size: 17px;
 
             margin-bottom: 8px;
+
         }
+
 
         .card p {
 
@@ -299,7 +409,9 @@
             line-height: 1.4;
 
             color: #ddd;
+
         }
+
 
         /* ================================
            RODAPÉ
@@ -314,13 +426,16 @@
             color: #ccc;
 
             padding-bottom: 20px;
+
         }
+
 
         /* ================================
            CELULAR
         ================================= */
 
         @media (max-width: 600px) {
+
 
             #bg-video {
 
@@ -332,7 +447,9 @@
 
                 object-position:
                     center center;
+
             }
+
 
             .container {
 
@@ -342,17 +459,23 @@
 
                 padding:
                     30px 12px 25px;
+
             }
+
 
             h1 {
 
                 font-size: 34px;
+
             }
+
 
             .sub {
 
                 font-size: 16px;
+
             }
+
 
             .btn {
 
@@ -364,33 +487,45 @@
                     18px 10px;
 
                 border-radius: 17px;
+
             }
+
 
             .btn small {
 
                 font-size: 14px;
+
             }
+
 
             .cards {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
 
                 gap: 12px;
+
             }
+
 
             .card {
 
                 padding: 18px;
+
             }
+
 
             .card span {
 
                 font-size: 36px;
+
             }
+
 
             .card p {
 
                 font-size: 14px;
+
             }
 
         }
@@ -408,23 +543,36 @@
     ================================= -->
 
     <video
+
         autoplay
+
         muted
+
         loop
+
         playsinline
+
         preload="auto"
+
         id="bg-video">
 
+
         <source
+
             src="6e0435cdf73692771097c0abcf882e37.mp4"
+
             type="video/mp4">
 
+
         Seu navegador não suporta vídeo.
+
 
     </video>
 
 
-    <!-- CAMADA ESCURA -->
+    <!-- ================================
+         CAMADA ESCURA
+    ================================= -->
 
     <div class="overlay"></div>
 
@@ -439,12 +587,16 @@
         <!-- TÍTULO -->
 
         <h1>
+
             🍕 Pizza Play
+
         </h1>
 
 
         <p class="sub">
+
             Filmes • Séries • Ao Vivo
+
         </p>
 
 
@@ -453,16 +605,25 @@
         ================================= -->
 
         <a
+
             class="btn"
+
             href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+
             target="_blank"
+
             rel="noopener noreferrer">
+
 
             🎁 CRIE SEU LOGIN E SENHA AQUI
 
+
             <small>
+
                 Aproveite 4 horas grátis
+
             </small>
+
 
         </a>
 
@@ -472,16 +633,25 @@
         ================================= -->
 
         <a
+
             class="btn"
+
             href="https://clientefinal.com/"
+
             target="_blank"
+
             rel="noopener noreferrer">
+
 
             🔐 PAINEL DO CLIENTE
 
+
             <small>
+
                 Entrar com seu login e senha
+
             </small>
+
 
         </a>
 
@@ -493,56 +663,92 @@
         <section class="cards">
 
 
+            <!-- FILMES -->
+
             <div class="card">
 
+
                 <span>
+
                     🎬
+
                 </span>
 
+
                 <h3>
+
                     Filmes
+
                 </h3>
 
+
                 <p>
+
                     Os melhores lançamentos
                     para você assistir.
+
                 </p>
+
 
             </div>
 
 
+            <!-- SÉRIES -->
+
             <div class="card">
 
+
                 <span>
+
                     📺
+
                 </span>
 
+
                 <h3>
+
                     Séries
+
                 </h3>
 
+
                 <p>
+
                     Séries de sucesso
                     para maratonar.
+
                 </p>
+
 
             </div>
 
 
+            <!-- AO VIVO -->
+
             <div class="card">
 
+
                 <span>
+
                     📡
+
                 </span>
 
+
                 <h3>
+
                     Ao Vivo
+
                 </h3>
 
+
                 <p>
+
                     Canais ao vivo com
                     excelente qualidade.
+
                 </p>
+
 
             </div>
 
@@ -555,14 +761,21 @@
         ================================= -->
 
         <footer>
+
             🍕 Pizza Play © 2026
+
         </footer>
 
 
     </main>
 
 
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
+
     <script>
+
 
         /* ================================
            SERVICE WORKER
@@ -570,33 +783,53 @@
 
         if ("serviceWorker" in navigator) {
 
+
             window.addEventListener(
+
                 "load",
+
                 function () {
 
+
                     navigator.serviceWorker
+
                         .register(
+
                             "./service-worker.js"
+
                         )
+
 
                         .then(function () {
 
+
                             console.log(
+
                                 "Service Worker registrado."
+
                             );
+
 
                         })
 
+
                         .catch(function (erro) {
 
+
                             console.log(
+
                                 "Erro no Service Worker:",
+
                                 erro
+
                             );
+
 
                         });
 
+
                 }
+
             );
 
         }
@@ -607,28 +840,43 @@
         ================================= */
 
         document
+
             .querySelectorAll(".btn")
+
             .forEach(function (botao) {
 
+
                 botao.addEventListener(
+
                     "click",
+
                     function () {
+
 
                         this.style.transform =
                             "scale(0.97)";
 
+
                         setTimeout(
+
                             function () {
+
 
                                 botao.style.transform =
                                     "";
 
+
                             },
+
                             150
+
                         );
 
+
                     }
+
                 );
+
 
             });
 
@@ -638,33 +886,54 @@
         ================================= */
 
         window.addEventListener(
+
             "load",
+
             function () {
 
+
                 const cards =
+
                     document.querySelectorAll(
+
                         ".card"
+
                     );
 
+
                 cards.forEach(
+
                     function (card, index) {
 
+
                         setTimeout(
+
                             function () {
 
+
                                 card.classList.add(
+
                                     "show"
+
                                 );
 
+
                             },
+
                             index * 150
+
                         );
 
+
                     }
+
                 );
 
+
             }
+
         );
+
 
     </script>
 
