@@ -4,196 +4,320 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>🍕 Pizza Play</title>
 
 <meta name="theme-color" content="#111111">
+<meta name="description" content="Pizza Play - Filmes, Séries e Ao Vivo">
 
 <link rel="manifest" href="manifest.json">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-background:#000;
-color:#fff;
-overflow-x:hidden;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
 }
 
+
+/* =========================
+   VÍDEO DE FUNDO
+========================= */
+
 #bg-video{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
 }
 
 .overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.60);
-z-index:-1;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-max-width:420px;
-margin:auto;
-padding:25px;
-text-align:center;
+    width:100%;
+    max-width:420px;
+    margin:0 auto;
+    padding:45px 15px 40px;
+    text-align:center;
 }
 
-.logo{
 
-width:170px;
-height:170px;
-border-radius:35px;
-margin-top:20px;
-box-shadow:0 0 25px #ff6a00;
-
-}
+/* =========================
+   TÍTULO
+========================= */
 
 h1{
+    font-size:40px;
+    color:#fff;
+    margin-top:10px;
 
-font-size:40px;
-
-margin-top:15px;
-
-color:#ff8a00;
-
+    text-shadow:
+        0 3px 15px rgba(0,0,0,.8);
 }
 
 .sub{
-
-margin-top:8px;
-
-font-size:18px;
-
-color:#ddd;
-
+    margin-top:8px;
+    font-size:18px;
+    color:#fff;
 }
+
+
+/* =========================
+   BOTÕES
+   TRANSPARENTES + BORDA
+   LARANJA
+========================= */
 
 .btn{
 
-display:block;
+    display:block;
 
-text-decoration:none;
+    width:100%;
 
-padding:18px;
+    text-decoration:none;
 
-border-radius:18px;
+    padding:18px;
 
-margin-top:20px;
+    border-radius:18px;
 
-font-size:22px;
+    margin-top:20px;
 
-font-weight:bold;
+    font-size:22px;
 
-transition:.3s;
+    font-weight:bold;
 
-box-shadow:0 0 20px rgba(0,0,0,.4);
+    color:#fff;
+
+    background:transparent;
+
+    border:2px solid #ff7a00;
+
+    box-shadow:
+        0 0 12px rgba(255,122,0,.25);
+
+    transition:
+        .3s ease;
 
 }
+
+
+/* Efeito ao passar o mouse */
 
 .btn:hover{
 
-transform:scale(1.03);
+    background:rgba(255,122,0,.15);
+
+    border-color:#ff9d3d;
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 0 25px rgba(255,122,0,.45);
 
 }
 
-.teste{
 
-background:linear-gradient(45deg,#ff7a00,#ff2d00);
+/* Efeito ao clicar */
 
-color:#fff;
+.btn:active{
 
-}
-
-.painel{
-
-background:#1565c0;
-
-color:#fff;
+    transform:scale(.97);
 
 }
+
+
+/* =========================
+   TEXTO DOS BOTÕES
+========================= */
 
 .btn small{
 
-display:block;
+    display:block;
 
-margin-top:8px;
+    margin-top:8px;
 
-font-size:15px;
+    font-size:15px;
 
-font-weight:normal;
+    font-weight:normal;
+
+    color:#fff;
 
 }
+
+
+/* =========================
+   CARDS / CAIXAS DE TEXTO
+========================= */
 
 .cards{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(3,1fr);
+    grid-template-columns:
+        repeat(3,1fr);
 
-gap:12px;
+    gap:12px;
 
-margin-top:35px;
+    margin-top:35px;
 
 }
+
 
 .card{
 
-background:rgba(255,255,255,.08);
+    background:transparent;
 
-padding:18px;
+    padding:18px;
 
-border-radius:18px;
+    border-radius:18px;
 
-backdrop-filter:blur(8px);
+    border:
+        2px solid #ff7a00;
+
+    box-shadow:
+        0 0 12px rgba(255,122,0,.20);
+
+    transition:
+        .3s ease;
 
 }
+
+
+/* Hover dos cards */
+
+.card:hover{
+
+    background:
+        rgba(255,122,0,.10);
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 0 25px rgba(255,122,0,.40);
+
+}
+
 
 .card span{
 
-font-size:40px;
+    font-size:40px;
 
-display:block;
+    display:block;
 
-margin-bottom:8px;
+    margin-bottom:8px;
 
 }
+
+
+.card h3{
+
+    margin-bottom:8px;
+
+    color:#fff;
+
+}
+
+
+.card p{
+
+    font-size:14px;
+
+    line-height:1.4;
+
+    color:#fff;
+
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
 
 footer{
 
-margin-top:40px;
+    margin-top:40px;
 
-font-size:14px;
+    font-size:14px;
 
-color:#ccc;
+    color:#fff;
 
-padding-bottom:30px;
+    padding-bottom:30px;
 
 }
+
+
+/* =========================
+   CELULAR
+========================= */
 
 @media(max-width:600px){
 
-.cards{
+    .container{
 
-grid-template-columns:1fr;
+        padding:
+            45px
+            15px
+            40px;
 
-}
+    }
+
+    h1{
+
+        font-size:34px;
+
+    }
+
+    .btn{
+
+        font-size:20px;
+
+        padding:17px;
+
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
 
 }
 
@@ -201,132 +325,225 @@ grid-template-columns:1fr;
 
 </head>
 
+
 <body>
 
-<video autoplay muted loop playsinline id="bg-video">
 
-<source src="6e0435cdf73692771097c0abcf882e37.mp4" type="video/mp4">
+<!-- VÍDEO DE FUNDO -->
+
+<video
+    autoplay
+    muted
+    loop
+    playsinline
+    id="bg-video"
+>
+
+    <source
+        src="6e0435cdf73692771097c0abcf882e37.mp4"
+        type="video/mp4"
+    >
 
 </video>
 
+
 <div class="overlay"></div>
+
+
+<!-- CONTEÚDO -->
 
 <div class="container">
 
-<img src="logo.png" class="logo">
 
-<h1>🍕 Pizza Play</h1>
+    <h1>🍕 Pizza Play</h1>
 
-<p class="sub">
+    <p class="sub">
+        Filmes • Séries • Ao Vivo
+    </p>
 
-Filmes • Séries • Ao Vivo
 
-</p>
-<a class="btn teste"
-href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
-target="_blank">
+    <!-- BOTÃO TESTE -->
 
-🎁 CRIE SEU LOGIN E SENHA AQUI
+    <a
+        class="btn"
+        href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
 
-<small>
-Aproveite 4 horas grátis
-</small>
+        🎁 CRIE SEU LOGIN E SENHA AQUI
 
-</a>
+        <small>
+            Aproveite 4 horas grátis
+        </small>
 
-<a class="btn painel"
-href="https://clientefinal.com/"
-target="_blank">
+    </a>
 
-🔐 PAINEL DO CLIENTE
 
-<small>
-Entrar com seu login e senha
-</small>
+    <!-- BOTÃO PAINEL -->
 
-</a>
+    <a
+        class="btn"
+        href="https://clientefinal.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
 
-<div class="cards">
+        🔐 PAINEL DO CLIENTE
 
-<div class="card">
+        <small>
+            Entrar com seu login e senha
+        </small>
 
-<span>🎬</span>
+    </a>
 
-<h3>Filmes</h3>
 
-<p>
-Os melhores lançamentos para você assistir.
-</p>
+    <!-- CARDS -->
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <span>🎬</span>
+
+            <h3>Filmes</h3>
+
+            <p>
+                Os melhores lançamentos
+                para você assistir.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>📺</span>
+
+            <h3>Séries</h3>
+
+            <p>
+                Séries de sucesso
+                para maratonar.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>📡</span>
+
+            <h3>Ao Vivo</h3>
+
+            <p>
+                Canais ao vivo com
+                excelente qualidade.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+
+        🍕 Pizza Play © 2026
+
+    </footer>
+
 
 </div>
 
-<div class="card">
 
-<span>📺</span>
-
-<h3>Séries</h3>
-
-<p>
-Séries de sucesso para maratonar.
-</p>
-
-</div>
-
-<div class="card">
-
-<span>📡</span>
-
-<h3>Ao Vivo</h3>
-
-<p>
-Canais ao vivo com excelente qualidade.
-</p>
-
-</div>
-
-</div>
-
-<footer>
-
-🍕 Pizza Play © 2026
-
-</footer>
 <script>
 
-// Registra o Service Worker para transformar o site em PWA
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker
-            .register("service-worker.js")
-            .then(() => {
-                console.log("Service Worker registrado com sucesso.");
-            })
-            .catch((erro) => {
-                console.log("Erro ao registrar Service Worker:", erro);
-            });
-    });
+/* Service Worker */
+
+if("serviceWorker" in navigator){
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator.serviceWorker
+                .register("service-worker.js")
+                .catch(
+                    erro => console.log(erro)
+                );
+
+        }
+    );
+
 }
 
-// Efeito simples ao clicar nos botões
-document.querySelectorAll(".btn").forEach((botao) => {
-    botao.addEventListener("click", function () {
-        this.style.transform = "scale(0.97)";
 
-        setTimeout(() => {
-            this.style.transform = "scale(1)";
-        }, 150);
+/* Efeito dos botões */
+
+document
+    .querySelectorAll(".btn")
+    .forEach((botao)=>{
+
+        botao.addEventListener(
+            "click",
+            function(){
+
+                this.style.transform =
+                    "scale(.97)";
+
+                setTimeout(()=>{
+
+                    this.style.transform =
+                        "scale(1)";
+
+                },150);
+
+            }
+        );
+
     });
-});
 
-// Animação de entrada dos cards
-window.addEventListener("load", () => {
 
-    const cards = document.querySelectorAll(".card");
+/* Animação dos cards */
 
-    cards.forEach((card, i) => {
+window.addEventListener(
+    "load",
+    ()=>{
 
-        card
-</div>
+        const cards =
+            document.querySelectorAll(".card");
+
+        cards.forEach(
+            (card,i)=>{
+
+                card.style.opacity="0";
+
+                card.style.transform=
+                    "translateY(20px)";
+
+                setTimeout(()=>{
+
+                    card.style.transition=
+                        "all .5s ease";
+
+                    card.style.opacity="1";
+
+                    card.style.transform=
+                        "translateY(0)";
+
+                },200+(i*150));
+
+            }
+        );
+
+    }
+);
+
+</script>
+
 
 </body>
+
 </html>
