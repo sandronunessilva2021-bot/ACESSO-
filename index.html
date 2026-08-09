@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>PainelCliente</title>
 
 <style>
+
+/* RESET */
 *{
     margin:0;
     padding:0;
@@ -14,184 +20,218 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
+/* TELA */
 body{
-    min-height:100vh;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
     background:#000;
     color:#fff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
 }
 
-/* Fundo escuro */
-.overlay{
+/* VÍDEO DE FUNDO */
+#video-fundo{
     position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.55);
-    z-index:1;
-}
+    top:0;
+    left:0;
 
-/* Conteúdo principal */
-.container{
-    position:relative;
-    z-index:2;
-    width:100%;
-    max-width:500px;
-    min-height:100vh;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    padding:25px;
-}
-
-/* Título */
-h1{
-    font-size:28px;
-    margin-bottom:20px;
-    color:#fff;
-    text-align:center;
-}
-
-/* Botões */
-.btn{
-    width:100%;
-    max-width:360px;
-
-    padding:15px 20px;
-
-    border:2px solid #ff6a00;
-    border-radius:12px;
-
-    background:rgba(0,0,0,0.25);
-
-    color:#fff;
-    text-decoration:none;
-
-    text-align:center;
-    font-size:16px;
-    font-weight:bold;
-
-    transition:0.3s;
-
-    backdrop-filter:blur(4px);
-}
-
-/* Efeito ao tocar */
-.btn:hover{
-    background:rgba(255,106,0,0.15);
-    box-shadow:0 0 15px rgba(255,106,0,0.4);
-    transform:scale(1.02);
-}
-
-/* Espaçamento do botão superior */
-.btn-top{
-    margin-bottom:18px;
-}
-
-/* Vídeo */
-.video-box{
-    width:100%;
-    max-width:420px;
-
-    aspect-ratio:16 / 9;
-
-    border-radius:14px;
-    overflow:hidden;
-
-    border:1px solid rgba(255,106,0,0.45);
-
-    background:#111;
-
-    box-shadow:
-        0 0 20px rgba(255,106,0,0.12);
-}
-
-.video-box video{
     width:100%;
     height:100%;
 
     object-fit:cover;
 
-    display:block;
+    z-index:-3;
 }
 
-/* Espaçamento do botão inferior */
-.btn-bottom{
-    margin-top:18px;
+/* ESCURECER O VÍDEO */
+.overlay{
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.45);
+
+    z-index:-2;
 }
 
-/* Celular */
+/* CONTEÚDO */
+.container{
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+}
+
+/* TÍTULO */
+.titulo{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    margin-bottom:25px;
+
+    text-align:center;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 10px rgba(255,106,0,0.6);
+}
+
+/* ÁREA DOS BOTÕES */
+.botoes{
+
+    width:100%;
+
+    max-width:360px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+/* BOTÕES */
+.botao{
+
+    width:100%;
+
+    padding:16px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    border:2px solid #ff6a00;
+
+    border-radius:12px;
+
+    background:rgba(0,0,0,0.20);
+
+    backdrop-filter:blur(4px);
+
+    -webkit-backdrop-filter:blur(4px);
+
+    transition:0.3s;
+}
+
+/* EFEITO */
+.botao:hover{
+
+    background:rgba(255,106,0,0.12);
+
+    box-shadow:
+        0 0 18px rgba(255,106,0,0.45);
+
+    transform:scale(1.02);
+}
+
+/* CELULAR */
 @media(max-width:480px){
 
-    .container{
-        padding:20px;
+    .titulo{
+        font-size:25px;
     }
 
-    h1{
-        font-size:24px;
+    .botoes{
+        max-width:330px;
     }
 
-    .video-box{
-        max-width:100%;
-    }
-
-    .btn{
+    .botao{
+        padding:15px;
         font-size:15px;
-        padding:14px;
     }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
+
+<!-- VÍDEO -->
+
+<video
+    id="video-fundo"
+    autoplay
+    muted
+    loop
+    playsinline>
+
+    <source
+        src="SEU_VIDEO.mp4"
+        type="video/mp4">
+
+</video>
+
+
+<!-- ESCURECIMENTO -->
+
 <div class="overlay"></div>
+
+
+<!-- CONTEÚDO -->
 
 <div class="container">
 
-    <h1>PainelCliente</h1>
+    <div class="titulo">
+        PainelCliente
+    </div>
 
-    <!-- BOTÃO DE CIMA -->
-    <a
-        class="btn btn-top"
-        href="https://clientefinal.com/"
-        target="_blank">
-        🎥 Assistir Filmes e Séries
-    </a>
 
-    <!-- VÍDEO NO MEIO -->
-    <div class="video-box">
+    <div class="botoes">
 
-        <video
-            autoplay
-            muted
-            loop
-            playsinline
-            controls>
+        <!-- BOTÃO 1 -->
 
-            <!-- COLOQUE AQUI O LINK DO SEU VÍDEO MP4 -->
-            <source
-                src="SEU_VIDEO.mp4"
-                type="video/mp4">
+        <a
+            href="https://clientefinal.com/"
+            class="botao"
+            target="_blank">
 
-            Seu navegador não suporta vídeo.
-        </video>
+            🎥 Assistir Filmes e Séries
+
+        </a>
+
+
+        <!-- BOTÃO 2 -->
+
+        <a
+            href="https://testeagora.tv/"
+            class="botao"
+            target="_blank">
+
+            🎁 Solicitar Teste Grátis
+
+        </a>
 
     </div>
 
-    <!-- BOTÃO DE BAIXO -->
-    <a
-        class="btn btn-bottom"
-        href="https://testeagora.tv/"
-        target="_blank">
-        🎁 Solicitar Teste Grátis
-    </a>
-
 </div>
 
+
 </body>
+
 </html>
