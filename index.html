@@ -1,572 +1,604 @@
-```html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- =========================
+     NOSSOS APLICATIVOS
+========================= -->
 
-    <title>Teste Grátis - Painel Cliente</title>
+<section class="apps-section">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    <div class="apps-header">
+        <div>
+            <h2>Nossos aplicativos</h2>
+            <p>Clique em um card para ver download, código ou passos de ativação.</p>
+        </div>
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        <div class="apps-filters">
+            <button class="filter active" data-filter="todos">Todos</button>
+            <button class="filter" data-filter="android">Android</button>
+            <button class="filter" data-filter="windows">Windows</button>
+            <button class="filter" data-filter="streaming">Streaming</button>
+            <button class="filter" data-filter="smarttv">Smart TV</button>
+        </div>
+    </div>
 
-            background:
-                radial-gradient(circle at top, rgba(255,140,0,.25), transparent 35%),
-                linear-gradient(135deg, #090909, #171717);
-        }
 
-        .container {
-            width: 100%;
-            max-width: 430px;
-        }
+    <div class="apps-grid">
 
-        .card {
-            background: rgba(20,20,20,.96);
-            border: 1px solid rgba(255,106,0,.45);
-            border-radius: 20px;
-            padding: 30px 25px;
-            box-shadow:
-                0 15px 50px rgba(0,0,0,.55),
-                0 0 25px rgba(255,106,0,.10);
-        }
+        <!-- FASTPRO -->
+        <div class="app-card" data-category="android">
 
-        .icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 15px;
+            <div class="app-image fastpro">
+                <span class="app-badge">🤖 Android</span>
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff6a00, #ff9500);
-
-            font-size: 34px;
-
-            box-shadow: 0 0 25px rgba(255,106,0,.35);
-        }
-
-        h1 {
-            color: #fff;
-            text-align: center;
-            font-size: 25px;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            color: #aaa;
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            color: #ddd;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
-
-        .field {
-            margin-bottom: 15px;
-        }
-
-        input {
-            width: 100%;
-            height: 48px;
-            padding: 0 14px;
-
-            border-radius: 10px;
-            border: 1px solid #3a3a3a;
-            background: #101010;
-            color: #fff;
-
-            outline: none;
-            font-size: 14px;
-
-            transition: .2s;
-        }
-
-        input:focus {
-            border-color: #ff6a00;
-            box-shadow: 0 0 0 2px rgba(255,106,0,.10);
-        }
-
-        input::placeholder {
-            color: #777;
-        }
-
-        .bouquet-info {
-            margin-top: -5px;
-            margin-bottom: 15px;
-
-            color: #888;
-            font-size: 11px;
-            line-height: 1.4;
-        }
-
-        .btn {
-            width: 100%;
-            min-height: 52px;
-
-            border: 0;
-            border-radius: 11px;
-
-            background: linear-gradient(135deg, #ff6a00, #ff9500);
-            color: #fff;
-
-            font-size: 15px;
-            font-weight: bold;
-
-            cursor: pointer;
-            transition: .25s;
-
-            box-shadow: 0 6px 20px rgba(255,106,0,.20);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255,106,0,.35);
-        }
-
-        .btn:disabled {
-            opacity: .65;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .result {
-            display: none;
-            margin-top: 18px;
-            padding: 15px;
-
-            border-radius: 10px;
-
-            font-size: 13px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
-
-        .success {
-            display: block;
-            background: rgba(0,180,80,.12);
-            border: 1px solid rgba(0,200,90,.35);
-            color: #7dffad;
-        }
-
-        .error {
-            display: block;
-            background: rgba(255,50,50,.10);
-            border: 1px solid rgba(255,70,70,.35);
-            color: #ff9696;
-        }
-
-        .footer {
-            margin-top: 18px;
-            text-align: center;
-            color: #666;
-            font-size: 11px;
-        }
-
-        .back {
-            display: block;
-            margin-top: 15px;
-
-            text-align: center;
-            color: #ff8a00;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .back:hover {
-            text-decoration: underline;
-        }
-
-        @media(max-width:480px) {
-            .card {
-                padding: 25px 18px;
-            }
-
-            h1 {
-                font-size: 22px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="container">
-
-    <div class="card">
-
-        <div class="icon">🎁</div>
-
-        <h1>Teste Grátis por 4 Horas</h1>
-
-        <p class="subtitle">
-            Preencha seus dados abaixo para criar seu acesso de teste.
-        </p>
-
-        <form id="trialForm">
-
-            <!-- NOME -->
-            <div class="field">
-                <label for="name">Nome</label>
-
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Digite seu nome"
-                    required>
+                <div class="fast-logo">
+                    Fast<span>▶</span><br>
+                    Player
+                </div>
             </div>
 
-            <!-- LOGIN -->
-            <div class="field">
-                <label for="username">Login</label>
+            <div class="app-info">
+                <h3>FastPro</h3>
 
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Escolha seu login"
-                    required
-                    minlength="3">
+                <span class="app-type">FastPro (XCIPTV)</span>
+
+                <p>
+                    App XCIPTV customizado para Android
+                    com nossa marca e suporte integrado.
+                </p>
+
+                <button class="instructions">
+                    Ver instruções →
+                </button>
             </div>
 
-            <!-- SENHA -->
-            <div class="field">
-                <label for="password">Senha</label>
+        </div>
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Crie uma senha"
-                    required
-                    minlength="4">
+
+        <!-- FASTWIN -->
+        <div class="app-card" data-category="windows">
+
+            <div class="app-image fastwin">
+                <span class="app-badge">▣ Windows</span>
+
+                <div class="fast-logo">
+                    Fast<span>▶</span><br>
+                    Player
+                </div>
             </div>
 
-            <!-- EMAIL -->
-            <div class="field">
-                <label for="email">E-mail</label>
+            <div class="app-info">
+                <h3>FastWin</h3>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="seuemail@exemplo.com">
+                <span class="app-type">FastWin (Windows)</span>
+
+                <p>
+                    Versão para PC com Windows,
+                    instalação direta via .exe customizado.
+                </p>
+
+                <button class="instructions">
+                    Ver instruções →
+                </button>
             </div>
 
-            <!-- WHATSAPP -->
-            <div class="field">
-                <label for="whatsapp">WhatsApp</label>
+        </div>
 
-                <input
-                    type="tel"
-                    id="whatsapp"
-                    placeholder="5511999999999">
+
+        <!-- EZZE PLAYER -->
+        <div class="app-card" data-category="smarttv">
+
+            <div class="app-image ezze">
+                <span class="app-badge">📺 ROKU</span>
+
+                <div class="ezze-logo">
+                    EZ
+                </div>
             </div>
 
-            <!-- BOUQUET -->
-            <div class="field">
-                <label for="idbouquet">ID do Bouquet</label>
+            <div class="app-info">
+                <h3>Ezze Player</h3>
 
-                <input
-                    type="number"
-                    id="idbouquet"
-                    placeholder="Ex: 1"
-                    required
-                    min="1">
+                <span class="app-type">Ezze Player</span>
+
+                <p>
+                    Licenças do Ezze Player liberadas
+                    para todos os clientes. Ative em segundos.
+                </p>
+
+                <button class="instructions">
+                    Ver instruções →
+                </button>
             </div>
 
-            <div class="bouquet-info">
-                Informe o ID do pacote/bouquet que deverá ser liberado
-                no teste.
+        </div>
+
+
+        <!-- FOCOX -->
+        <div class="app-card" data-category="streaming">
+
+            <div class="app-image focox">
+                <span class="app-badge">📺 Streaming</span>
+
+                <div class="focox-logo">
+                    FocoX
+                </div>
             </div>
 
-            <button
-                type="submit"
-                class="btn"
-                id="submitBtn">
+            <div class="app-info">
+                <h3>FocoX Play</h3>
 
-                🎁 CRIAR TESTE GRÁTIS
+                <span class="app-type">FocoX Play</span>
 
-            </button>
+                <p>
+                    Licenças do FocoX Play liberadas
+                    para todos os clientes. Ative em segundos.
+                </p>
 
-        </form>
+                <button class="instructions">
+                    Ver instruções →
+                </button>
+            </div>
 
-        <div id="result" class="result"></div>
+        </div>
 
-        <a
-            href="https://clientefinal.com/"
-            class="back">
 
-            ← Voltar para o login
+        <!-- FUN PLAY -->
+        <div class="app-card" data-category="streaming">
 
-        </a>
+            <div class="app-image funplay">
+                <span class="app-badge">◉ Streaming</span>
 
-        <div class="footer">
-            Teste gratuito • Acesso temporário
+                <div class="fun-logo">
+                    FUN<br>
+                    <small>PLAY</small>
+                </div>
+            </div>
+
+            <div class="app-info">
+                <h3>Fun Play</h3>
+
+                <span class="app-type">Fun Play</span>
+
+                <p>
+                    Licenças do Fun Play disponíveis
+                    para todos os clientes. Tela inicial já configurada.
+                </p>
+
+                <button class="instructions">
+                    Ver instruções →
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- BLESSED -->
+        <div class="app-card" data-category="premium">
+
+            <div class="app-image blessed">
+                <span class="app-badge">★ Premium</span>
+
+                <div class="blessed-logo">
+                    ▶
+                </div>
+            </div>
+
+            <div class="app-info">
+                <h3>Blessed Player</h3>
+
+                <span class="app-type">Premium</span>
+
+                <p>
+                    Licenças Blessed liberadas.
+                    Ative com PFAST + usuário e senha do cliente.
+                </p>
+
+                <button class="instructions">
+                    Ver instruções →
+                </button>
+            </div>
+
+        </div>
+
+
+        <!-- XCLOUD -->
+        <div class="app-card" data-category="smarttv">
+
+            <div class="app-image xcloud">
+                <span class="app-badge">📺 Smart TV</span>
+
+                <div class="xcloud-logo">
+                    XCloud TV
+                </div>
+            </div>
+
+            <div class="app-info">
+                <h3>XCloud TV</h3>
+
+                <span class="app-type">
+                    XCloud TV (Premium IPTV nas LG)
+                </span>
+
+                <p>
+                    Licenças XCloud TV liberadas para todos
+                    os clientes. Compatível com Smart TVs.
+                </p>
+
+                <button class="instructions">
+                    Ver instruções →
+                </button>
+            </div>
+
         </div>
 
     </div>
 
-</div>
+</section>
+
+
+<style>
+
+/* =========================
+   SEÇÃO
+========================= */
+
+.apps-section {
+    width: 100%;
+    padding: 30px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.apps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.apps-header h2 {
+    margin: 0;
+    color: #303640;
+    font-size: 22px;
+}
+
+.apps-header p {
+    margin: 5px 0 0;
+    color: #858b94;
+    font-size: 14px;
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+.apps-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter {
+    border: 1px solid #e2e5ea;
+    background: #f7f8fa;
+    color: #737983;
+    padding: 10px 16px;
+    border-radius: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.filter:hover {
+    border-color: #ffad00;
+}
+
+.filter.active {
+    background: #ffad00;
+    color: white;
+    border-color: #ffad00;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.app-card {
+    background: white;
+    border: 1px solid #e1e3e7;
+    border-radius: 17px;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.app-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.10);
+}
+
+
+/* =========================
+   IMAGEM DO CARD
+========================= */
+
+.app-image {
+    height: 168px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+/* Cores dos cards */
+
+.fastpro {
+    background: linear-gradient(135deg,#1767bd,#48a9ed);
+}
+
+.fastwin {
+    background: linear-gradient(135deg,#008271,#51bcb5);
+}
+
+.ezze {
+    background: linear-gradient(135deg,#6940bd,#a487d8);
+}
+
+.focox {
+    background: linear-gradient(135deg,#1555b8,#4a9ee8);
+}
+
+.funplay {
+    background: linear-gradient(135deg,#f36b00,#ff9d2e);
+}
+
+.blessed {
+    background: linear-gradient(135deg,#31399e,#5b67c5);
+}
+
+.xcloud {
+    background: linear-gradient(135deg,#202b80,#5968cf);
+}
+
+
+/* =========================
+   BADGE
+========================= */
+
+.app-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background: rgba(0,0,0,.65);
+    color: white;
+
+    padding: 6px 11px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   LOGOS
+========================= */
+
+.fast-logo {
+    color: #07121b;
+    font-size: 52px;
+    line-height: .72;
+    font-weight: 900;
+    text-align: left;
+}
+
+.fast-logo span {
+    color: #ff8300;
+    font-size: 45px;
+}
+
+.ezze-logo {
+    width: 105px;
+    height: 105px;
+
+    border-radius: 22px;
+
+    background: #713ee0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-size: 48px;
+    font-weight: 900;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.2);
+}
+
+.focox-logo {
+    color: white;
+    font-size: 42px;
+    font-weight: 900;
+    font-style: italic;
+}
+
+.fun-logo {
+    color: white;
+    font-size: 48px;
+    font-weight: 900;
+    text-align: center;
+    line-height: .8;
+}
+
+.fun-logo small {
+    font-size: 24px;
+}
+
+.blessed-logo {
+    color: white;
+    font-size: 80px;
+    text-shadow: 0 5px 10px rgba(0,0,0,.4);
+}
+
+.xcloud-logo {
+    color: white;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.app-info {
+    padding: 16px;
+}
+
+.app-info h3 {
+    margin: 0 0 5px;
+    color: #3b4149;
+    font-size: 16px;
+}
+
+.app-type {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #666d76;
+    margin-bottom: 10px;
+}
+
+.app-info p {
+    margin: 0 0 12px;
+    color: #737983;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+.instructions {
+    border: none;
+    background: transparent;
+    color: #ff9d00;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    font-size: 13px;
+}
+
+.instructions:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 1000px) {
+
+    .apps-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .apps-section {
+        padding: 15px;
+    }
+
+    .apps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .apps-filters {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+    }
+
+    .filter {
+        white-space: nowrap;
+    }
+
+}
+
+</style>
 
 
 <script>
 
-    /*
-     * CONFIGURAÇÃO DA API
-     *
-     * O servidor da API é:
-     * https://api.painelcliente.com
-     *
-     * Endpoint:
-     * /trial_create/{token}
-     */
+/* =========================
+   FILTRO DOS APLICATIVOS
+========================= */
 
-    const API_URL =
-        "https://api.painelcliente.com/trial_create/PANELCLIENT_UUNN4-CLUBY-84RO1-9ZKZ5";
+const filters = document.querySelectorAll(".filter");
+const cards = document.querySelectorAll(".app-card");
 
-    /*
-     * SECRET DA API
-     *
-     * ATENÇÃO:
-     * Em uma página pública esta informação ficará visível
-     * para quem visualizar o código-fonte.
-     *
-     * Para produção, mova esta chamada para um backend.
-     */
+filters.forEach(filter => {
 
-    const API_SECRET =
-        "c238ce7e0774e91b2a3a2a4fa86a0784";
+    filter.addEventListener("click", () => {
 
+        filters.forEach(btn =>
+            btn.classList.remove("active")
+        );
 
-    const form =
-        document.getElementById("trialForm");
+        filter.classList.add("active");
 
-    const button =
-        document.getElementById("submitBtn");
+        const category = filter.dataset.filter;
 
-    const result =
-        document.getElementById("result");
+        cards.forEach(card => {
 
+            if (
+                category === "todos" ||
+                card.dataset.category === category
+            ) {
 
-    form.addEventListener("submit", async function(event) {
+                card.style.display = "";
 
-        event.preventDefault();
+            } else {
 
-        result.className = "result";
-        result.innerHTML = "";
-
-        button.disabled = true;
-        button.innerHTML = "⏳ CRIANDO TESTE...";
-
-
-        const name =
-            document.getElementById("name").value.trim();
-
-        const username =
-            document.getElementById("username").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const whatsapp =
-            document.getElementById("whatsapp").value.trim();
-
-        const idbouquet =
-            Number(
-                document.getElementById("idbouquet").value
-            );
-
-
-        /*
-         * Validação básica
-         */
-
-        if (!name || !username || !password || !idbouquet) {
-
-            showError(
-                "Preencha todos os campos obrigatórios."
-            );
-
-            resetButton();
-
-            return;
-        }
-
-
-        /*
-         * Dados enviados para a API
-         */
-
-        const data = {
-
-            secret: API_SECRET,
-
-            username: username,
-
-            password: password,
-
-            idbouquet: [idbouquet],
-
-            email: email,
-
-            whatsapp: whatsapp,
-
-            notes:
-                "Teste grátis criado pelo formulário do site. Nome: "
-                + name
-        };
-
-
-        try {
-
-            const response =
-                await fetch(API_URL, {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-
-                    body: JSON.stringify(data)
-
-                });
-
-
-            let responseData;
-
-            try {
-
-                responseData =
-                    await response.json();
-
-            } catch {
-
-                responseData = null;
+                card.style.display = "none";
 
             }
 
-
-            /*
-             * Verifica resposta HTTP
-             */
-
-            if (!response.ok) {
-
-                let mensagem =
-                    "A API recusou a criação do teste.";
-
-                if (responseData) {
-
-                    mensagem +=
-                        "\n\nResposta da API:\n" +
-                        JSON.stringify(
-                            responseData,
-                            null,
-                            2
-                        );
-                }
-
-                showError(mensagem);
-
-                resetButton();
-
-                return;
-            }
-
-
-            /*
-             * Sucesso
-             */
-
-            result.className =
-                "result success";
-
-            result.innerHTML =
-                "✅ TESTE CRIADO COM SUCESSO!\n\n" +
-                "Login: " + username +
-                "\nSenha: " + password +
-                "\n\n" +
-                "Seu teste foi enviado para o sistema.";
-
-
-            /*
-             * Mostra também a resposta da API
-             * no console para diagnóstico.
-             */
-
-            console.log(
-                "Resposta da API:",
-                responseData
-            );
-
-
-            button.innerHTML =
-                "✅ TESTE CRIADO";
-
-
-        } catch (error) {
-
-            console.error(error);
-
-            showError(
-                "Não foi possível conectar à API.\n\n" +
-                "Se o código estiver correto, verifique " +
-                "se a API permite requisições diretamente " +
-                "do navegador (CORS)."
-            );
-
-            resetButton();
-
-        }
+        });
 
     });
 
-
-    function showError(message) {
-
-        result.className =
-            "result error";
-
-        result.textContent =
-            "❌ ERRO\n\n" + message;
-
-    }
-
-
-    function resetButton() {
-
-        button.disabled = false;
-
-        button.innerHTML =
-            "🎁 CRIAR TESTE GRÁTIS";
-
-    }
+});
 
 </script>
-
-</body>
-</html>
-```
