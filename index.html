@@ -13,16 +13,16 @@
     <meta name="theme-color" content="#000000">
 
     <meta name="description"
-          content="Pizza Play - Filmes, Séries e Ao Vivo">
+          content="Pizza Play">
 
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Android -->
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable"
+          content="yes">
 
-    <!-- iPhone/iPad -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
 
     <meta name="apple-mobile-web-app-status-bar-style"
           content="black-translucent">
@@ -32,10 +32,6 @@
 
 
     <style>
-
-        /* ================================
-           RESET
-        ================================= */
 
         * {
             margin: 0;
@@ -49,12 +45,7 @@
         body {
 
             width: 100%;
-            min-height: 100%;
-
-        }
-
-
-        body {
+            height: 100%;
 
             background: #000;
 
@@ -65,19 +56,45 @@
         }
 
 
-        /* ================================
-           VÍDEO DE FUNDO
+        body {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+        }
+
+
+        /* =================================
+           ÁREA DO VÍDEO
         ================================= */
+
+        .video-area {
+
+            width: 100%;
+
+            height: 50vh;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #000;
+
+        }
+
 
         #bg-video {
 
-            position: fixed;
+            position: absolute;
 
             top: 50%;
             left: 50%;
 
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
 
             transform:
                 translate(-50%, -50%);
@@ -87,92 +104,88 @@
             object-position:
                 center center;
 
-            background: #000;
-
-            z-index: -2;
-
         }
 
 
-        /* ================================
-           CAMADA ESCURA
+        /* =================================
+           CAMADA ESCURA DO VÍDEO
         ================================= */
 
-        .overlay {
+        .video-overlay {
 
-            position: fixed;
+            position: absolute;
 
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
+            inset: 0;
 
             background:
-                rgba(0, 0, 0, 0.58);
-
-            z-index: -1;
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,.15),
+                    rgba(0,0,0,.45)
+                );
 
         }
 
 
-        /* ================================
-           CONTAINER
+        /* =================================
+           ÁREA DOS BOTÕES
         ================================= */
 
-        .container {
+        .content {
 
             width: 100%;
 
-            max-width: 720px;
+            min-height: 50vh;
 
-            margin: 0 auto;
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
 
             padding:
-                40px 12px 30px;
+                25px 15px 35px;
 
-            text-align: center;
+            background: #000;
 
         }
 
 
-        /* ================================
+        /* =================================
            TÍTULO
         ================================= */
 
         h1 {
 
-            font-size: 40px;
+            font-size: 32px;
 
-            font-weight: 800;
-
-            margin-top: 10px;
+            margin-bottom: 25px;
 
             color: #fff;
 
+            text-align: center;
+
             text-shadow:
-
-                0 0 18px
-                rgba(255,255,255,.35);
-
-        }
-
-
-        .sub {
-
-            margin-top: 8px;
-
-            font-size: 18px;
-
-            color: #ddd;
+                0 0 15px
+                rgba(255,255,255,.3);
 
         }
 
 
-        /* ================================
+        /* =================================
            BOTÕES
-           TRANSPARENTES + BORDA LARANJA
         ================================= */
+
+        .buttons {
+
+            width: 100%;
+
+            max-width: 600px;
+
+        }
+
 
         .btn {
 
@@ -180,24 +193,22 @@
 
             width: 100%;
 
-            margin-left: auto;
+            padding:
+                18px 15px;
 
-            margin-right: auto;
+            margin-top: 15px;
+
+            text-align: center;
 
             text-decoration: none;
 
-            padding:
-                19px 12px;
+            color: #fff;
 
-            margin-top: 20px;
-
-            border-radius: 18px;
-
-            font-size: 20px;
+            font-size: 19px;
 
             font-weight: bold;
 
-            color: #fff;
+            border-radius: 17px;
 
             /* FUNDO TRANSPARENTE */
 
@@ -208,42 +219,29 @@
             border:
                 1px solid #ff6a00;
 
-            /* VIDRO LEVE */
-
-            backdrop-filter:
-                blur(5px);
-
-            -webkit-backdrop-filter:
-                blur(5px);
-
-            /* BRILHO LARANJA */
+            /* BRILHO */
 
             box-shadow:
-
                 0 0 10px
                 rgba(255,106,0,.25);
 
+            backdrop-filter:
+                blur(4px);
+
+            -webkit-backdrop-filter:
+                blur(4px);
+
             transition:
-
-                transform .2s ease,
-
-                background .2s ease,
-
-                border-color .2s ease,
-
-                box-shadow .2s ease;
+                .2s ease;
 
         }
 
 
-        /* ================================
-           EFEITO BOTÃO
+        /* =================================
+           HOVER / TOQUE
         ================================= */
 
         .btn:hover {
-
-            transform:
-                scale(1.02);
 
             background:
                 rgba(255,106,0,.08);
@@ -252,9 +250,11 @@
                 #ff6a00;
 
             box-shadow:
-
-                0 0 18px
+                0 0 20px
                 rgba(255,106,0,.45);
+
+            transform:
+                scale(1.02);
 
         }
 
@@ -270,261 +270,89 @@
         }
 
 
+        /* =================================
+           TEXTO PEQUENO
+        ================================= */
+
         .btn small {
 
             display: block;
 
-            margin-top: 7px;
-
-            font-size: 14px;
-
-            font-weight: normal;
-
-            color: #eee;
-
-        }
-
-
-        /* ================================
-           CARDS
-           TRANSPARENTES + BORDA LARANJA
-        ================================= */
-
-        .cards {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 12px;
-
-            margin-top: 35px;
-
-        }
-
-
-        .card {
-
-            background: transparent;
-
-            padding:
-                18px 12px;
-
-            border-radius: 18px;
-
-            /* BORDA LARANJA */
-
-            border:
-                1px solid #ff6a00;
-
-            /* VIDRO LEVE */
-
-            backdrop-filter:
-                blur(5px);
-
-            -webkit-backdrop-filter:
-                blur(5px);
-
-            /* BRILHO */
-
-            box-shadow:
-
-                0 0 10px
-                rgba(255,106,0,.20);
-
-            opacity: 0;
-
-            transform:
-                translateY(20px);
-
-            transition:
-
-                opacity .5s ease,
-
-                transform .5s ease,
-
-                background .2s ease,
-
-                box-shadow .2s ease;
-
-        }
-
-
-        /* ================================
-           CARDS VISÍVEIS
-        ================================= */
-
-        .card.show {
-
-            opacity: 1;
-
-            transform:
-                translateY(0);
-
-        }
-
-
-        /* ================================
-           EFEITO DOS CARDS
-        ================================= */
-
-        .card:hover {
-
-            background:
-                rgba(255,106,0,.06);
-
-            box-shadow:
-
-                0 0 16px
-                rgba(255,106,0,.35);
-
-        }
-
-
-        .card span {
-
-            display: block;
-
-            font-size: 38px;
-
-            margin-bottom: 8px;
-
-        }
-
-
-        .card h3 {
-
-            font-size: 17px;
-
-            margin-bottom: 8px;
-
-        }
-
-
-        .card p {
+            margin-top: 6px;
 
             font-size: 13px;
 
-            line-height: 1.4;
+            font-weight: normal;
 
             color: #ddd;
 
         }
 
 
-        /* ================================
+        /* =================================
            RODAPÉ
         ================================= */
 
         footer {
 
-            margin-top: 40px;
+            margin-top: 25px;
 
-            font-size: 14px;
+            font-size: 12px;
 
-            color: #ccc;
+            color: #888;
 
-            padding-bottom: 20px;
+            text-align: center;
 
         }
 
 
-        /* ================================
+        /* =================================
            CELULAR
         ================================= */
 
         @media (max-width: 600px) {
 
+            .video-area {
 
-            #bg-video {
-
-                width: 100vw;
-
-                height: 100vh;
-
-                object-fit: cover;
-
-                object-position:
-                    center center;
+                height: 50vh;
 
             }
 
 
-            .container {
+            .content {
 
-                width: 100%;
-
-                max-width: 100%;
+                min-height: 50vh;
 
                 padding:
-                    30px 12px 25px;
+                    20px 12px 25px;
 
             }
 
 
             h1 {
 
-                font-size: 34px;
+                font-size: 28px;
 
-            }
-
-
-            .sub {
-
-                font-size: 16px;
+                margin-bottom: 20px;
 
             }
 
 
             .btn {
 
-                width: 100%;
-
-                font-size: 19px;
+                font-size: 18px;
 
                 padding:
-                    18px 10px;
+                    17px 12px;
 
-                border-radius: 17px;
+                border-radius: 16px;
 
             }
 
 
             .btn small {
 
-                font-size: 14px;
-
-            }
-
-
-            .cards {
-
-                grid-template-columns:
-                    1fr;
-
-                gap: 12px;
-
-            }
-
-
-            .card {
-
-                padding: 18px;
-
-            }
-
-
-            .card span {
-
-                font-size: 36px;
-
-            }
-
-
-            .card p {
-
-                font-size: 14px;
+                font-size: 13px;
 
             }
 
@@ -538,53 +366,54 @@
 <body>
 
 
-    <!-- ================================
-         VÍDEO DE FUNDO
+    <!-- =================================
+         VÍDEO — METADE DA TELA
     ================================= -->
 
-    <video
-
-        autoplay
-
-        muted
-
-        loop
-
-        playsinline
-
-        preload="auto"
-
-        id="bg-video">
+    <section class="video-area">
 
 
-        <source
+        <video
 
-            src="6e0435cdf73692771097c0abcf882e37.mp4"
+            id="bg-video"
 
-            type="video/mp4">
+            autoplay
+
+            muted
+
+            loop
+
+            playsinline
+
+            preload="auto">
 
 
-        Seu navegador não suporta vídeo.
+            <source
+
+                src="6e0435cdf73692771097c0abcf882e37.mp4"
+
+                type="video/mp4">
 
 
-    </video>
+            Seu navegador não suporta vídeo.
 
 
-    <!-- ================================
-         CAMADA ESCURA
+        </video>
+
+
+        <div class="video-overlay"></div>
+
+
+    </section>
+
+
+
+    <!-- =================================
+         BOTÕES
     ================================= -->
 
-    <div class="overlay"></div>
+    <main class="content">
 
-
-    <!-- ================================
-         CONTEÚDO
-    ================================= -->
-
-    <main class="container">
-
-
-        <!-- TÍTULO -->
 
         <h1>
 
@@ -593,172 +422,64 @@
         </h1>
 
 
-        <p class="sub">
+        <div class="buttons">
 
-            Filmes • Séries • Ao Vivo
 
-        </p>
+            <!-- TESTE GRÁTIS -->
 
+            <a
 
-        <!-- ================================
-             BOTÃO TESTE
-        ================================= -->
+                class="btn"
 
-        <a
+                href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
 
-            class="btn"
+                target="_blank"
 
-            href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+                rel="noopener noreferrer">
 
-            target="_blank"
 
-            rel="noopener noreferrer">
+                🎁 CRIE SEU LOGIN E SENHA AQUI
 
 
-            🎁 CRIE SEU LOGIN E SENHA AQUI
+                <small>
 
+                    Aproveite 4 horas grátis
 
-            <small>
+                </small>
 
-                Aproveite 4 horas grátis
 
-            </small>
+            </a>
 
 
-        </a>
 
+            <!-- PAINEL -->
 
-        <!-- ================================
-             BOTÃO PAINEL
-        ================================= -->
+            <a
 
-        <a
+                class="btn"
 
-            class="btn"
+                href="https://clientefinal.com/"
 
-            href="https://clientefinal.com/"
+                target="_blank"
 
-            target="_blank"
+                rel="noopener noreferrer">
 
-            rel="noopener noreferrer">
 
+                🔐 PAINEL DO CLIENTE
 
-            🔐 PAINEL DO CLIENTE
 
+                <small>
 
-            <small>
+                    Entrar com seu login e senha
 
-                Entrar com seu login e senha
+                </small>
 
-            </small>
 
+            </a>
 
-        </a>
 
+        </div>
 
-        <!-- ================================
-             CARDS
-        ================================= -->
-
-        <section class="cards">
-
-
-            <!-- FILMES -->
-
-            <div class="card">
-
-
-                <span>
-
-                    🎬
-
-                </span>
-
-
-                <h3>
-
-                    Filmes
-
-                </h3>
-
-
-                <p>
-
-                    Os melhores lançamentos
-                    para você assistir.
-
-                </p>
-
-
-            </div>
-
-
-            <!-- SÉRIES -->
-
-            <div class="card">
-
-
-                <span>
-
-                    📺
-
-                </span>
-
-
-                <h3>
-
-                    Séries
-
-                </h3>
-
-
-                <p>
-
-                    Séries de sucesso
-                    para maratonar.
-
-                </p>
-
-
-            </div>
-
-
-            <!-- AO VIVO -->
-
-            <div class="card">
-
-
-                <span>
-
-                    📡
-
-                </span>
-
-
-                <h3>
-
-                    Ao Vivo
-
-                </h3>
-
-
-                <p>
-
-                    Canais ao vivo com
-                    excelente qualidade.
-
-                </p>
-
-
-            </div>
-
-
-        </section>
-
-
-        <!-- ================================
-             RODAPÉ
-        ================================= -->
 
         <footer>
 
@@ -770,16 +491,13 @@
     </main>
 
 
-    <!-- ================================
-         JAVASCRIPT
+
+    <!-- =================================
+         SERVICE WORKER
     ================================= -->
 
     <script>
 
-
-        /* ================================
-           SERVICE WORKER
-        ================================= */
 
         if ("serviceWorker" in navigator) {
 
@@ -791,41 +509,28 @@
                 function () {
 
 
-                    navigator.serviceWorker
+                    navigator.serviceWorker.register(
 
-                        .register(
+                        "./service-worker.js"
 
-                            "./service-worker.js"
-
-                        )
+                    ).then(function () {
 
 
-                        .then(function () {
+                        console.log(
+                            "Service Worker ativo."
+                        );
 
 
-                            console.log(
-
-                                "Service Worker registrado."
-
-                            );
+                    }).catch(function (erro) {
 
 
-                        })
+                        console.log(
+                            "Erro:",
+                            erro
+                        );
 
 
-                        .catch(function (erro) {
-
-
-                            console.log(
-
-                                "Erro no Service Worker:",
-
-                                erro
-
-                            );
-
-
-                        });
+                    });
 
 
                 }
@@ -835,104 +540,40 @@
         }
 
 
-        /* ================================
+        /* =================================
            EFEITO DOS BOTÕES
         ================================= */
 
         document
-
             .querySelectorAll(".btn")
-
             .forEach(function (botao) {
 
 
                 botao.addEventListener(
-
                     "click",
-
                     function () {
 
 
                         this.style.transform =
-                            "scale(0.97)";
+                            "scale(.97)";
 
 
                         setTimeout(
+                            () => {
 
-                            function () {
-
-
-                                botao.style.transform =
+                                this.style.transform =
                                     "";
 
-
                             },
-
                             150
-
                         );
 
 
                     }
-
                 );
 
 
             });
-
-
-        /* ================================
-           ANIMAÇÃO DOS CARDS
-        ================================= */
-
-        window.addEventListener(
-
-            "load",
-
-            function () {
-
-
-                const cards =
-
-                    document.querySelectorAll(
-
-                        ".card"
-
-                    );
-
-
-                cards.forEach(
-
-                    function (card, index) {
-
-
-                        setTimeout(
-
-                            function () {
-
-
-                                card.classList.add(
-
-                                    "show"
-
-                                );
-
-
-                            },
-
-                            index * 150
-
-                        );
-
-
-                    }
-
-                );
-
-
-            }
-
-        );
 
 
     </script>
