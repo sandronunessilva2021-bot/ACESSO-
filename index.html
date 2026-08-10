@@ -7,11 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🍕 Pizza Play</title>
-
-<meta name="theme-color" content="#111111">
-
-<link rel="manifest" href="manifest.json">
+<title>Smart Play</title>
 
 <style>
 
@@ -25,10 +21,11 @@ font-family:Arial,Helvetica,sans-serif;
 body{
 background:#000;
 color:#fff;
-overflow-x:hidden;
+overflow:hidden;
 }
 
 /* VÍDEO DE FUNDO */
+
 #bg-video{
 position:fixed;
 top:0;
@@ -49,166 +46,129 @@ background:rgba(0,0,0,.65);
 z-index:-1;
 }
 
+/* CONTEÚDO */
+
 .container{
-max-width:420px;
+width:100%;
+max-width:430px;
+min-height:100vh;
 margin:auto;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
 padding:25px;
 text-align:center;
 }
 
-/* LOGO */
-.logo{
-width:170px;
-height:170px;
-border-radius:35px;
-margin-top:20px;
-box-shadow:0 0 25px #b000ff;
-}
-
 /* TÍTULO */
+
 h1{
-font-size:40px;
-margin-top:15px;
-color:#b000ff;
+font-size:42px;
+margin-bottom:10px;
+
+color:#c65cff;
+
 text-shadow:
 0 0 5px #b000ff,
 0 0 15px #b000ff,
 0 0 30px #8a00ff;
 }
 
+/* DESCRIÇÃO */
+
 .sub{
-margin-top:8px;
 font-size:18px;
-color:#ddd;
+color:#fff;
+margin-bottom:25px;
 }
 
 .sub strong{
-color:#b000ff;
+color:#c65cff;
+
+text-shadow:
+0 0 8px #b000ff;
 }
 
 /* BOTÕES */
+
 .btn{
+width:100%;
+
 display:block;
+
 text-decoration:none;
-padding:18px;
+
+padding:18px 15px;
+
+margin-top:15px;
+
 border-radius:18px;
-margin-top:20px;
-font-size:22px;
+
+font-size:20px;
+
 font-weight:bold;
-transition:.3s;
+
+color:#fff;
 
 background:rgba(0,0,0,.35);
 
 border:2px solid #b000ff;
 
-color:#fff;
-
 box-shadow:
-0 0 8px rgba(176,0,255,.7),
-inset 0 0 8px rgba(176,0,255,.15);
+0 0 8px rgba(176,0,255,.8),
+inset 0 0 10px rgba(176,0,255,.15);
+
+text-shadow:
+0 0 8px #b000ff;
+
+transition:.3s;
 }
 
 .btn:hover{
 transform:scale(1.03);
 
 box-shadow:
-0 0 12px #b000ff,
-0 0 25px rgba(176,0,255,.7);
+0 0 15px #b000ff,
+0 0 30px rgba(176,0,255,.7);
 }
 
 .btn:active{
 transform:scale(.97);
 }
 
-/* BOTÃO TESTE */
-.teste{
-border-color:#b000ff;
-color:#d580ff;
-
-text-shadow:
-0 0 8px #b000ff;
-}
-
-/* BOTÃO PAINEL */
-.painel{
-border-color:#b000ff;
-color:#d580ff;
-
-text-shadow:
-0 0 8px #b000ff;
-}
+/* TEXTO PEQUENO */
 
 .btn small{
 display:block;
-margin-top:8px;
-font-size:15px;
-font-weight:normal;
-color:#fff;
-}
 
-/* CARDS */
-.cards{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-margin-top:35px;
-}
-
-.card{
-background:rgba(255,255,255,.07);
-
-padding:18px;
-
-border-radius:18px;
-
-backdrop-filter:blur(8px);
-
-border:1px solid rgba(176,0,255,.75);
-
-box-shadow:
-0 0 10px rgba(176,0,255,.25);
-}
-
-.card span{
-font-size:40px;
-display:block;
-margin-bottom:8px;
-}
-
-.card h3{
-color:#c65cff;
-
-text-shadow:
-0 0 8px rgba(176,0,255,.8);
-}
-
-.card p{
 margin-top:7px;
+
 font-size:14px;
+
+font-weight:normal;
+
 color:#ddd;
-line-height:1.4;
-}
 
-/* RODAPÉ */
-footer{
-margin-top:40px;
-font-size:14px;
-color:#ccc;
-padding-bottom:30px;
-}
-
-footer strong{
-color:#c65cff;
-
-text-shadow:
-0 0 8px #b000ff;
+text-shadow:none;
 }
 
 /* CELULAR */
+
 @media(max-width:600px){
 
-.cards{
-grid-template-columns:1fr 1fr;
+h1{
+font-size:36px;
+}
+
+.sub{
+font-size:16px;
+}
+
+.btn{
+font-size:18px;
 }
 
 }
@@ -219,9 +179,15 @@ grid-template-columns:1fr 1fr;
 
 <body>
 
-<!-- VÍDEO DE FUNDO -->
 
-<video autoplay muted loop playsinline id="bg-video">
+<!-- VÍDEO -->
+
+<video
+autoplay
+muted
+loop
+playsinline
+id="bg-video">
 
 <source
 src="6e0435cdf73692771097c0abcf882e37.mp4"
@@ -229,29 +195,25 @@ type="video/mp4">
 
 </video>
 
+
 <div class="overlay"></div>
 
 
+<!-- CONTEÚDO -->
+
 <div class="container">
 
-<!-- LOGO -->
-
-<img src="logo.png" class="logo">
-
-
-<!-- TÍTULO -->
-
-<h1>🍕 Pizza Play</h1>
+<h1>Smart Play</h1>
 
 <p class="sub">
 Filmes • Séries • <strong>Jogos ao Vivo</strong> • Ao Vivo
 </p>
 
 
-<!-- BOTÃO TESTE -->
+<!-- TESTE -->
 
 <a
-class="btn teste"
+class="btn"
 href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
 target="_blank">
 
@@ -264,10 +226,10 @@ Aproveite 4 horas grátis
 </a>
 
 
-<!-- BOTÃO PAINEL -->
+<!-- PAINEL -->
 
 <a
-class="btn painel"
+class="btn"
 href="https://clientefinal.com/"
 target="_blank">
 
@@ -279,160 +241,26 @@ Entrar com seu login e senha
 
 </a>
 
-
-<!-- CARDS -->
-
-<div class="cards">
-
-
-<!-- FILMES -->
-
-<div class="card">
-
-<span>🎬</span>
-
-<h3>Filmes</h3>
-
-<p>
-Os melhores lançamentos para você assistir.
-</p>
-
-</div>
-
-
-<!-- SÉRIES -->
-
-<div class="card">
-
-<span>📺</span>
-
-<h3>Séries</h3>
-
-<p>
-Séries de sucesso para maratonar.
-</p>
-
-</div>
-
-
-<!-- JOGOS AO VIVO -->
-
-<div class="card">
-
-<span>🏆</span>
-
-<h3>Jogos ao Vivo</h3>
-
-<p>
-Acompanhe seus jogos e eventos esportivos ao vivo.
-</p>
-
-</div>
-
-
-<!-- CANAIS AO VIVO -->
-
-<div class="card">
-
-<span>📡</span>
-
-<h3>Ao Vivo</h3>
-
-<p>
-Conteúdos ao vivo com excelente qualidade.
-</p>
-
-</div>
-
-</div>
-
-
-<!-- RODAPÉ -->
-
-<footer>
-
-🍕 Pizza Play © 2026
-
-</footer>
-
 </div>
 
 
 <script>
 
-/* SERVICE WORKER / PWA */
-
-if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", () => {
-
-        navigator.serviceWorker
-            .register("service-worker.js")
-
-            .then(() => {
-
-                console.log(
-                    "Service Worker registrado com sucesso."
-                );
-
-            })
-
-            .catch((erro) => {
-
-                console.log(
-                    "Erro ao registrar Service Worker:",
-                    erro
-                );
-
-            });
-
-    });
-
-}
-
-
-/* EFEITO DOS BOTÕES */
+/* EFEITO AO CLICAR */
 
 document.querySelectorAll(".btn").forEach((botao) => {
 
-    botao.addEventListener("click", function () {
+botao.addEventListener("click", function(){
 
-        this.style.transform = "scale(0.97)";
+this.style.transform = "scale(.97)";
 
-        setTimeout(() => {
+setTimeout(() => {
 
-            this.style.transform = "scale(1)";
+this.style.transform = "scale(1)";
 
-        }, 150);
-
-    });
+},150);
 
 });
-
-
-/* ANIMAÇÃO DOS CARDS */
-
-window.addEventListener("load", () => {
-
-    const cards = document.querySelectorAll(".card");
-
-    cards.forEach((card, i) => {
-
-        card.style.opacity = "0";
-        card.style.transform = "translateY(20px)";
-
-        setTimeout(() => {
-
-            card.style.transition =
-                "all .6s ease";
-
-            card.style.opacity = "1";
-            card.style.transform =
-                "translateY(0)";
-
-        }, i * 150);
-
-    });
 
 });
 
