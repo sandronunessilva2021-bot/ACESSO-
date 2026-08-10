@@ -30,6 +30,7 @@ color:#fff;
 overflow:hidden;
 }
 
+
 /* =========================
    VÍDEO DE FUNDO
 ========================= */
@@ -47,21 +48,22 @@ object-fit:cover;
 z-index:-2;
 }
 
-/* CAMADA LEVE SOBRE O VÍDEO */
+
+/* CAMADA LEVE */
 
 .overlay{
 position:fixed;
-
 top:0;
 left:0;
 
 width:100%;
 height:100%;
 
-background:rgba(0,0,0,.12);
+background:rgba(0,0,0,.10);
 
 z-index:-1;
 }
+
 
 /* =========================
    CONTEÚDO
@@ -90,6 +92,7 @@ text-align:center;
 
 }
 
+
 /* =========================
    TÍTULO
 ========================= */
@@ -100,19 +103,12 @@ font-size:42px;
 
 margin-bottom:10px;
 
-color:#c65cff;
+color:#d8d8d8;
 
-text-shadow:
-
-0 0 5px #b000ff,
-
-0 0 15px #b000ff,
-
-0 0 30px #8a00ff,
-
-0 0 50px rgba(176,0,255,.7);
+font-weight:bold;
 
 }
+
 
 /* =========================
    DESCRIÇÃO
@@ -122,27 +118,20 @@ text-shadow:
 
 font-size:18px;
 
-color:#fff;
+color:#d8d8d8;
 
 margin-bottom:25px;
-
-text-shadow:
-
-0 1px 3px #000;
 
 }
 
 .sub strong{
 
-color:#d16cff;
+color:#ffffff;
 
-text-shadow:
-
-0 0 8px #b000ff,
-
-0 0 15px #8a00ff;
+font-weight:bold;
 
 }
+
 
 /* =========================
    BOTÕES
@@ -166,43 +155,25 @@ font-size:20px;
 
 font-weight:bold;
 
-color:#fff;
+color:#eeeeee;
 
-background:rgba(0,0,0,.30);
+background:rgba(0,0,0,.25);
 
-border:2px solid #b000ff;
-
-box-shadow:
-
-0 0 8px rgba(176,0,255,.8),
-
-0 0 18px rgba(176,0,255,.35),
-
-inset 0 0 10px rgba(176,0,255,.15);
-
-text-shadow:
-
-0 0 8px #b000ff;
+border:2px solid #cfcfcf;
 
 transition:.3s;
 
 }
 
-/* EFEITO AO PASSAR O DEDO/MOUSE */
+
+/* EFEITO AO PASSAR */
 
 .btn:hover{
 
-transform:scale(1.03);
-
-box-shadow:
-
-0 0 15px #b000ff,
-
-0 0 30px rgba(176,0,255,.7),
-
-inset 0 0 15px rgba(176,0,255,.2);
+background:rgba(255,255,255,.08);
 
 }
+
 
 /* EFEITO AO CLICAR */
 
@@ -212,8 +183,9 @@ transform:scale(.97);
 
 }
 
+
 /* =========================
-   TEXTO PEQUENO DOS BOTÕES
+   TEXTO PEQUENO
 ========================= */
 
 .btn small{
@@ -226,13 +198,10 @@ font-size:14px;
 
 font-weight:normal;
 
-color:#eee;
-
-text-shadow:
-
-0 1px 3px #000;
+color:#cfcfcf;
 
 }
+
 
 /* =========================
    CELULAR
@@ -276,9 +245,7 @@ font-size:13px;
 <body>
 
 
-<!-- =========================
-     VÍDEO
-========================= -->
+<!-- VÍDEO -->
 
 <video
 autoplay
@@ -296,24 +263,16 @@ Seu navegador não suporta vídeo.
 </video>
 
 
-<!-- CAMADA TRANSPARENTE -->
-
 <div class="overlay"></div>
 
 
-<!-- =========================
-     CONTEÚDO
-========================= -->
+<!-- CONTEÚDO -->
 
 <div class="container">
 
 
-<!-- NOME -->
-
 <h1>Smart Play</h1>
 
-
-<!-- DESCRIÇÃO -->
 
 <p class="sub">
 
@@ -323,9 +282,7 @@ Filmes • Séries •
 </p>
 
 
-<!-- =========================
-     BOTÃO TESTE
-========================= -->
+<!-- TESTE -->
 
 <a
 class="btn"
@@ -344,9 +301,7 @@ Aproveite 4 horas grátis
 </a>
 
 
-<!-- =========================
-     BOTÃO PAINEL
-========================= -->
+<!-- PAINEL -->
 
 <a
 class="btn"
@@ -368,13 +323,9 @@ Entrar com seu login e senha
 </div>
 
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
 <script>
 
-/* EFEITO AO CLICAR NOS BOTÕES */
+/* EFEITO AO CLICAR */
 
 document
 .querySelectorAll(".btn")
