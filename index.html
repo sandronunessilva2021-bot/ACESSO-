@@ -1,506 +1,549 @@
-{
-  "openapi": "3.0.3",
-  "info": {
-    "title": "Painel Cliente API",
-    "version": "2.0.0",
-    "description": "API do Painel Cliente para revendas integrarem a operação: perfil e pacotes (bouquets), novos conteúdos (canais, filmes e séries), testes de 4 horas e gestão de assinantes — cadastro, renovação, conexões, bloqueio e listagem paginada."
-  },
-  "servers": [
-    {
-      "url": "https://api.painelcliente.com",
-      "description": "Servidor de Produção"
-    }
-  ],
-  "components": {
-    "securitySchemes": {
-      "secretKey": {
-        "type": "apiKey",
-        "in": "query",
-        "name": "secret",
-        "description": "Chave secreta de autenticação (configurada no painel do revenda)"
-      }
-    }
-  },
-  "security": [{"secretKey": []}],
-  "tags": [
-    {"name": "Perfil", "description": "Endpoints relacionados ao perfil e informações do revenda"},
-    {"name": "Bouquets", "description": "Endpoints relacionados aos bouquets (pacotes de canais e serviços)"},
-    {"name": "Testes", "description": "Endpoints relacionados à criação e gerenciamento de testes gratuitos"},
-    {"name": "Clientes", "description": "Endpoints relacionados ao gerenciamento completo de clientes"},
-    {"name": "Novos Conteúdos", "description": "Endpoints para consultar canais, filmes e séries adicionados ou atualizados recentemente"}
-  ],
-  "paths": {
-    "/profile/{token}": {
-      "post": {
-        "summary": "Obter Perfil do Revenda",
-        "operationId": "getProfile",
-        "tags": ["Perfil"],
-        "parameters": [
-          {
-            "name": "token",
-            "in": "path",
-            "required": true,
-            "schema": {"type": "string"}
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret"],
-                "properties": {
-                  "secret": {"type": "string", "description": "Chave secreta de autenticação"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {"description": "Perfil obtido com sucesso"},
-          "401": {"description": "Token de autenticação inválido ou ausente"},
-          "400": {"description": "Erro de validação nos parâmetros"}
-        }
-      }
-    },
-    "/bouquets/{token}": {
-      "post": {
-        "summary": "Obter Bouquets",
-        "operationId": "getBouquets",
-        "tags": ["Bouquets"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret"],
-                "properties": {"secret": {"type": "string"}}
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Bouquets obtidos com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/new_channels/{token}": {
-      "post": {
-        "summary": "Novos Canais",
-        "description": "Retorna a lista dos canais adicionados mais recentemente. Os campos `added` são timestamps Unix (segundos). Quando não houver conteúdo, `data` retorna vazio.",
-        "operationId": "getNewChannels",
-        "tags": ["Novos Conteúdos"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}, "description": "Token de acesso da API"}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret"],
-                "properties": {
-                  "secret": {"type": "string", "description": "Chave secreta vinculada ao token"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Lista de novos canais obtida com sucesso",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "statusCode": {"type": "integer", "example": 200},
-                    "result": {"type": "boolean", "example": true},
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {"type": "string", "example": "Canal Exemplo HD"},
-                          "icon": {"type": "string", "example": "https://exemplo.com/icone.png"},
-                          "added": {"type": "string", "example": "1716123456"},
-                          "category": {"type": "string", "example": "Esportes"}
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {"description": "Erro na requisição (secret inválido, TOKEN ou SECRET inválido, revendedor bloqueado, revendedor inexistente)"}
-        }
-      }
-    },
-    "/new_movies/{token}": {
-      "post": {
-        "summary": "Novos Filmes",
-        "description": "Retorna a lista dos filmes adicionados mais recentemente. O campo `added` é timestamp Unix (segundos). Quando não houver conteúdo, `data` retorna vazio.",
-        "operationId": "getNewMovies",
-        "tags": ["Novos Conteúdos"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}, "description": "Token de acesso da API"}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret"],
-                "properties": {
-                  "secret": {"type": "string", "description": "Chave secreta vinculada ao token"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Lista de novos filmes obtida com sucesso",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "statusCode": {"type": "integer", "example": 200},
-                    "result": {"type": "boolean", "example": true},
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {"type": "string", "example": "Filme Exemplo"},
-                          "added": {"type": "string", "example": "1716123456"},
-                          "category": {"type": "string", "example": "Ação, Aventura"},
-                          "icon": {"type": "string", "example": "https://exemplo.com/capa.jpg"},
-                          "description": {"type": "string", "example": "Sinopse do filme..."}
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {"description": "Erro na requisição (secret inválido, TOKEN ou SECRET inválido, revendedor bloqueado, revendedor inexistente)"}
-        }
-      }
-    },
-    "/new_series/{token}": {
-      "post": {
-        "summary": "Novas Séries",
-        "description": "Retorna a lista das séries adicionadas ou atualizadas mais recentemente. O campo `last_updated` é timestamp Unix (segundos). Quando não houver conteúdo, `data` retorna vazio.",
-        "operationId": "getNewSeries",
-        "tags": ["Novos Conteúdos"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}, "description": "Token de acesso da API"}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret"],
-                "properties": {
-                  "secret": {"type": "string", "description": "Chave secreta vinculada ao token"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Lista de novas séries obtida com sucesso",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "statusCode": {"type": "integer", "example": 200},
-                    "result": {"type": "boolean", "example": true},
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "name": {"type": "string", "example": "Série Exemplo"},
-                          "icon": {"type": "string", "example": "https://exemplo.com/capa.jpg"},
-                          "description": {"type": "string", "example": "Sinopse da série..."},
-                          "last_updated": {"type": "string", "example": "1716123456"}
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {"description": "Erro na requisição (secret inválido, TOKEN ou SECRET inválido, revendedor bloqueado, revendedor inexistente)"}
-        }
-      }
-    },
-    "/trial_create/{token}": {
-      "post": {
-        "summary": "Criar Teste",
-        "operationId": "createTrial",
-        "tags": ["Testes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username", "password", "idbouquet"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"},
-                  "password": {"type": "string"},
-                  "idbouquet": {"type": "array", "items": {"type": "integer"}},
-                  "email": {"type": "string"},
-                  "whatsapp": {"type": "string"},
-                  "notes": {"type": "string"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Teste criado com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/create_client/{token}": {
-      "post": {
-        "summary": "Criar Cliente",
-        "operationId": "createClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username", "password", "idbouquet", "month", "connections"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"},
-                  "password": {"type": "string"},
-                  "idbouquet": {"type": "array", "items": {"type": "integer"}},
-                  "month": {"type": "integer"},
-                  "connections": {"type": "integer"},
-                  "email": {"type": "string"},
-                  "whatsapp": {"type": "string"},
-                  "notes": {"type": "string"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Cliente criado com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/update_client/{token}": {
-      "post": {
-        "summary": "Atualizar Cliente",
-        "operationId": "updateClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"},
-                  "password": {"type": "string"},
-                  "idbouquet": {"type": "array", "items": {"type": "integer"}},
-                  "notes": {"type": "string"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Cliente atualizado com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/renew_client/{token}": {
-      "post": {
-        "summary": "Renovar Cliente",
-        "operationId": "renewClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username", "month"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"},
-                  "month": {"type": "integer"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Cliente renovado com sucesso"}, "400": {"description": "Erro na requisição"}, "429": {"description": "Aguarde 1 minuto antes de renovar novamente"}}
-      }
-    },
-    "/screen_client/add/{token}": {
-      "post": {
-        "summary": "Adicionar Conexão (Tela)",
-        "operationId": "addScreenClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username", "connections"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"},
-                  "connections": {"type": "integer"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Conexão adicionada com sucesso"}, "400": {"description": "Erro na requisição"}, "429": {"description": "Aguarde 1 minuto"}}
-      }
-    },
-    "/screen_client/remove/{token}": {
-      "post": {
-        "summary": "Remover Conexão (Tela)",
-        "operationId": "removeScreenClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username", "connections"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"},
-                  "connections": {"type": "integer"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Conexão removida com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/block_client/{token}": {
-      "post": {
-        "summary": "Bloquear/Desbloquear Cliente",
-        "operationId": "blockClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username", "status"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"},
-                  "status": {"type": "boolean"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Status alterado com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/get_client/{token}": {
-      "post": {
-        "summary": "Obter Informações do Cliente",
-        "operationId": "getClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Informações obtidas com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/delete_client/{token}": {
-      "post": {
-        "summary": "Deletar Cliente",
-        "operationId": "deleteClient",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret", "username"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "username": {"type": "string"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Cliente deletado com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    },
-    "/get_clients_all/{token}": {
-      "post": {
-        "summary": "Listar Clientes",
-        "operationId": "getAllClients",
-        "tags": ["Clientes"],
-        "parameters": [{"name": "token", "in": "path", "required": true, "schema": {"type": "string"}}],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["secret"],
-                "properties": {
-                  "secret": {"type": "string"},
-                  "page": {"type": "integer"},
-                  "limit": {"type": "integer"}
-                }
-              }
-            }
-          }
-        },
-        "responses": {"200": {"description": "Lista obtida com sucesso"}, "400": {"description": "Erro na requisição"}}
-      }
-    }
-  }
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🍕 Pizza Play</title>
+
+<meta name="theme-color" content="#111111">
+<meta name="description" content="Pizza Play - Filmes, Séries e Ao Vivo">
+
+<link rel="manifest" href="manifest.json">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+
+/* =========================
+   VÍDEO DE FUNDO
+========================= */
+
+#bg-video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.45);
+    z-index:-1;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    width:100%;
+    max-width:420px;
+    margin:0 auto;
+    padding:45px 15px 40px;
+    text-align:center;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+h1{
+    font-size:40px;
+    color:#fff;
+    margin-top:10px;
+
+    text-shadow:
+        0 3px 15px rgba(0,0,0,.8);
+}
+
+.sub{
+    margin-top:8px;
+    font-size:18px;
+    color:#fff;
+}
+
+
+/* =========================
+   BOTÕES
+   TRANSPARENTES + BORDA
+   LARANJA
+========================= */
+
+.btn{
+
+    display:block;
+
+    width:100%;
+
+    text-decoration:none;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    margin-top:20px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#fff;
+
+    background:transparent;
+
+    border:2px solid #ff7a00;
+
+    box-shadow:
+        0 0 12px rgba(255,122,0,.25);
+
+    transition:
+        .3s ease;
+
+}
+
+
+/* Efeito ao passar o mouse */
+
+.btn:hover{
+
+    background:rgba(255,122,0,.15);
+
+    border-color:#ff9d3d;
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 0 25px rgba(255,122,0,.45);
+
+}
+
+
+/* Efeito ao clicar */
+
+.btn:active{
+
+    transform:scale(.97);
+
+}
+
+
+/* =========================
+   TEXTO DOS BOTÕES
+========================= */
+
+.btn small{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:15px;
+
+    font-weight:normal;
+
+    color:#fff;
+
+}
+
+
+/* =========================
+   CARDS / CAIXAS DE TEXTO
+========================= */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:35px;
+
+}
+
+
+.card{
+
+    background:transparent;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    border:
+        2px solid #ff7a00;
+
+    box-shadow:
+        0 0 12px rgba(255,122,0,.20);
+
+    transition:
+        .3s ease;
+
+}
+
+
+/* Hover dos cards */
+
+.card:hover{
+
+    background:
+        rgba(255,122,0,.10);
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 0 25px rgba(255,122,0,.40);
+
+}
+
+
+.card span{
+
+    font-size:40px;
+
+    display:block;
+
+    margin-bottom:8px;
+
+}
+
+
+.card h3{
+
+    margin-bottom:8px;
+
+    color:#fff;
+
+}
+
+
+.card p{
+
+    font-size:14px;
+
+    line-height:1.4;
+
+    color:#fff;
+
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer{
+
+    margin-top:40px;
+
+    font-size:14px;
+
+    color:#fff;
+
+    padding-bottom:30px;
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:600px){
+
+    .container{
+
+        padding:
+            45px
+            15px
+            40px;
+
+    }
+
+    h1{
+
+        font-size:34px;
+
+    }
+
+    .btn{
+
+        font-size:20px;
+
+        padding:17px;
+
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .card{
+
+        padding:20px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- VÍDEO DE FUNDO -->
+
+<video
+    autoplay
+    muted
+    loop
+    playsinline
+    id="bg-video"
+>
+
+    <source
+        src="6e0435cdf73692771097c0abcf882e37.mp4"
+        type="video/mp4"
+    >
+
+</video>
+
+
+<div class="overlay"></div>
+
+
+<!-- CONTEÚDO -->
+
+<div class="container">
+
+
+    <h1>🍕 Pizza Play</h1>
+
+    <p class="sub">
+        Filmes • Séries • Ao Vivo
+    </p>
+
+
+    <!-- BOTÃO TESTE -->
+
+    <a
+        class="btn"
+        href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        🎁 CRIE SEU LOGIN E SENHA AQUI
+
+        <small>
+            Aproveite 4 horas grátis
+        </small>
+
+    </a>
+
+
+    <!-- BOTÃO PAINEL -->
+
+    <a
+        class="btn"
+        href="https://clientefinal.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        🔐 PAINEL DO CLIENTE
+
+        <small>
+            Entrar com seu login e senha
+        </small>
+
+    </a>
+
+
+    <!-- CARDS -->
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <span>🎬</span>
+
+            <h3>Filmes</h3>
+
+            <p>
+                Os melhores lançamentos
+                para você assistir.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>📺</span>
+
+            <h3>Séries</h3>
+
+            <p>
+                Séries de sucesso
+                para maratonar.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>📡</span>
+
+            <h3>Ao Vivo</h3>
+
+            <p>
+                Canais ao vivo com
+                excelente qualidade.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+
+        🍕 Pizza Play © 2026
+
+    </footer>
+
+
+</div>
+
+
+<script>
+
+/* Service Worker */
+
+if("serviceWorker" in navigator){
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator.serviceWorker
+                .register("service-worker.js")
+                .catch(
+                    erro => console.log(erro)
+                );
+
+        }
+    );
+
+}
+
+
+/* Efeito dos botões */
+
+document
+    .querySelectorAll(".btn")
+    .forEach((botao)=>{
+
+        botao.addEventListener(
+            "click",
+            function(){
+
+                this.style.transform =
+                    "scale(.97)";
+
+                setTimeout(()=>{
+
+                    this.style.transform =
+                        "scale(1)";
+
+                },150);
+
+            }
+        );
+
+    });
+
+
+/* Animação dos cards */
+
+window.addEventListener(
+    "load",
+    ()=>{
+
+        const cards =
+            document.querySelectorAll(".card");
+
+        cards.forEach(
+            (card,i)=>{
+
+                card.style.opacity="0";
+
+                card.style.transform=
+                    "translateY(20px)";
+
+                setTimeout(()=>{
+
+                    card.style.transition=
+                        "all .5s ease";
+
+                    card.style.opacity="1";
+
+                    card.style.transform=
+                        "translateY(0)";
+
+                },200+(i*150));
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
