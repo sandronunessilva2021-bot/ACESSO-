@@ -18,83 +18,138 @@ box-sizing:border-box;
 font-family:Arial,Helvetica,sans-serif;
 }
 
+html,
+body{
+width:100%;
+height:100%;
+}
+
 body{
 background:#000;
 color:#fff;
 overflow:hidden;
 }
 
-/* VÍDEO DE FUNDO */
+/* =========================
+   VÍDEO DE FUNDO
+========================= */
 
 #bg-video{
 position:fixed;
 top:0;
 left:0;
+
 width:100%;
 height:100%;
+
 object-fit:cover;
+
 z-index:-2;
 }
 
+/* CAMADA LEVE SOBRE O VÍDEO */
+
 .overlay{
 position:fixed;
+
 top:0;
 left:0;
+
 width:100%;
 height:100%;
-background:rgba(0,0,0,.65);
+
+background:rgba(0,0,0,.12);
+
 z-index:-1;
 }
 
-/* CONTEÚDO */
+/* =========================
+   CONTEÚDO
+========================= */
 
 .container{
+
 width:100%;
 max-width:430px;
+
 min-height:100vh;
+
 margin:auto;
 
 display:flex;
+
 flex-direction:column;
+
 justify-content:center;
+
 align-items:center;
 
 padding:25px;
+
 text-align:center;
+
 }
 
-/* TÍTULO */
+/* =========================
+   TÍTULO
+========================= */
 
 h1{
+
 font-size:42px;
+
 margin-bottom:10px;
 
 color:#c65cff;
 
 text-shadow:
+
 0 0 5px #b000ff,
+
 0 0 15px #b000ff,
-0 0 30px #8a00ff;
+
+0 0 30px #8a00ff,
+
+0 0 50px rgba(176,0,255,.7);
+
 }
 
-/* DESCRIÇÃO */
+/* =========================
+   DESCRIÇÃO
+========================= */
 
 .sub{
+
 font-size:18px;
+
 color:#fff;
+
 margin-bottom:25px;
+
+text-shadow:
+
+0 1px 3px #000;
+
 }
 
 .sub strong{
-color:#c65cff;
+
+color:#d16cff;
 
 text-shadow:
-0 0 8px #b000ff;
+
+0 0 8px #b000ff,
+
+0 0 15px #8a00ff;
+
 }
 
-/* BOTÕES */
+/* =========================
+   BOTÕES
+========================= */
 
 .btn{
+
 width:100%;
 
 display:block;
@@ -113,35 +168,56 @@ font-weight:bold;
 
 color:#fff;
 
-background:rgba(0,0,0,.35);
+background:rgba(0,0,0,.30);
 
 border:2px solid #b000ff;
 
 box-shadow:
+
 0 0 8px rgba(176,0,255,.8),
+
+0 0 18px rgba(176,0,255,.35),
+
 inset 0 0 10px rgba(176,0,255,.15);
 
 text-shadow:
+
 0 0 8px #b000ff;
 
 transition:.3s;
+
 }
 
+/* EFEITO AO PASSAR O DEDO/MOUSE */
+
 .btn:hover{
+
 transform:scale(1.03);
 
 box-shadow:
+
 0 0 15px #b000ff,
-0 0 30px rgba(176,0,255,.7);
+
+0 0 30px rgba(176,0,255,.7),
+
+inset 0 0 15px rgba(176,0,255,.2);
+
 }
+
+/* EFEITO AO CLICAR */
 
 .btn:active{
+
 transform:scale(.97);
+
 }
 
-/* TEXTO PEQUENO */
+/* =========================
+   TEXTO PEQUENO DOS BOTÕES
+========================= */
 
 .btn small{
+
 display:block;
 
 margin-top:7px;
@@ -150,25 +226,44 @@ font-size:14px;
 
 font-weight:normal;
 
-color:#ddd;
+color:#eee;
 
-text-shadow:none;
+text-shadow:
+
+0 1px 3px #000;
+
 }
 
-/* CELULAR */
+/* =========================
+   CELULAR
+========================= */
 
 @media(max-width:600px){
 
 h1{
+
 font-size:36px;
+
 }
 
 .sub{
+
 font-size:16px;
+
 }
 
 .btn{
+
 font-size:18px;
+
+padding:17px 12px;
+
+}
+
+.btn small{
+
+font-size:13px;
+
 }
 
 }
@@ -177,10 +272,13 @@ font-size:18px;
 
 </head>
 
+
 <body>
 
 
-<!-- VÍDEO -->
+<!-- =========================
+     VÍDEO
+========================= -->
 
 <video
 autoplay
@@ -193,62 +291,94 @@ id="bg-video">
 src="6e0435cdf73692771097c0abcf882e37.mp4"
 type="video/mp4">
 
+Seu navegador não suporta vídeo.
+
 </video>
 
+
+<!-- CAMADA TRANSPARENTE -->
 
 <div class="overlay"></div>
 
 
-<!-- CONTEÚDO -->
+<!-- =========================
+     CONTEÚDO
+========================= -->
 
 <div class="container">
 
+
+<!-- NOME -->
+
 <h1>Smart Play</h1>
 
+
+<!-- DESCRIÇÃO -->
+
 <p class="sub">
-Filmes • Séries • <strong>Jogos ao Vivo</strong> • Ao Vivo
+
+Filmes • Séries •
+<strong>Jogos ao Vivo</strong> • Ao Vivo
+
 </p>
 
 
-<!-- TESTE -->
+<!-- =========================
+     BOTÃO TESTE
+========================= -->
 
 <a
 class="btn"
 href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer">
 
 🎁 CRIE SEU LOGIN E SENHA AQUI
 
 <small>
+
 Aproveite 4 horas grátis
+
 </small>
 
 </a>
 
 
-<!-- PAINEL -->
+<!-- =========================
+     BOTÃO PAINEL
+========================= -->
 
 <a
 class="btn"
 href="https://clientefinal.com/"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer">
 
 🔐 PAINEL DO CLIENTE
 
 <small>
+
 Entrar com seu login e senha
+
 </small>
 
 </a>
 
+
 </div>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-/* EFEITO AO CLICAR */
+/* EFEITO AO CLICAR NOS BOTÕES */
 
-document.querySelectorAll(".btn").forEach((botao) => {
+document
+.querySelectorAll(".btn")
+.forEach((botao) => {
 
 botao.addEventListener("click", function(){
 
@@ -265,6 +395,7 @@ this.style.transform = "scale(1)";
 });
 
 </script>
+
 
 </body>
 
