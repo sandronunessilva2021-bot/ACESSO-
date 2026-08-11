@@ -7,222 +7,399 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Smart Play</title>
+<title>🍕 Pizza Play</title>
+
+<meta name="theme-color" content="#111111">
+
+<link rel="manifest" href="manifest.json">
 
 <style>
 
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 html,
 body{
-width:100%;
-height:100%;
+    width:100%;
+    min-height:100%;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
 }
+
+
+/* =========================
+   FUNDO COM A IMAGEM
+========================= */
 
 body{
-background:#000;
-color:#fff;
-overflow:hidden;
+    background-image:url("tv-cinema.png");
+    background-position:center top;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-attachment:fixed;
 }
 
 
-/* VÍDEO DE FUNDO */
-
-#bg-video{
-position:fixed;
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-object-fit:cover;
-
-z-index:-2;
-}
-
-
-/* CAMADA LEVE */
-
+/* Escurecimento leve do fundo */
 .overlay{
-position:fixed;
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background:rgba(0,0,0,.10);
-
-z-index:-1;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.15);
+    z-index:-1;
+    pointer-events:none;
 }
 
 
-/* CONTEÚDO */
+/* =========================
+   VÍDEO DENTRO DA TV
+========================= */
+
+.tv-video{
+    position:absolute;
+
+    /*
+    Ajuste da posição do vídeo
+    dentro da TV da imagem
+    */
+
+    left:1.5%;
+    top:13.7%;
+
+    width:59.5%;
+    height:43.8%;
+
+    object-fit:cover;
+
+    border:none;
+    border-radius:3px;
+
+    background:#000;
+
+    z-index:2;
+}
+
+
+/* =========================
+   ÁREA PRINCIPAL
+========================= */
 
 .container{
 
-width:100%;
-max-width:430px;
+    position:relative;
 
-min-height:100vh;
+    max-width:420px;
 
-margin:auto;
+    margin:auto;
 
-display:flex;
+    padding:25px;
 
-flex-direction:column;
+    padding-top:25px;
 
-justify-content:center;
+    text-align:center;
 
-align-items:center;
-
-padding:25px;
-
-text-align:center;
+    z-index:5;
 
 }
 
 
-/* TÍTULO */
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:35px;
+
+    margin-top:20px;
+
+    box-shadow:0 0 25px #ff6a00;
+
+    object-fit:cover;
+
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
 
 h1{
 
-font-size:42px;
+    font-size:40px;
 
-margin-bottom:10px;
+    margin-top:15px;
 
-color:#d8d8d8;
+    color:#ff8a00;
 
-font-weight:bold;
+    text-shadow:0 2px 8px rgba(0,0,0,.8);
 
 }
 
 
-/* DESCRIÇÃO */
+/* =========================
+   SUBTÍTULO
+========================= */
 
 .sub{
 
-font-size:18px;
+    margin-top:8px;
 
-color:#d8d8d8;
+    font-size:18px;
 
-margin-bottom:25px;
+    color:#fff;
 
-}
-
-
-/* JOGOS AO VIVO - VERDE FLUORESCENTE */
-
-.sub .jogos{
-
-color:#39ff14;
-
-font-weight:bold;
+    text-shadow:0 2px 5px #000;
 
 }
 
 
-/* BOTÕES */
+/* =========================
+   BOTÕES
+========================= */
 
 .btn{
 
-width:100%;
+    display:block;
 
-display:block;
+    text-decoration:none;
 
-text-decoration:none;
+    padding:18px;
 
-padding:18px 15px;
+    border-radius:18px;
 
-margin-top:15px;
+    margin-top:20px;
 
-border-radius:18px;
+    font-size:22px;
 
-font-size:20px;
+    font-weight:bold;
 
-font-weight:bold;
+    transition:.3s;
 
-color:#eeeeee;
-
-background:rgba(0,0,0,.25);
-
-border:2px solid #cfcfcf;
-
-transition:.3s;
+    box-shadow:0 0 20px rgba(0,0,0,.4);
 
 }
 
-
-/* EFEITO AO PASSAR */
 
 .btn:hover{
 
-background:rgba(255,255,255,.08);
+    transform:scale(1.03);
 
 }
 
-
-/* EFEITO AO CLICAR */
 
 .btn:active{
 
-transform:scale(.97);
+    transform:scale(.97);
 
 }
 
 
-/* TEXTO PEQUENO */
+/* =========================
+   BOTÃO TESTE
+========================= */
+
+.teste{
+
+    background:linear-gradient(
+        45deg,
+        #ff7a00,
+        #ff2d00
+    );
+
+    color:#fff;
+
+}
+
+
+/* =========================
+   BOTÃO PAINEL
+========================= */
+
+.painel{
+
+    background:#1565c0;
+
+    color:#fff;
+
+}
+
+
+/* Texto pequeno dos botões */
 
 .btn small{
 
-display:block;
+    display:block;
 
-margin-top:7px;
+    margin-top:8px;
 
-font-size:14px;
+    font-size:15px;
 
-font-weight:normal;
-
-color:#cfcfcf;
+    font-weight:normal;
 
 }
 
 
-/* CELULAR */
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:35px;
+
+}
+
+
+.card{
+
+    background:rgba(0,0,0,.55);
+
+    padding:18px;
+
+    border-radius:18px;
+
+    backdrop-filter:blur(8px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+}
+
+
+.card span{
+
+    font-size:40px;
+
+    display:block;
+
+    margin-bottom:8px;
+
+}
+
+
+.card h3{
+
+    margin-bottom:8px;
+
+}
+
+
+.card p{
+
+    font-size:14px;
+
+    line-height:1.4;
+
+    color:#ddd;
+
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer{
+
+    margin-top:40px;
+
+    font-size:14px;
+
+    color:#ccc;
+
+    padding-bottom:30px;
+
+    text-shadow:0 2px 5px #000;
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
 
 @media(max-width:600px){
 
-h1{
+    .cards{
 
-font-size:36px;
+        grid-template-columns:1fr;
 
-}
-
-.sub{
-
-font-size:16px;
+    }
 
 }
 
-.btn{
 
-font-size:18px;
+/* =========================
+   AJUSTE PARA TELAS VERTICAIS
+========================= */
 
-padding:17px 12px;
+@media(max-width:600px) and (orientation:portrait){
+
+    body{
+
+        background-size:100% auto;
+
+        background-position:center top;
+
+    }
 
 }
 
-.btn small{
 
-font-size:13px;
+/* =========================
+   AJUSTE PARA TELAS PEQUENAS
+========================= */
 
-}
+@media(max-width:400px){
+
+    .container{
+
+        padding:18px;
+
+    }
+
+    .logo{
+
+        width:140px;
+
+        height:140px;
+
+    }
+
+    h1{
+
+        font-size:32px;
+
+    }
+
+    .btn{
+
+        font-size:19px;
+
+        padding:16px;
+
+    }
 
 }
 
@@ -234,105 +411,340 @@ font-size:13px;
 <body>
 
 
-<!-- VÍDEO -->
-
-<video
-autoplay
-muted
-loop
-playsinline
-id="bg-video">
-
-<source
-src="6e0435cdf73692771097c0abcf882e37.mp4"
-type="video/mp4">
-
-Seu navegador não suporta vídeo.
-
-</video>
-
+<!-- =========================
+     FUNDO
+========================= -->
 
 <div class="overlay"></div>
 
 
-<!-- CONTEÚDO -->
+<!-- =========================
+     IMAGEM DA CENA
+========================= -->
+
+<img
+    src="tv-cinema.png"
+    alt="Pizza Play"
+    style="
+        position:fixed;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        z-index:-2;
+        pointer-events:none;
+    "
+>
+
+
+<!-- =========================
+     VÍDEO DENTRO DA TV
+========================= -->
+
+<video
+    class="tv-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+>
+
+    <source
+        src="6e0435cdf73692771097c0abcf882e37.mp4"
+        type="video/mp4"
+    >
+
+    Seu navegador não suporta vídeo HTML5.
+
+</video>
+
+
+<!-- =========================
+     CONTEÚDO DO SITE
+========================= -->
 
 <div class="container">
 
 
-<h1>Smart Play</h1>
+    <!-- LOGO -->
+
+    <img
+        src="logo.png"
+        class="logo"
+        alt="Pizza Play"
+    >
 
 
-<p class="sub">
+    <!-- TÍTULO -->
 
-Filmes • Séries •
-<span class="jogos">Jogos ao Vivo</span> • Ao Vivo
-
-</p>
-
-
-<!-- BOTÃO TESTE -->
-
-<a
-class="btn"
-href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
-target="_blank"
-rel="noopener noreferrer">
-
-🎁 CRIE SEU LOGIN E SENHA AQUI
-
-<small>
-
-Aproveite 4 horas grátis
-
-</small>
-
-</a>
+    <h1>
+        🍕 Pizza Play
+    </h1>
 
 
-<!-- BOTÃO PAINEL -->
+    <!-- SUBTÍTULO -->
 
-<a
-class="btn"
-href="https://clientefinal.com/"
-target="_blank"
-rel="noopener noreferrer">
+    <p class="sub">
 
-🔐 PAINEL DO CLIENTE
+        Filmes • Séries • Ao Vivo
 
-<small>
+    </p>
 
-Entrar com seu login e senha
 
-</small>
+    <!-- =========================
+         BOTÃO TESTE
+    ========================= -->
 
-</a>
+    <a
+        class="btn teste"
+        href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        🎁 CRIE SEU LOGIN E SENHA AQUI
+
+        <small>
+            Aproveite 4 horas grátis
+        </small>
+
+    </a>
+
+
+    <!-- =========================
+         BOTÃO PAINEL
+    ========================= -->
+
+    <a
+        class="btn painel"
+        href="https://clientefinal.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        🔐 PAINEL DO CLIENTE
+
+        <small>
+            Entrar com seu login e senha
+        </small>
+
+    </a>
+
+
+    <!-- =========================
+         CARDS
+    ========================= -->
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <span>🎬</span>
+
+            <h3>
+                Filmes
+            </h3>
+
+            <p>
+                Os melhores lançamentos
+                para você assistir.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>📺</span>
+
+            <h3>
+                Séries
+            </h3>
+
+            <p>
+                Séries de sucesso
+                para maratonar.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <span>📡</span>
+
+            <h3>
+                Ao Vivo
+            </h3>
+
+            <p>
+                Canais ao vivo com
+                excelente qualidade.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         RODAPÉ
+    ========================= -->
+
+    <footer>
+
+        🍕 Pizza Play © 2026
+
+    </footer>
 
 
 </div>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-/* EFEITO AO CLICAR */
+
+/* =========================
+   VÍDEO DA TV
+========================= */
+
+const video = document.querySelector(".tv-video");
+
+
+video.muted = true;
+
+
+video.play().catch(() => {
+
+    /*
+    Alguns celulares bloqueiam
+    autoplay até o usuário tocar
+    na tela.
+    */
+
+    document.addEventListener(
+        "click",
+        () => {
+
+            video.play();
+
+        },
+        {
+            once:true
+        }
+    );
+
+});
+
+
+/* =========================
+   EFEITO DOS BOTÕES
+========================= */
 
 document
 .querySelectorAll(".btn")
 .forEach((botao) => {
 
-botao.addEventListener("click", function(){
+    botao.addEventListener(
+        "click",
+        function(){
 
-this.style.transform = "scale(.97)";
+            this.style.transform =
+                "scale(0.97)";
 
-setTimeout(() => {
+            setTimeout(() => {
 
-this.style.transform = "scale(1)";
+                this.style.transform =
+                    "scale(1)";
 
-},150);
+            },150);
+
+        }
+    );
 
 });
 
-});
+
+/* =========================
+   ANIMAÇÃO DOS CARDS
+========================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        const cards =
+            document.querySelectorAll(".card");
+
+
+        cards.forEach(
+            (card,i) => {
+
+                card.style.opacity="0";
+
+                card.style.transform=
+                    "translateY(20px)";
+
+
+                setTimeout(() => {
+
+                    card.style.transition=
+                        "all .5s ease";
+
+                    card.style.opacity="1";
+
+                    card.style.transform=
+                        "translateY(0)";
+
+                },150 * i);
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   SERVICE WORKER / PWA
+========================= */
+
+if("serviceWorker" in navigator){
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator.serviceWorker
+            .register("service-worker.js")
+            .then(() => {
+
+                console.log(
+                    "Service Worker registrado com sucesso."
+                );
+
+            })
+            .catch((erro) => {
+
+                console.log(
+                    "Erro ao registrar Service Worker:",
+                    erro
+                );
+
+            });
+
+        }
+    );
+
+}
+
 
 </script>
 
