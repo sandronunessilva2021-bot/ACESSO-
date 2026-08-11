@@ -1,754 +1,272 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>🍕 Pizza Play</title>
-
-<meta name="theme-color" content="#111111">
-
-<link rel="manifest" href="manifest.json">
-
-<style>
-
-/* =========================
-   CONFIGURAÇÕES GERAIS
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-html,
-body{
-    width:100%;
-    min-height:100%;
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
-}
-
-
-/* =========================
-   FUNDO COM A IMAGEM
-========================= */
-
-body{
-    background-image:url("tv-cinema.png");
-    background-position:center top;
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-attachment:fixed;
-}
-
-
-/* Escurecimento leve do fundo */
-.overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.15);
-    z-index:-1;
-    pointer-events:none;
-}
-
-
-/* =========================
-   VÍDEO DENTRO DA TV
-========================= */
-
-.tv-video{
-    position:absolute;
-
-    /*
-    Ajuste da posição do vídeo
-    dentro da TV da imagem
-    */
-
-    left:1.5%;
-    top:13.7%;
-
-    width:59.5%;
-    height:43.8%;
-
-    object-fit:cover;
-
-    border:none;
-    border-radius:3px;
-
-    background:#000;
-
-    z-index:2;
-}
-
-
-/* =========================
-   ÁREA PRINCIPAL
-========================= */
-
-.container{
-
-    position:relative;
-
-    max-width:420px;
-
-    margin:auto;
-
-    padding:25px;
-
-    padding-top:25px;
-
-    text-align:center;
-
-    z-index:5;
-
-}
-
-
-/* =========================
-   LOGO
-========================= */
-
-.logo{
-
-    width:170px;
-
-    height:170px;
-
-    border-radius:35px;
-
-    margin-top:20px;
-
-    box-shadow:0 0 25px #ff6a00;
-
-    object-fit:cover;
-
-}
-
-
-/* =========================
-   TÍTULO
-========================= */
-
-h1{
-
-    font-size:40px;
-
-    margin-top:15px;
-
-    color:#ff8a00;
-
-    text-shadow:0 2px 8px rgba(0,0,0,.8);
-
-}
-
-
-/* =========================
-   SUBTÍTULO
-========================= */
-
-.sub{
-
-    margin-top:8px;
-
-    font-size:18px;
-
-    color:#fff;
-
-    text-shadow:0 2px 5px #000;
-
-}
-
-
-/* =========================
-   BOTÕES
-========================= */
-
-.btn{
-
-    display:block;
-
-    text-decoration:none;
-
-    padding:18px;
-
-    border-radius:18px;
-
-    margin-top:20px;
-
-    font-size:22px;
-
-    font-weight:bold;
-
-    transition:.3s;
-
-    box-shadow:0 0 20px rgba(0,0,0,.4);
-
-}
-
-
-.btn:hover{
-
-    transform:scale(1.03);
-
-}
-
-
-.btn:active{
-
-    transform:scale(.97);
-
-}
-
-
-/* =========================
-   BOTÃO TESTE
-========================= */
-
-.teste{
-
-    background:linear-gradient(
-        45deg,
-        #ff7a00,
-        #ff2d00
-    );
-
-    color:#fff;
-
-}
-
-
-/* =========================
-   BOTÃO PAINEL
-========================= */
-
-.painel{
-
-    background:#1565c0;
-
-    color:#fff;
-
-}
-
-
-/* Texto pequeno dos botões */
-
-.btn small{
-
-    display:block;
-
-    margin-top:8px;
-
-    font-size:15px;
-
-    font-weight:normal;
-
-}
-
-
-/* =========================
-   CARDS
-========================= */
-
-.cards{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:12px;
-
-    margin-top:35px;
-
-}
-
-
-.card{
-
-    background:rgba(0,0,0,.55);
-
-    padding:18px;
-
-    border-radius:18px;
-
-    backdrop-filter:blur(8px);
-
-    border:1px solid rgba(255,255,255,.12);
-
-}
-
-
-.card span{
-
-    font-size:40px;
-
-    display:block;
-
-    margin-bottom:8px;
-
-}
-
-
-.card h3{
-
-    margin-bottom:8px;
-
-}
-
-
-.card p{
-
-    font-size:14px;
-
-    line-height:1.4;
-
-    color:#ddd;
-
-}
-
-
-/* =========================
-   RODAPÉ
-========================= */
-
-footer{
-
-    margin-top:40px;
-
-    font-size:14px;
-
-    color:#ccc;
-
-    padding-bottom:30px;
-
-    text-shadow:0 2px 5px #000;
-
-}
-
-
-/* =========================
-   CELULAR
-========================= */
-
-@media(max-width:600px){
-
-    .cards{
-
-        grid-template-columns:1fr;
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#020609">
+  <title>Painel Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-}
-
-
-/* =========================
-   AJUSTE PARA TELAS VERTICAIS
-========================= */
-
-@media(max-width:600px) and (orientation:portrait){
-
-    body{
-
-        background-size:100% auto;
-
-        background-position:center top;
-
+    html, body {
+      min-height: 100%;
     }
 
-}
-
-
-/* =========================
-   AJUSTE PARA TELAS PEQUENAS
-========================= */
-
-@media(max-width:400px){
-
-    .container{
-
-        padding:18px;
-
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(13, 40, 78, 0.65) 0%, rgba(5, 17, 34, 0.85) 38%, #01050a 100%);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 16px;
     }
 
-    .logo{
-
-        width:140px;
-
-        height:140px;
-
+    .painel {
+      width: min(850px, 100%);
+      min-height: 1290px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(10, 20, 27, 0.28), transparent 45%),
+        #020609;
+      border: 3px solid #252b32;
+      border-radius: 42px;
+      box-shadow:
+        0 0 60px rgba(5, 28, 60, 0.75),
+        inset 0 0 60px rgba(0, 0, 0, 0.55);
+      padding: 145px 68px 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    h1{
-
-        font-size:32px;
-
+    h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -2px;
+      text-align: center;
+      margin-bottom: 70px;
     }
 
-    .btn{
-
-        font-size:19px;
-
-        padding:16px;
-
+    .linha {
+      width: 78%;
+      height: 4px;
+      margin-bottom: 205px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #ff8500 20%,
+        #ff9d00 50%,
+        #ff8500 80%,
+        transparent
+      );
+      box-shadow: 0 0 14px #ff8500, 0 0 28px rgba(255, 133, 0, 0.55);
+      border-radius: 50%;
     }
 
-}
+    .botoes {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+    }
 
-</style>
+    .botao {
+      min-height: 185px;
+      width: 100%;
+      border: 4px solid #ff8a00;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #03080b, #05090c);
+      color: #ff8a00;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 45px;
+      padding: 30px 35px;
+      text-align: center;
+      box-shadow:
+        0 0 18px rgba(255, 138, 0, 0.08),
+        inset 0 0 25px rgba(255, 138, 0, 0.025);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
 
+    .botao:hover {
+      transform: translateY(-4px);
+      background: #080d11;
+      box-shadow:
+        0 0 25px rgba(255, 138, 0, 0.28),
+        0 0 50px rgba(255, 138, 0, 0.08),
+        inset 0 0 25px rgba(255, 138, 0, 0.04);
+    }
+
+    .icone {
+      width: 78px;
+      min-width: 78px;
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 58px;
+      line-height: 1;
+      filter: drop-shadow(0 0 7px rgba(255, 138, 0, 0.2));
+    }
+
+    .texto {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .titulo {
+      font-size: clamp(27px, 4vw, 45px);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .subtitulo {
+      font-size: clamp(19px, 2.6vw, 29px);
+      font-weight: 700;
+      margin-top: 10px;
+      line-height: 1.2;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 12px;
+      }
+
+      .painel {
+        min-height: 96vh;
+        border-radius: 28px;
+        border-width: 2px;
+        padding: 80px 22px 70px;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+        margin-bottom: 45px;
+      }
+
+      .linha {
+        width: 90%;
+        margin-bottom: 105px;
+      }
+
+      .botoes {
+        gap: 28px;
+      }
+
+      .botao {
+        min-height: 145px;
+        border-width: 3px;
+        border-radius: 24px;
+        gap: 18px;
+        padding: 22px 15px;
+      }
+
+      .icone {
+        width: 54px;
+        min-width: 54px;
+        height: 54px;
+        font-size: 42px;
+      }
+
+      .titulo {
+        font-size: 25px;
+      }
+
+      .subtitulo {
+        font-size: 17px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .painel {
+        padding: 65px 14px 55px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      .linha {
+        margin-bottom: 85px;
+      }
+
+      .botao {
+        min-height: 125px;
+        gap: 10px;
+        padding: 18px 10px;
+      }
+
+      .icone {
+        width: 44px;
+        min-width: 44px;
+        font-size: 35px;
+      }
+
+      .titulo {
+        font-size: 21px;
+      }
+
+      .subtitulo {
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <main class="painel">
+    <h1>PAINEL LOGIN</h1>
 
-<!-- =========================
-     FUNDO
-========================= -->
+    <div class="linha"></div>
 
-<div class="overlay"></div>
+    <section class="botoes">
 
-
-<!-- =========================
-     IMAGEM DA CENA
-========================= -->
-
-<img
-    src="tv-cinema.png"
-    alt="Pizza Play"
-    style="
-        position:fixed;
-        inset:0;
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        z-index:-2;
-        pointer-events:none;
-    "
->
-
-
-<!-- =========================
-     VÍDEO DENTRO DA TV
-========================= -->
-
-<video
-    class="tv-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
->
-
-    <source
-        src="6e0435cdf73692771097c0abcf882e37.mp4"
-        type="video/mp4"
-    >
-
-    Seu navegador não suporta vídeo HTML5.
-
-</video>
-
-
-<!-- =========================
-     CONTEÚDO DO SITE
-========================= -->
-
-<div class="container">
-
-
-    <!-- LOGO -->
-
-    <img
-        src="logo.png"
-        class="logo"
-        alt="Pizza Play"
-    >
-
-
-    <!-- TÍTULO -->
-
-    <h1>
-        🍕 Pizza Play
-    </h1>
-
-
-    <!-- SUBTÍTULO -->
-
-    <p class="sub">
-
-        Filmes • Séries • Ao Vivo
-
-    </p>
-
-
-    <!-- =========================
-         BOTÃO TESTE
-    ========================= -->
-
-    <a
-        class="btn teste"
-        href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-
-        🎁 CRIE SEU LOGIN E SENHA AQUI
-
-        <small>
-            Aproveite 4 horas grátis
-        </small>
-
-    </a>
-
-
-    <!-- =========================
-         BOTÃO PAINEL
-    ========================= -->
-
-    <a
-        class="btn painel"
+      <!-- Botão de Login -->
+      <a
+        class="botao"
         href="https://clientefinal.com/"
         target="_blank"
         rel="noopener noreferrer"
-    >
-
-        🔐 PAINEL DO CLIENTE
-
-        <small>
-            Entrar com seu login e senha
-        </small>
-
-    </a>
-
-
-    <!-- =========================
-         CARDS
-    ========================= -->
-
-    <div class="cards">
-
-
-        <div class="card">
-
-            <span>🎬</span>
-
-            <h3>
-                Filmes
-            </h3>
-
-            <p>
-                Os melhores lançamentos
-                para você assistir.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <span>📺</span>
-
-            <h3>
-                Séries
-            </h3>
-
-            <p>
-                Séries de sucesso
-                para maratonar.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <span>📡</span>
-
-            <h3>
-                Ao Vivo
-            </h3>
-
-            <p>
-                Canais ao vivo com
-                excelente qualidade.
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- =========================
-         RODAPÉ
-    ========================= -->
-
-    <footer>
-
-        🍕 Pizza Play © 2026
-
-    </footer>
-
-
-</div>
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-
-/* =========================
-   VÍDEO DA TV
-========================= */
-
-const video = document.querySelector(".tv-video");
-
-
-video.muted = true;
-
-
-video.play().catch(() => {
-
-    /*
-    Alguns celulares bloqueiam
-    autoplay até o usuário tocar
-    na tela.
-    */
-
-    document.addEventListener(
-        "click",
-        () => {
-
-            video.play();
-
-        },
-        {
-            once:true
-        }
-    );
-
-});
-
-
-/* =========================
-   EFEITO DOS BOTÕES
-========================= */
-
-document
-.querySelectorAll(".btn")
-.forEach((botao) => {
-
-    botao.addEventListener(
-        "click",
-        function(){
-
-            this.style.transform =
-                "scale(0.97)";
-
-            setTimeout(() => {
-
-                this.style.transform =
-                    "scale(1)";
-
-            },150);
-
-        }
-    );
-
-});
-
-
-/* =========================
-   ANIMAÇÃO DOS CARDS
-========================= */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        const cards =
-            document.querySelectorAll(".card");
-
-
-        cards.forEach(
-            (card,i) => {
-
-                card.style.opacity="0";
-
-                card.style.transform=
-                    "translateY(20px)";
-
-
-                setTimeout(() => {
-
-                    card.style.transition=
-                        "all .5s ease";
-
-                    card.style.opacity="1";
-
-                    card.style.transform=
-                        "translateY(0)";
-
-                },150 * i);
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================
-   SERVICE WORKER / PWA
-========================= */
-
-if("serviceWorker" in navigator){
-
-    window.addEventListener(
-        "load",
-        () => {
-
-            navigator.serviceWorker
-            .register("service-worker.js")
-            .then(() => {
-
-                console.log(
-                    "Service Worker registrado com sucesso."
-                );
-
-            })
-            .catch((erro) => {
-
-                console.log(
-                    "Erro ao registrar Service Worker:",
-                    erro
-                );
-
-            });
-
-        }
-    );
-
-}
-
-
-</script>
-
+        aria-label="Acessar o painel de login"
+      >
+        <span class="icone" aria-hidden="true">🔒</span>
+
+        <span class="texto">
+          <span class="titulo">PAINEL LOGIN</span>
+        </span>
+      </a>
+
+      <!-- Botão para criar login e ganhar teste grátis -->
+      <a
+        class="botao"
+        href="https://testeagora.tv/c4430a597cd6e4cbd4b65725aa31014a"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Criar seu login e ganhar 4 horas de teste grátis"
+      >
+        <span class="icone" aria-hidden="true">🎁</span>
+
+        <span class="texto">
+          <span class="titulo">CRIE SEU LOGIN AQUI</span>
+          <span class="subtitulo">E GANHE 4 HORAS DE TESTE GRÁTIS</span>
+        </span>
+      </a>
+
+    </section>
+  </main>
 
 </body>
-
 </html>
